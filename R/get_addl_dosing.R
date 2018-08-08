@@ -20,7 +20,7 @@ get_addl_dosing <- function(df, .f = roundup, .tolII=0.5) {
     }
   } else {
     # if no MEX, assume all doses are legit
-    df <- df %>% mutate(MEX__ = 0)
+    df <- df %>% mutate(MEX__ = FALSE)
   }
   # use a dose indicator to determine what amounts for imputed addl values should
   # actually be, given originally a missing dose value
@@ -101,13 +101,13 @@ get_addl_dosing <- function(df, .f = roundup, .tolII=0.5) {
 #           NDSECONDS_IN_DAY__ - SECONDS_IN_DAY__,
         TIME + II * 3600
       ),
-      TIME = anytime::anytime(TIME, tz = "UTC", asUTC = TRUE),
+   #   TIME = anytime::anytime(TIME, tz = "UTC", asUTC = TRUE),
 #       DTIME__ = DTIME__ - II * 3600,
 #       ADDL = calc_addl(DTIME__, II * 3600, .f = .f),
       EVID = 1,
       # addl dose should always be as if from proper dosing record so set these to as if exist
       MEX = FALSE,
-      MEX__ = 0
+      MEX__ = FALSE
     ) %>%
     filter(ADDL>=0) # remove negative addl computed for fractional interval
   } else {

@@ -79,14 +79,13 @@ test_that("post.merge.refactoring works with defaults",{
 })
 
 test_that("post.merge.refactoring fails with bad fun.transform",{
-  # no problems expected
-
+  # should get a message "object 'NOPE' not found"
   events.df = PMDatR::append.events(ex.df, pc.df)
   events.df = PMDatR::append.CovT(events.df,vs.df)
   events.df = PMDatR::merge.Cov(events.df,list(dm.df))
   tranfun = function(.data){.data %>% mutate_each(funs(locf),NOPE,BPDIA)}
 
-  events.df = post.merge.refactoring(events.df, fun.transform = tranfun, options=NULL)
+  expect_warning(post.merge.refactoring(events.df, fun.transform = tranfun, options=NULL), ".+'NOPE'.+")
 
 })
 
@@ -114,6 +113,7 @@ test_that("post.merge.refactoring works with KeepEVID2",{
   expect_equal(events.df$HT,events.df$ID)
   expect_equal(events.df$BPSYS,events.df$ID)
   expect_equal(events.df$BPDIA,events.df$ID)
+  expect_equal(unique(events.df$EVID),2:0)
 
 })
 

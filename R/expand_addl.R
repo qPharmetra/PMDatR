@@ -18,7 +18,8 @@
 #' variable in days, the time_related_cols value represents the scaling factor
 #' so time_related_cols = c("AGEYRS" = 1/365)
 #' @importFrom dplyr filter mutate
-#' @importFrom purrr pmap map_df
+#' @importFrom purrr map_df
+#' @importFrom purrrlyr by_row
 #' @importFrom tidyr unnest
 #' @export
 expand_addl <- function(.df, ii_scale = 3600, time_related_cols = NULL) {
@@ -27,8 +28,7 @@ expand_addl <- function(.df, ii_scale = 3600, time_related_cols = NULL) {
     return(.df)
   }
 
-  #expanded_addl <- by_row(addl_df, function(row) {
-  expanded_addl <- pmap(addl_df, function(row) {
+  expanded_addl <- by_row(addl_df, function(row) {
     naddl <- row$ADDL
     expanded_df <- map_df(1:naddl, function(i) {
       # setting all created rows an ADDL value of -1 to distinguish

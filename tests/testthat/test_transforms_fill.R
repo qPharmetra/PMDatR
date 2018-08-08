@@ -14,7 +14,10 @@ test1 = data_frame(ID=1,TIME=0:10,BW=runif(11,50,80))
 
 test_that("Fill value replaces with a constant value",
           {
-
+          df=test1
+          df$BW=NA
+          df = df %>% fill_NA(BW, 100)
+          expect_equal(df$BW[4:6],rep(100,3))
           })
 
 test_that("Fill value replaces with an expression",

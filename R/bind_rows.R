@@ -1,6 +1,7 @@
 #' bind rows for dataframes with units
 #' @param ... dataframes to bind together
-#' @importFrom purrr map map_lgl
+#' @importFrom purrr map map_lgl map_df
+#' @importFrom purrrlyr dmap_at
 #' @examples
 #' library(dplyr)
 #' library(PMDatR)
@@ -29,7 +30,7 @@ bind_rows <- function(..., .id=NULL) {
   # all columns to be consistent
   # this will remove all units as bind_rows in dplyr 0.5 chokes
   # on the unknown attributes
-  output <- purrr::map_df(list_df, function(.df) {
+  output <- map_df(list_df, function(.df) {
     strip_units_df(convert_units_from_list(.df, as.list(common_units)))
   })
   # re-set units to common outputs
@@ -84,7 +85,7 @@ harmonize_for_bind_rows = function(list_df){
   # if there were any columns needing harmonization, we'll take care of them now
   #local helper function to channel the conversion by each df
   convert_data_frame = function(df,conv_cols){
-    df %>% purrr::dmap_at(names(conv_cols),as.character)
+    df %>% purrrlyr::dmap_at(names(conv_cols),as.character)
   }
   # if there are any cols to mutate, lapply through the dataframes and return the list
   if(length(cols)>0) list_df = lapply(list_df, convert_data_frame, cols)

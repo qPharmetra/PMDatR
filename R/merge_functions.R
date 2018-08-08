@@ -206,12 +206,18 @@ post.merge.refactoring = function(.data, fun.transform, fun.filter, fun.exclude,
   tryCatch({
     # Default Time Transformations
     ## elapsed time & time after first dose
+    # capture incoming column order
+    incols = names(.data)
     .data = .data %>% group_by(ID) %>%
       mutate(ELTM = elapsed.time(TIME),
              TAFD = difftime(TIME,TIME[Position(function(i) i==1, EVID)], units="hours"))
     ## time after dose
     .data = .data %>%  mutate(NDOSE = pmax(1,cumsum(EVID==1))) %>% group_by(ID,NDOSE) %>%
-      mutate(TAD = difftime(TIME,TIME[Position(function(i) i==1, EVID)], units="hours"))},
+      mutate(TAD = difftime(TIME,TIME[Position(function(i) i==1, EVID)], units="hours")) %>%
+      ungroup()
+    # put columns back in order
+    .data = .data %>% select_(.dots=c(incols, "ELTM", "TAFD", "NDOSE", "TAD"))
+    },
     error = function(cond){
       warning("Post Merge: Unable process default Time Transformations.  ELTM, TAD, TAFD defaults not computed.")
     })
@@ -245,11 +251,11 @@ post.merge.refactoring = function(.data, fun.transform, fun.filter, fun.exclude,
       all(is.na(x) | grepl("^\\s*$", x))
     }
     emptycol = purrr::map_lgl(.data,is_empty_col)
-    .data = .data %>% select_if(!emptycol)
+    .data = .data %>% select_if(Negate(is_empty_col))
     message(sprintf("Dropped empty columns [%s]", paste(names(emptycol)[emptycol],collapse=", ")))
   }
 
-  .data %>% select(RECID,everything())
+  .data %>% ungroup() %>% select(RECID,everything())
 }
 
 
