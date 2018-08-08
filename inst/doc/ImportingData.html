@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Vignette Author" />
+
+<meta name="date" content="2016-06-17" />
+
+<title>Importing Data with PMDatR</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Importing Data with PMDatR</h1>
+<h4 class="author"><em>Vignette Author</em></h4>
+<h4 class="date"><em>2016-06-17</em></h4>
+</div>
+
+
+<p>Draft v. 0.2</p>
+<p>This vignette demonstrates the data import features of the PMDatR package. The basic data import function is based on the Domain object, which contains information on the source data and import options. Loading a domain then fills in the Domain object with the data from the source file as well as metadata describing the source. Additional processing to (for instance) remove rows, select and rename columns, perform “pre-merge”, or run custom processing steps can be provided by a user specified function.</p>
+<div id="example-data" class="section level2">
+<h2>Example Data</h2>
+<p>A small sample data set is present in the package test directory: “<path.package("PMDatR")>/tests”. There are four domain files present (PC, EX, DM, LB) in 4 different file formats (sas7bdat, csv, xlsx, xpt). The xpt file is a single file containing all 4 domains and is not supported as of release 0.2.</p>
+<p>Here we set the path for the data, and load useful libraries:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PMDatR)
+<span class="kw">library</span>(parsedate)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(yaml)</code></pre></div>
+</div>
+<div id="creating-domain-objects" class="section level2">
+<h2>Creating Domain Objects</h2>
+<p>Domain objects can be created by passing a list with named members for “filepath” and “name”, where “name” contains the name of the domain.</p>
+<p>As of version 0.2 the DataManagement object is incomplete. The intended method for creating domains is to pass the settings list which contains all the domain information to a DataManagement object, which will then load the domains. here we construct the DataManagement object (variable DM, not to be confused with the DM domain) manually in the script.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex.dom =<span class="st"> </span><span class="kw">domain</span>(<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;EX&quot;</span>, <span class="dt">filepath=</span><span class="st">&quot;ex.sas7bdat&quot;</span>)) 
+
+
+DM=<span class="kw">list</span>() 
+DM$domains =<span class="st"> </span><span class="kw">list</span>(<span class="dt">EX=</span>ex.dom)</code></pre></div>
+<p>The DM object is created and we can load the domain sources.</p>
+</div>
+<div id="no-frills-load" class="section level2">
+<h2>No Frills Load</h2>
+<p>This shows a basic load of the domain data. Note that we must reassign the domain based on the load. This is due to a feature of R where objects are not changed in place. That is, if we want to change a variable, we should assign it not count on changes happening as a side-effect of a function call.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex.dom =<span class="st"> </span><span class="kw">load.domain</span>(ex.dom)</code></pre></div>
+<p>A quick look at the names in the ex.dom object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ex.dom)</code></pre></div>
+<pre><code>## [1] &quot;name&quot;     &quot;filepath&quot; &quot;Data&quot;     &quot;inMeta&quot;   &quot;Loaded&quot;   &quot;outMeta&quot;</code></pre>
+<p>The $Data member contains the data frame of the domain data. This is what our data looks like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex.dom$Data</code></pre></div>
+<pre><code>## Source: local data frame [18 x 19]
+## 
+##     STUDYID DOMAIN     USUBJID EXSEQ EXTRT EXDOSE EXDOSU EXDOSFRM EXDOSFRQ
+##       (chr)  (chr)       (chr) (dbl) (chr)  (dbl)  (chr)    (chr)    (chr)
+## 1  STUDY-01     EX  STUDY-01-1     1     B    100     mg   TABLET     ONCE
+## 2  STUDY-01     EX  STUDY-01-1     2     A    100     mg   TABLET     ONCE
+## 3  STUDY-01     EX  STUDY-01-2     1     A    100     mg   TABLET     ONCE
+## 4  STUDY-01     EX  STUDY-01-3     1     A    100     mg   TABLET     ONCE
+## 5  STUDY-01     EX  STUDY-01-3     2     B    100     mg   TABLET     ONCE
+## 6  STUDY-01     EX  STUDY-01-4     1     B    100     mg   TABLET     ONCE
+## 7  STUDY-01     EX  STUDY-01-4     2     A    100     mg   TABLET     ONCE
+## 8  STUDY-01     EX  STUDY-01-5     1     B    100     mg   TABLET     ONCE
+## 9  STUDY-01     EX  STUDY-01-5     2     A    100     mg   TABLET     ONCE
+## 10 STUDY-01     EX  STUDY-01-6     1     A    100     mg   TABLET     ONCE
+## 11 STUDY-01     EX  STUDY-01-6     2     B    100     mg   TABLET     ONCE
+## 12 STUDY-01     EX  STUDY-01-7     1     B    100     mg   TABLET     ONCE
+## 13 STUDY-01     EX  STUDY-01-8     1     A    100     mg   TABLET     ONCE
+## 14 STUDY-01     EX  STUDY-01-8     2     B    100     mg   TABLET     ONCE
+## 15 STUDY-01     EX  STUDY-01-9     1     A    100     mg   TABLET     ONCE
+## 16 STUDY-01     EX  STUDY-01-9     2     B    100     mg   TABLET     ONCE
+## 17 STUDY-01     EX STUDY-01-10     1     B    100     mg   TABLET     ONCE
+## 18 STUDY-01     EX STUDY-01-10     2     A    100     mg   TABLET     ONCE
+## Variables not shown: EXROUTE (chr), VISITNUM (dbl), VISIT (chr), EPOCH
+##   (chr), EXSTDTC (chr), EXENDTC (chr), EXSTDY (dbl), EXENDY (dbl), EXTPT
+##   (chr), EXTPTNUM (dbl)</code></pre>
+</div>
+<div id="pre-processing-a-domain" class="section level2">
+<h2>Pre-processing a domain</h2>
+<p>We can provide a function to pre-process the domain. Let’s remove some of the extraneous columns and convert times to POSIXct (a native date/time format in R). A preprocessing function can have any name. It should take a domain object as the only parameter. It must return the domain object with the data stored in $Data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">preprocess.EX =<span class="st"> </span>function(.dom){
+  .dom$Data =<span class="st"> </span>.dom$Data %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">TIME=</span><span class="kw">parse_date</span>(EXSTDTC)) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">select</span>(USUBJID, TIME, EXSTDTC, EXSEQ, EXDOSE, VISIT, EPOCH)
+  .dom
+}
+
+ex.dom =<span class="st"> </span><span class="kw">load.domain</span>(ex.dom, <span class="dt">.fun =</span> preprocess.EX)
+ex.dom$Data</code></pre></div>
+<pre><code>## Source: local data frame [18 x 7]
+## 
+##        USUBJID                TIME          EXSTDTC EXSEQ EXDOSE
+##          (chr)              (time)            (chr) (dbl)  (dbl)
+## 1   STUDY-01-1 2013-12-18 09:00:00 2013-12-18T09:00     1    100
+## 2   STUDY-01-1 2013-12-28 09:00:00 2013-12-28T09:00     2    100
+## 3   STUDY-01-2 2013-12-18 09:05:00 2013-12-18T09:05     1    100
+## 4   STUDY-01-3 2013-12-18 09:10:00 2013-12-18T09:10     1    100
+## 5   STUDY-01-3 2013-12-28 09:10:00 2013-12-28T09:10     2    100
+## 6   STUDY-01-4 2013-12-18 09:15:00 2013-12-18T09:15     1    100
+## 7   STUDY-01-4 2013-12-28 09:15:00 2013-12-28T09:15     2    100
+## 8   STUDY-01-5 2013-12-18 09:20:00 2013-12-18T09:20     1    100
+## 9   STUDY-01-5 2013-12-28 09:20:00 2013-12-28T09:20     2    100
+## 10  STUDY-01-6 2013-12-18 09:25:00 2013-12-18T09:25     1    100
+## 11  STUDY-01-6 2013-12-28 09:25:00 2013-12-28T09:25     2    100
+## 12  STUDY-01-7 2013-12-18 09:30:00 2013-12-18T09:30     1    100
+## 13  STUDY-01-8 2013-12-18 09:35:00 2013-12-18T09:35     1    100
+## 14  STUDY-01-8 2013-12-28 09:35:00 2013-12-28T09:35     2    100
+## 15  STUDY-01-9 2013-12-28 09:05:00 2013-12-28T09:05     1    100
+## 16  STUDY-01-9 2014-01-07 09:05:00 2014-01-07T09:05     2    100
+## 17 STUDY-01-10 2013-12-28 09:30:00 2013-12-28T09:30     1    100
+## 18 STUDY-01-10 2014-01-07 09:30:00 2014-01-07T09:30     2    100
+## Variables not shown: VISIT (chr), EPOCH (chr)</code></pre>
+</div>
+<div id="metadata" class="section level2">
+<h2>Metadata</h2>
+<p>Details about the source and preprocessed domain data are stored in inMeta and outMeta, respectively. The metadata is stored as a list, but can be saved as YAML. Let’s look at the outMeta in list format here:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex.dom$outMeta</code></pre></div>
+<pre><code>## $USUBJID
+## $USUBJID$name
+## [1] &quot;USUBJID&quot;
+## 
+## $USUBJID$storage
+## [1] &quot;character&quot;
+## 
+## $USUBJID$minimum
+## [1] NA
+## 
+## $USUBJID$maximum
+## [1] NA
+## 
+## $USUBJID$unique
+##  [1] &quot;STUDY-01-1&quot;  &quot;STUDY-01-2&quot;  &quot;STUDY-01-3&quot;  &quot;STUDY-01-4&quot;  &quot;STUDY-01-5&quot; 
+##  [6] &quot;STUDY-01-6&quot;  &quot;STUDY-01-7&quot;  &quot;STUDY-01-8&quot;  &quot;STUDY-01-9&quot;  &quot;STUDY-01-10&quot;
+## 
+## 
+## $TIME
+## $TIME$name
+## [1] &quot;TIME&quot;
+## 
+## $TIME$storage
+## [1] &quot;POSIXct&quot; &quot;POSIXt&quot; 
+## 
+## $TIME$minimum
+## [1] &quot;2013-12-18 09:00:00 UTC&quot;
+## 
+## $TIME$maximum
+## [1] &quot;2014-01-07 09:30:00 UTC&quot;
+## 
+## $TIME$unique
+## [1] NA
+## 
+## 
+## $EXSTDTC
+## $EXSTDTC$name
+## [1] &quot;EXSTDTC&quot;
+## 
+## $EXSTDTC$storage
+## [1] &quot;character&quot;
+## 
+## $EXSTDTC$minimum
+## [1] NA
+## 
+## $EXSTDTC$maximum
+## [1] NA
+## 
+## $EXSTDTC$unique
+##  [1] &quot;2013-12-18T09:00&quot; &quot;2013-12-28T09:00&quot; &quot;2013-12-18T09:05&quot;
+##  [4] &quot;2013-12-18T09:10&quot; &quot;2013-12-28T09:10&quot; &quot;2013-12-18T09:15&quot;
+##  [7] &quot;2013-12-28T09:15&quot; &quot;2013-12-18T09:20&quot; &quot;2013-12-28T09:20&quot;
+## [10] &quot;2013-12-18T09:25&quot; &quot;2013-12-28T09:25&quot; &quot;2013-12-18T09:30&quot;
+## [13] &quot;2013-12-18T09:35&quot; &quot;2013-12-28T09:35&quot; &quot;2013-12-28T09:05&quot;
+## [16] &quot;2014-01-07T09:05&quot; &quot;2013-12-28T09:30&quot; &quot;2014-01-07T09:30&quot;
+## 
+## 
+## $EXSEQ
+## $EXSEQ$name
+## [1] &quot;EXSEQ&quot;
+## 
+## $EXSEQ$storage
+## [1] &quot;numeric&quot;
+## 
+## $EXSEQ$minimum
+## [1] 1
+## 
+## $EXSEQ$maximum
+## [1] 2
+## 
+## $EXSEQ$unique
+## [1] NA
+## 
+## 
+## $EXDOSE
+## $EXDOSE$name
+## [1] &quot;EXDOSE&quot;
+## 
+## $EXDOSE$storage
+## [1] &quot;numeric&quot;
+## 
+## $EXDOSE$minimum
+## [1] 100
+## 
+## $EXDOSE$maximum
+## [1] 100
+## 
+## $EXDOSE$unique
+## [1] NA
+## 
+## 
+## $VISIT
+## $VISIT$name
+## [1] &quot;VISIT&quot;
+## 
+## $VISIT$storage
+## [1] &quot;character&quot;
+## 
+## $VISIT$minimum
+## [1] NA
+## 
+## $VISIT$maximum
+## [1] NA
+## 
+## $VISIT$unique
+## [1] &quot;Treatment Period 1 Day 1&quot; &quot;Treatment Period 2 Day 1&quot;
+## 
+## 
+## $EPOCH
+## $EPOCH$name
+## [1] &quot;EPOCH&quot;
+## 
+## $EPOCH$storage
+## [1] &quot;character&quot;
+## 
+## $EPOCH$minimum
+## [1] NA
+## 
+## $EPOCH$maximum
+## [1] NA
+## 
+## $EPOCH$unique
+## [1] &quot;Treatment Period 1&quot; &quot;Treatment Period 2&quot;
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;domain.metadata&quot;</code></pre>
+<p>The list members are named after the column names. In addition, the metadata contains fields for:</p>
+<ul>
+<li>name</li>
+<li>storage (the type of the data)</li>
+<li>minimum and maximum (for continuous data)</li>
+<li>unique (for text and factor data, up to 50 unique values)</li>
+</ul>
+<div id="yaml" class="section level3">
+<h3>YAML</h3>
+<p>YAML is human editable format for data serialization (reading and writing data). It is used as the settings format for the DataManagement object and is a convenient way to share the metadata about source and loaded domains with another application (e.g. a GUI). Here is what YAML looks like for the outMeta object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">as.yaml</span>(ex.dom$outMeta))</code></pre></div>
+<pre><code>## USUBJID:
+##   name: USUBJID
+##   storage: character
+##   minimum: .na
+##   maximum: .na
+##   unique:
+##   - STUDY-01-1
+##   - STUDY-01-2
+##   - STUDY-01-3
+##   - STUDY-01-4
+##   - STUDY-01-5
+##   - STUDY-01-6
+##   - STUDY-01-7
+##   - STUDY-01-8
+##   - STUDY-01-9
+##   - STUDY-01-10
+## TIME:
+##   name: TIME
+##   storage:
+##   - POSIXct
+##   - POSIXt
+##   minimum: 1.3873572e+09
+##   maximum: 1.389087e+09
+##   unique: .na
+## EXSTDTC:
+##   name: EXSTDTC
+##   storage: character
+##   minimum: .na
+##   maximum: .na
+##   unique:
+##   - 2013-12-18T09:00
+##   - 2013-12-28T09:00
+##   - 2013-12-18T09:05
+##   - 2013-12-18T09:10
+##   - 2013-12-28T09:10
+##   - 2013-12-18T09:15
+##   - 2013-12-28T09:15
+##   - 2013-12-18T09:20
+##   - 2013-12-28T09:20
+##   - 2013-12-18T09:25
+##   - 2013-12-28T09:25
+##   - 2013-12-18T09:30
+##   - 2013-12-18T09:35
+##   - 2013-12-28T09:35
+##   - 2013-12-28T09:05
+##   - 2014-01-07T09:05
+##   - 2013-12-28T09:30
+##   - 2014-01-07T09:30
+## EXSEQ:
+##   name: EXSEQ
+##   storage: numeric
+##   minimum: 1.0
+##   maximum: 2.0
+##   unique: .na
+## EXDOSE:
+##   name: EXDOSE
+##   storage: numeric
+##   minimum: 100.0
+##   maximum: 100.0
+##   unique: .na
+## VISIT:
+##   name: VISIT
+##   storage: character
+##   minimum: .na
+##   maximum: .na
+##   unique:
+##   - Treatment Period 1 Day 1
+##   - Treatment Period 2 Day 1
+## EPOCH:
+##   name: EPOCH
+##   storage: character
+##   minimum: .na
+##   maximum: .na
+##   unique:
+##   - Treatment Period 1
+##   - Treatment Period 2</code></pre>
+</div>
+</div>
+<div id="excel-data" class="section level2">
+<h2>Excel Data</h2>
+<p>The data can also be loaded from Excel (xls or xlsx files)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex.dom =<span class="st"> </span><span class="kw">domain</span>(<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;EX&quot;</span>, <span class="dt">filepath=</span><span class="st">&quot;ex.xlsx&quot;</span>)) 
+ex.dom =<span class="st"> </span><span class="kw">load.domain</span>(ex.dom, <span class="dt">.fun=</span>preprocess.EX)
+ex.dom$Data</code></pre></div>
+<pre><code>## Source: local data frame [18 x 7]
+## 
+##        USUBJID                TIME          EXSTDTC EXSEQ EXDOSE
+##          (chr)              (time)            (chr) (dbl)  (dbl)
+## 1   STUDY-01-1 2013-12-18 09:00:00 2013-12-18T09:00     1    100
+## 2   STUDY-01-1 2013-12-28 09:00:00 2013-12-28T09:00     2    100
+## 3   STUDY-01-2 2013-12-18 09:05:00 2013-12-18T09:05     1    100
+## 4   STUDY-01-3 2013-12-18 09:10:00 2013-12-18T09:10     1    100
+## 5   STUDY-01-3 2013-12-28 09:10:00 2013-12-28T09:10     2    100
+## 6   STUDY-01-4 2013-12-18 09:15:00 2013-12-18T09:15     1    100
+## 7   STUDY-01-4 2013-12-28 09:15:00 2013-12-28T09:15     2    100
+## 8   STUDY-01-5 2013-12-18 09:20:00 2013-12-18T09:20     1    100
+## 9   STUDY-01-5 2013-12-28 09:20:00 2013-12-28T09:20     2    100
+## 10  STUDY-01-6 2013-12-18 09:25:00 2013-12-18T09:25     1    100
+## 11  STUDY-01-6 2013-12-28 09:25:00 2013-12-28T09:25     2    100
+## 12  STUDY-01-7 2013-12-18 09:30:00 2013-12-18T09:30     1    100
+## 13  STUDY-01-8 2013-12-18 09:35:00 2013-12-18T09:35     1    100
+## 14  STUDY-01-8 2013-12-28 09:35:00 2013-12-28T09:35     2    100
+## 15  STUDY-01-9 2013-12-28 09:05:00 2013-12-28T09:05     1    100
+## 16  STUDY-01-9 2014-01-07 09:05:00 2014-01-07T09:05     2    100
+## 17 STUDY-01-10 2013-12-28 09:30:00 2013-12-28T09:30     1    100
+## 18 STUDY-01-10 2014-01-07 09:30:00 2014-01-07T09:30     2    100
+## Variables not shown: VISIT (chr), EPOCH (chr)</code></pre>
+</div>
+<div id="text-data" class="section level2">
+<h2>Text Data</h2>
+<p>The data can also be loaded from text files (i.e., comma or tab delimited file types). Note that txtSettings is provided as part of the domain settings with a required sep member.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex.dom =<span class="st"> </span><span class="kw">domain</span>(<span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;EX&quot;</span>, <span class="dt">filepath=</span><span class="st">&quot;ex.csv&quot;</span>, <span class="dt">txtSettings =</span> <span class="kw">list</span>(<span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">header=</span>T))) 
+ex.dom =<span class="st"> </span><span class="kw">load.domain</span>(ex.dom, <span class="dt">.fun=</span>preprocess.EX)
+ex.dom$Data</code></pre></div>
+<pre><code>## Source: local data frame [18 x 7]
+## 
+##        USUBJID                TIME          EXSTDTC EXSEQ EXDOSE
+##          (chr)              (time)            (chr) (int)  (int)
+## 1   STUDY-01-1 2013-12-18 09:00:00 2013-12-18T09:00     1    100
+## 2   STUDY-01-1 2013-12-28 09:00:00 2013-12-28T09:00     2    100
+## 3   STUDY-01-2 2013-12-18 09:05:00 2013-12-18T09:05     1    100
+## 4   STUDY-01-3 2013-12-18 09:10:00 2013-12-18T09:10     1    100
+## 5   STUDY-01-3 2013-12-28 09:10:00 2013-12-28T09:10     2    100
+## 6   STUDY-01-4 2013-12-18 09:15:00 2013-12-18T09:15     1    100
+## 7   STUDY-01-4 2013-12-28 09:15:00 2013-12-28T09:15     2    100
+## 8   STUDY-01-5 2013-12-18 09:20:00 2013-12-18T09:20     1    100
+## 9   STUDY-01-5 2013-12-28 09:20:00 2013-12-28T09:20     2    100
+## 10  STUDY-01-6 2013-12-18 09:25:00 2013-12-18T09:25     1    100
+## 11  STUDY-01-6 2013-12-28 09:25:00 2013-12-28T09:25     2    100
+## 12  STUDY-01-7 2013-12-18 09:30:00 2013-12-18T09:30     1    100
+## 13  STUDY-01-8 2013-12-18 09:35:00 2013-12-18T09:35     1    100
+## 14  STUDY-01-8 2013-12-28 09:35:00 2013-12-28T09:35     2    100
+## 15  STUDY-01-9 2013-12-28 09:05:00 2013-12-28T09:05     1    100
+## 16  STUDY-01-9 2014-01-07 09:05:00 2014-01-07T09:05     2    100
+## 17 STUDY-01-10 2013-12-28 09:30:00 2013-12-28T09:30     1    100
+## 18 STUDY-01-10 2014-01-07 09:30:00 2014-01-07T09:30     2    100
+## Variables not shown: VISIT (chr), EPOCH (chr)</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

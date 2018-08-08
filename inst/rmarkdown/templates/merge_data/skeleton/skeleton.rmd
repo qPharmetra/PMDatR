@@ -1,0 +1,249 @@
+---
+title: "Merge Data"
+author: "`r Sys.info()['user']`"
+date: "`r Sys.time()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    mathjax: null
+params:
+  settings_file: ""
+---
+
+```{r preamble, include=F}
+library(knitr)
+library(dplyr)
+library(PMDatR)
+
+opts_chunk$set(error=TRUE)
+knit_hooks$set(error = function(x, options) print(PMDatR:::reinterpret_errors(x)))
+knit_hooks$set(warning = function(x,options)print(PMDatR:::reinterpret_errors(x)))
+```
+
+## PMDatR: Merge Data
+
+## Merge script
+
+### Create DataManagement object
+
+```{r createDM}
+DMO=list()
+if(params$settings_file!=""){
+  DMO = DataManagement(params$settings_file)
+  base_name = tools::file_path_sans_ext(basename(params$settings_file))
+  func_file = paste0(base_name, "_funcs.r")
+  NM_file = sprintf("%s.csv",base_name)
+  DB_file = sprintf("%s.database.csv",base_name)
+}
+
+nPrintRows = PMDatR:::coalesce(DMO$MergeOptions$nPrintRows, 20)
+```
+
+```{r checkDBfiles, echo=F, results='asis'}
+if(!is_file_writable(NM_file) | !is_file_writable(DB_file)){
+  msg=paste0("#### Merge process stopped because the output files are not writable.", "\n\n check output files:")
+  msg = if(!is_file_writable(NM_file)) sprintf("%s \n\n %s",msg,NM_file)
+  msg = if(!is_file_writable(DB_file)) sprintf("%s \n\n %s",msg,DB_file)           
+  cat(msg)
+}
+```
+
+
+### Source the file created by DM object initialization
+
+
+```{r echo=F, comment=NA}
+if(!file.exists(func_file)){
+  cat(sprintf("Functions file not found: %s\n\nVerify that settings were processed correctly and that a valid functions file is in the working directory with this template.", func_file))
+  knitr::knit_exit()
+} else {
+  # replace source with evaluate to capture errors
+  func_result = (evaluate::evaluate(file(func_file)))
+  ierrs = grepl("error|warning", sapply(func_result, class))
+  if(any(ierrs)){
+    cat(paste("There were errors in processing the functions file.",
+                "Be sure to check the header hook, which may have immediately executing code.",
+                "Errors found:\n", sep="\n"))
+    evaluate::replay(func_result[ierrs])
+  } else{
+    cat(sprintf("Functions file sourced: %s (MD5=%s)",func_file, tools::md5sum(func_file))) 
+  }
+
+  }
+```
+
+
+## Pre-process domains (load, filter, pre-merge etc)
+
+```{r}
+DMO = preprocess.domains(DMO)
+```
+
+
+
+```{r echo=F, results='asis'}
+# remove existing diagnostics that may be leftover from previous merge or load
+invisible(file.remove(list.files(pattern=sprintf("*%s_merge_diagnostics.*", 
+                                                 base_name), 
+                                 ignore.case=T)))
+for(dom in DMO$Domains) 
+{
+  # write out log to report error or success 
+  output_name = sprintf("%s_%s_merge_diagnostics.rmd", dom$name, base_name)
+
+  # get template
+  rmarkdown::draft(output_name, template="diagnostics_source", package = "PMDatR", edit=F)
+  # expand templated variable (domain name, to avoid duplicate chunk names in Merge Script)
+  xpd=knitr::knit_expand(output_name, domname=dom$name)
+  if(file.exists(output_name)) invisible(file.remove(output_name))
+  # overwrite the draft
+  #cat(xpd, file=output_name)
+  #rmarkdown::render(output_name, quiet=T)
+  
+  #cat(sprintf("[%s Domain Load Report](%s_diagnostics.html)\n\n", dom$name, dom$name))
+  cat(sprintf("## %s Domain Load Report\n\n", dom$name))
+  xpd = gsub("##", "###", xpd)
+  cat(knit(text=xpd, quiet=T))
+  cat("\n\n")
+  
+}
+```
+
+## Pre-merge Diagnostics
+
+```{r, echo=F, results='asis'}
+dnost = diagnostics_premerge(DMO)
+
+cat("\n\n### Mismatched IDs \n\n ")
+cat(sprintf("%s\n\n", dnost$missingIDs))
+    
+cat("\n\n### Mismatched TRT \n\n ")
+if(length(dnost$mismatchedTRT)!=0){
+
+  kable(as_data_frame(dnost$mismatchedTRT))
+} else{
+  cat("No mismatched TRT values found")
+}
+
+```
+
+
+## Process Dosing
+
+```{r}
+EX.df = Process_Dose()
+EX.df = post_process_dosing(EX.df, expandADDL = DMO$MergeOptions$ExpandADDL, 
+                            ADDLTolerance = DMO$MergeOptions$ADDLTolerance)
+kable(head(EX.df,nPrintRows))
+
+kable(as_data_frame(unit_cols(EX.df)))
+```
+
+## Process DV items
+
+```{r}
+DV.df = Process_DV()
+kable(head(DV.df,nPrintRows))
+
+kable(as_data_frame(unit_cols(DV.df)))
+```
+
+## Process Covariate items
+
+```{r results='asis'}
+Cov.l = Process_Cov()
+for(df in Cov.l){
+  print(kable(head(df,nPrintRows)))
+  
+  print(kable(as_data_frame(unit_cols(df))))
+}
+```
+
+## Process Time-Varying Covariate items (CovT)
+
+```{r}
+CovT.df = Process_CovT()
+kable(head(CovT.df,nPrintRows))
+
+kable(as_data_frame(unit_cols(CovT.df)))
+```
+
+## Ready for Merging
+
+### PRE-MERGE HOOK GOES HERE
+
+```{r}
+pre.merge.hook()
+```
+
+### Append events
+
+```{r}
+events.df = append.events(EX.df, DV.df)
+```
+
+### Append CovT
+
+```{r}
+events.df = append.CovT(events.df, CovT.df)
+```
+
+### Merge covariates
+
+```{r}
+database.df = merge.Cov(events.df, Cov.l)
+```
+
+## Post-Merge Transforms
+
+```{r}
+database.df = post.merge.refactoring(database.df, fun.transform = post.transform, 
+                                     fun.filter = post.filter,
+                                     fun.exclude = apply.exclusions,
+                                     options=DMO$MergeOptions)
+kable(head(database.df,nPrintRows))
+kable(as_data_frame(unit_cols(database.df)))
+```
+
+## POST-MERGE HOOK GOES HERE
+
+```{r}
+post.merge.hook()
+```
+
+
+## Write NONMEM file and DDS
+
+```{r}
+
+out.df = OutputDataset(database.df,base_name, column_info = DMO$Settings$OutputColumns)
+glimpse(out.df)
+```
+
+## Output File Information
+
+```{r echo=F, results='asis'}
+
+fnames=c(DB_file,NM_file)
+
+for(fname in fnames){
+  if(file.exists(fname)){
+    cat(sprintf("*Filename: %s*\n\nMD5: %s\n\nDimensions: %s rows x %s columns\n\nTimestamp: %s\n\n",
+        file.path(getwd(), fname),
+        md5 = tools::md5sum(fname),
+        nrows = nrow(database.df),
+        ncols = ncol(database.df),
+        file.info(fname)$mtime
+        ))
+  }
+}
+```
+
+## Data Definition
+
+```{r}
+ddd=createDDD(DMO, out.df)
+write.csv(ddd, paste0(base_name,".ddd.csv"), quote=T, row.names = F)
+kable(formatDDD(ddd),"markdown")
+```

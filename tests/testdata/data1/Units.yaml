@@ -1,0 +1,1807 @@
+Info: 
+ProjectDirectory: '\\localhost\C$\Projects\Lilly\PK Data Tool\scratch\Sprint11\Units'
+SourceDirectory: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas
+LastSavedAs: '\\localhost\C$\Projects\Lilly\PK Data Tool\scratch\Sprint11\Units\units.yaml'
+Domains:
+- name: DM
+  Mapping: CDISC 3
+  MappedDomain: DM
+  filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\dm.sas7bdat
+  InputMappings:
+    MappedDomain: DM
+    Filter: 
+    Keys: ID
+    Columns:
+    - Name: STUDYID
+      Mapping: STUDYID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: DOMAIN
+      Mapping: DOMAIN
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: USUBJID
+      Mapping: USUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: SUBJID
+      Mapping: SUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: RFSTDTC
+      Mapping: RFSTDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: RFENDTC
+      Mapping: RFENDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: RFXSTDTC
+      Mapping: RFXSTDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: RFXENDTC
+      Mapping: RFXENDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: RFICDTC
+      Mapping: RFICDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: RFPENDTC
+      Mapping: RFPENDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: DTHDTC
+      Mapping: DTHDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: DTHFL
+      Mapping: DTHFL
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: SITEID
+      Mapping: SITEID
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: INVID
+      Mapping: INVID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: INVNAM
+      Mapping: INVNAM
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: BRTHDTC
+      Mapping: BRTHDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: AGE
+      Mapping: AGE
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: AGEU
+      Mapping: AGEU
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: SEX
+      Mapping: SEX
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: RACE
+      Mapping: RACE
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: ETHNIC
+      Mapping: ETHNIC
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: ARMCD
+      Mapping: ARMCD
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: ARM
+      Mapping: ARM
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: ACTARMCD
+      Mapping: ACTARMCD
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: ACTARM
+      Mapping: ACTARM
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: COUNTRY
+      Mapping: COUNTRY
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: DMDTC
+      Mapping: iso_to_posix(DMDTC)
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: DMDY
+      Mapping: DMDY
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    PreMergeFile: 
+    PreMergeKeys: 
+    PreMergeFilter: 
+    PreMergeCols: 
+    PreMergeSupp: false
+    DefaultQuerySettings:
+      ID: USUBJID
+      TIME: 
+      DV: 
+      AMT: 
+      CMT: 
+      EVID: 
+      Values: 
+      Parameter: 
+  FileSettings:
+    sep: ','
+    header: true
+    fill: true
+    quote: '"'
+    comment.char: ''
+    sheet: ''
+    range: ''
+    id_cols: ''
+- name: EX
+  Mapping: CDISC 3
+  MappedDomain: EX
+  filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\ex.sas7bdat
+  InputMappings:
+    MappedDomain: EX
+    Filter: 
+    Keys: ID
+    Columns:
+    - Name: EXDTC
+      Mapping: iso_to_posix(EXSTDTC)
+      Units: h
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: EXSTDTC
+      Mapping: iso_to_posix(EXSTDTC)
+      Units: h
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: EXENDTC
+      Mapping: iso_to_posix(EXENDTC)
+      Units: h
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: STUDYID
+      Mapping: STUDYID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: DOMAIN
+      Mapping: DOMAIN
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: USUBJID
+      Mapping: USUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: EXSEQ
+      Mapping: EXSEQ
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: EXTRT
+      Mapping: EXTRT
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: EXDOSE
+      Mapping: EXDOSE
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: EXDOSU
+      Mapping: EXDOSU
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: EXDOSFRM
+      Mapping: EXDOSFRM
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: EXDOSFRQ
+      Mapping: EXDOSFRQ
+      Units: ''
+      Type: Unknown
+      Required: true
+      Fill: ''
+    - Name: EXOCCUR
+      Mapping: EXOCCUR
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: EXROUTE
+      Mapping: EXROUTE
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: VISITNUM
+      Mapping: VISITNUM
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: VISIT
+      Mapping: VISIT
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: EPOCH
+      Mapping: EPOCH
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: EXSTDY
+      Mapping: EXSTDY
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: EXENDY
+      Mapping: EXENDY
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: EXTPT
+      Mapping: EXTPT
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: EXTPTNUM
+      Mapping: EXTPTNUM
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: II
+      Mapping: replace_values(EXDOSFRQ,QD=24,ONCE=0,BID=12,WEEKLY=168)
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    PreMergeFile: 
+    PreMergeKeys: 
+    PreMergeFilter: 
+    PreMergeCols: 
+    PreMergeSupp: false
+    DefaultQuerySettings:
+      ID: USUBJID
+      TIME: EXSTDTC
+      DV: 0
+      AMT: EXDOSE
+      CMT: 1
+      EVID: 1
+      Values: 
+      Parameter: 
+  FileSettings:
+    sep: ','
+    header: true
+    fill: true
+    quote: '"'
+    comment.char: ''
+    sheet: ''
+    range: ''
+    id_cols: ''
+- name: LB
+  Mapping: CDISC 3
+  MappedDomain: LB
+  filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\lb.sas7bdat
+  InputMappings:
+    MappedDomain: LB
+    Filter: ''
+    Keys: ID
+    Columns:
+    - Name: STUDYID
+      Mapping: STUDYID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: DOMAIN
+      Mapping: DOMAIN
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: USUBJID
+      Mapping: USUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: LBSEQ
+      Mapping: LBSEQ
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: LBTESTCD
+      Mapping: LBTESTCD
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBTEST
+      Mapping: LBTEST
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBCAT
+      Mapping: LBCAT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBSCAT
+      Mapping: LBSCAT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBORRES
+      Mapping: LBORRES
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: LBORRESU
+      Mapping: LBORRESU
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: LBORNRLO
+      Mapping: LBORNRLO
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: LBORNRHI
+      Mapping: LBORNRHI
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: LBSTRESC
+      Mapping: LBSTRESC
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: LBSTRESN
+      Mapping: LBSTRESN
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: LBSTRESU
+      Mapping: LBSTRESU
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: LBSTNRLO
+      Mapping: LBSTNRLO
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: LBSTNRHI
+      Mapping: LBSTNRHI
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: LBNRIND
+      Mapping: LBNRIND
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: LBSTAT
+      Mapping: LBSTAT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBREASND
+      Mapping: LBREASND
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBNAM
+      Mapping: LBNAM
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBSPEC
+      Mapping: LBSPEC
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBSPCCND
+      Mapping: LBSPCCND
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBBLFL
+      Mapping: LBBLFL
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: VISITNUM
+      Mapping: VISITNUM
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: VISIT
+      Mapping: VISIT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: EPOCH
+      Mapping: EPOCH
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: LBDTC
+      Mapping: iso_to_posix(LBDTC)
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: LBDY
+      Mapping: LBDY
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    PreMergeFile: 
+    PreMergeKeys: 
+    PreMergeFilter: 
+    PreMergeCols: 
+    PreMergeSupp: false
+    DefaultQuerySettings:
+      ID: USUBJID
+      TIME: LBDTC
+      DV: 
+      AMT: 
+      CMT: 
+      EVID: 2
+      Values: LBSTRESN
+      Parameter: LBTESTCD
+  FileSettings:
+    sep: ','
+    header: true
+    fill: true
+    quote: '"'
+    comment.char: ''
+    sheet: ''
+    range: ''
+    id_cols: ''
+- name: PC
+  Mapping: CDISC 3
+  MappedDomain: PC
+  filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\pc.sas7bdat
+  InputMappings:
+    MappedDomain: PC
+    Filter: 
+    Keys: ID
+    Columns:
+    - Name: STUDYID
+      Mapping: STUDYID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: DOMAIN
+      Mapping: DOMAIN
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: USUBJID
+      Mapping: USUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: PCSEQ
+      Mapping: PCSEQ
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: PCGRPID
+      Mapping: PCGRPID
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: PCTESTCD
+      Mapping: PCTESTCD
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: PCTEST
+      Mapping: PCTEST
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: PCCAT
+      Mapping: PCCAT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: PCORRES
+      Mapping: PCORRES
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: PCORRESU
+      Mapping: PCORRESU
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: PCSTRESC
+      Mapping: PCSTRESC
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: PCSTRESN
+      Mapping: PCSTRESN
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: PCSTRESU
+      Mapping: PCSTRESU
+      Units: ''
+      Type: Text
+      Required: true
+      Fill: ''
+    - Name: PCSTAT
+      Mapping: PCSTAT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: PCREASND
+      Mapping: PCREASND
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: PCNAM
+      Mapping: PCNAM
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: PCSPEC
+      Mapping: PCSPEC
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: PCLLOQ
+      Mapping: PCLLOQ
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: VISITNUM
+      Mapping: VISITNUM
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: VISIT
+      Mapping: VISIT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: EPOCH
+      Mapping: EPOCH
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: TIME
+      Mapping: iso_to_posix(PCDTC)
+      Units: ''
+      Type: DateTime
+      Required: true
+      Fill: ''
+    - Name: PCDY
+      Mapping: PCDY
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    - Name: PCTPT
+      Mapping: PCTPT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Fill: ''
+    - Name: PCTPTNUM
+      Mapping: PCTPTNUM
+      Units: ''
+      Type: Numeric
+      Required: true
+      Fill: ''
+    PreMergeFile: 
+    PreMergeKeys: 
+    PreMergeFilter: 
+    PreMergeCols: 
+    PreMergeSupp: false
+    DefaultQuerySettings:
+      ID: USUBJID
+      TIME: PCDTC
+      DV: PCSTRESN
+      AMT: 0
+      CMT: 2
+      EVID: 0
+      Values: 
+      Parameter: 
+  FileSettings:
+    sep: ','
+    header: true
+    fill: true
+    quote: '"'
+    comment.char: ''
+    sheet: ''
+    range: ''
+    id_cols: ''
+DomainMetaData:
+- Domain: DM
+  Source: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\dm.sas7bdat
+  Type: Processed
+  Columns:
+  - name: STUDYID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - STUDY-01
+  - name: DOMAIN
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - DM
+  - name: USUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - STUDY-01-1
+    - STUDY-01-2
+    - STUDY-01-3
+    - STUDY-01-4
+    - STUDY-01-5
+  - name: SUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+  - name: RFSTDTC
+    storage: DateTime
+    minimum: 2013-12-18T09:00
+    maximum: 2013-12-28T09:30
+    unique:
+    - .na
+  - name: RFENDTC
+    storage: DateTime
+    minimum: 2013-12-18T09:05
+    maximum: 2014-01-07T09:30
+    unique:
+    - .na
+  - name: RFXSTDTC
+    storage: DateTime
+    minimum: 2013-12-18T09:00
+    maximum: 2013-12-28T09:30
+    unique:
+    - .na
+  - name: RFXENDTC
+    storage: DateTime
+    minimum: 2013-12-18T09:05
+    maximum: 2014-01-07T09:30
+    unique:
+    - .na
+  - name: RFICDTC
+    storage: DateTime
+    minimum: 2013-12-11T09:02
+    maximum: 2013-12-11T13:41
+    unique:
+    - .na
+  - name: RFPENDTC
+    storage: DateTime
+    minimum: 2013-12-23
+    maximum: 2014-01-13
+    unique:
+    - .na
+  - name: DTHDTC
+    storage: DateTime
+    minimum: ''
+    maximum: ''
+    unique:
+    - .na
+  - name: DTHFL
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - N
+  - name: SITEID
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - 001
+  - name: INVID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - 001
+  - name: INVNAM
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - John Smith
+  - name: BRTHDTC
+    storage: DateTime
+    minimum: 1959-03-26
+    maximum: 1983-03-14
+    unique:
+    - .na
+  - name: AGE
+    storage: Numeric
+    minimum: 30
+    maximum: 54
+    unique:
+    - .na
+  - name: AGEU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - YEARS
+  - name: SEX
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - M
+    - F
+  - name: RACE
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - WHITE
+    - ASIAN
+    - BLACK OR AFRICAN AMERICAN
+  - name: ETHNIC
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - HISPANIC OR LATINO
+    - NOT HISPANIC OR LATINO
+  - name: ARMCD
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - BA
+    - AB
+  - name: ARM
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - TRT2/TRT1
+    - TRT1/TRT2
+  - name: ACTARMCD
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - BA
+    - AB
+  - name: ACTARM
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - TRT2/TRT1
+    - TRT1/TRT2
+  - name: COUNTRY
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - USA
+  - name: DMDTC
+    storage: DateTime
+    minimum: 2013-12-11
+    maximum: 2013-12-11
+    unique:
+    - .na
+  - name: DMDY
+    storage: Numeric
+    minimum: -17
+    maximum: -7
+    unique:
+    - .na
+- Domain: EX
+  Source: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\ex.sas7bdat
+  Type: Processed
+  Columns:
+  - name: EXDTC
+    storage: DateTime
+    minimum: 2013-12-18 09:00:00
+    maximum: 2014-01-07 09:30:00
+    unique:
+    - .na
+  - name: EXSTDTC
+    storage: DateTime
+    minimum: 2013-12-18 09:00:00
+    maximum: 2014-01-07 09:30:00
+    unique:
+    - .na
+  - name: EXENDTC
+    storage: DateTime
+    minimum: 2013-12-18 09:00:00
+    maximum: 2014-01-07 09:30:00
+    unique:
+    - .na
+  - name: STUDYID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - STUDY-01
+  - name: DOMAIN
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - EX
+  - name: USUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - STUDY-01-1
+    - STUDY-01-2
+    - STUDY-01-3
+    - STUDY-01-4
+    - STUDY-01-5
+  - name: EXSEQ
+    storage: Numeric
+    minimum: 1
+    maximum: 2
+    unique:
+    - .na
+  - name: EXTRT
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - B
+    - A
+  - name: EXDOSE
+    storage: Numeric
+    minimum: 100
+    maximum: 100
+    unique:
+    - .na
+  - name: EXDOSU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - mg
+  - name: EXDOSFRM
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - TABLET
+  - name: EXDOSFRQ
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ONCE
+  - name: EXROUTE
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ORAL
+  - name: VISITNUM
+    storage: Numeric
+    minimum: 110
+    maximum: 210
+    unique:
+    - .na
+  - name: VISIT
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - Treatment Period 1 Day 1
+    - Treatment Period 2 Day 1
+  - name: EPOCH
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - Treatment Period 1
+    - Treatment Period 2
+  - name: EXSTDY
+    storage: Numeric
+    minimum: 1
+    maximum: 11
+    unique:
+    - .na
+  - name: EXENDY
+    storage: Numeric
+    minimum: 1
+    maximum: 11
+    unique:
+    - .na
+  - name: EXTPT
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - 0 h
+  - name: EXTPTNUM
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - 0.0e+00
+  - name: II
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - 0
+- Domain: LB
+  Source: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\lb.sas7bdat
+  Type: Processed
+  Columns:
+  - name: STUDYID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - STUDY-01
+  - name: DOMAIN
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - LB
+  - name: USUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - STUDY-01-1
+    - STUDY-01-2
+    - STUDY-01-3
+    - STUDY-01-4
+    - STUDY-01-5
+  - name: LBSEQ
+    storage: Numeric
+    minimum: 1
+    maximum: 269
+    unique:
+    - .na
+  - name: LBTESTCD
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ETHANOL
+    - AMPHET
+    - BILIU
+    - BNZDZPN
+    - CANNAB
+    - COCAINE
+    - GLUCU
+    - KETONES
+    - LEUKASE
+    - NITRITE
+    - OCCBLD
+    - OPIATE
+    - OXYCDN
+    - PH
+    - PROTU
+    - SPGRAV
+    - UROBIL
+    - ALB
+    - ALT
+    - AMYLASE
+    - AST
+    - BASO
+    - BILI
+    - CA
+    - CL
+    - CREAT
+    - EOS
+    - GLUC
+    - HBSAG
+    - HCAB
+    - HCT
+    - HGB
+    - HIV12AB
+    - K
+    - LYM
+    - MONO
+    - NEUT
+    - PLAT
+    - PLATMRPH
+    - RBC
+    - RBCMORPH
+    - SODIUM
+    - UREA
+    - WBC
+    - WBCMORPH
+    - HCG
+    - HCGU
+    - BACT
+    - EPISQCE
+    - RBCU
+    - WBCU
+  - name: LBTEST
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - Ethanol
+    - Amphetamine
+    - Bilirubin Urine
+    - Benzodiazepine
+    - Cannabinoids
+    - Cocaine
+    - Glucose Urine
+    - Ketones
+    - Leukocyte Esterase
+    - Nitrite
+    - Occult Blood
+    - Opiate
+    - Oxycodone
+    - pH
+    - Protein Urine
+    - Specific Gravity
+    - Urobilinogen
+    - Albumin
+    - Alanine Aminotransferase
+    - Amylase
+    - Aspartate Aminotransferase
+    - Basophils
+    - Bilirubin
+    - Calcium
+    - Chloride
+    - Creatinine
+    - Eosinophils
+    - Glucose
+    - Hepatitis B Virus Surface Antigen
+    - Hepatitis C Virus Antibody
+    - Hematocrit
+    - Hemoglobin
+    - HIV-1/2 Antibody
+    - Potassium
+    - Lymphocytes
+    - Monocytes
+    - Neutrophils
+    - Platelets
+    - Platelet Morphology
+    - Erythrocytes
+    - Erythrocyte Cell Morphology
+    - Sodium
+    - Urea
+    - Leukocytes
+    - Leukocyte Cell Morphology
+    - Beta-Human Chorionic Gonadotropin
+    - Choriogonadotropin Beta Urine
+    - Bacteria
+    - Squamous Epithelial Cells
+    - Erythrocytes Urine
+    - Leukocytes Urine
+  - name: LBCAT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - BREATH ALCOHOL CONCENTRATION
+    - URINALYSIS
+    - CHEMISTRY
+    - HEMATOLOGY
+  - name: LBSCAT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - BAC
+    - DRUG SCREEN
+    - ''
+    - LIVER FUNCTION
+    - DIFFERENTIALS
+    - ELECTROLYTES
+    - RENAL FUNCTION
+    - SEROLOGY
+    - HORMONES
+    - MICROSCOPY
+  - name: LBORRES
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - NEGATIVE
+    - 7.5
+    - 1.26
+    - 4
+    - 56.25
+  - name: LBORRESU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - mmol/L
+    - g/L
+    - umol/L
+    - U/L
+  - name: LBORNRLO
+    storage: Numeric
+    minimum: ''
+    maximum: NEGATIVE
+    unique:
+    - .na
+  - name: LBORNRHI
+    storage: Numeric
+    minimum: ''
+    maximum: NON-REACTIVE
+    unique:
+    - .na
+  - name: LBSTRESC
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - NEGATIVE
+    - 7.5
+    - 1.26
+    - 4
+    - 56.25
+  - name: LBSTRESN
+    storage: Numeric
+    minimum: 0
+    maximum: 461.25
+    unique:
+    - .na
+  - name: LBSTRESU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - mmol/L
+    - g/L
+    - umol/L
+    - U/L
+  - name: LBSTNRLO
+    storage: Numeric
+    minimum: 0
+    maximum: 145
+    unique:
+    - .na
+  - name: LBSTNRHI
+    storage: Numeric
+    minimum: 0.2
+    maximum: 400
+    unique:
+    - .na
+  - name: LBNRIND
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - NORMAL
+    - NA
+    - LOW
+    - HIGH
+    - ABNORMAL
+  - name: LBSTAT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+  - name: LBREASND
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+  - name: LBNAM
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - LAB2
+    - LAB1
+  - name: LBSPEC
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - BREATH
+    - URINE
+    - SERUM
+    - PLASMA
+  - name: LBSPCCND
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+  - name: LBBLFL
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - Y
+  - name: VISITNUM
+    storage: Numeric
+    minimum: 1
+    maximum: 800
+    unique:
+    - .na
+  - name: VISIT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - Screening Visit
+    - Treatment Period 1 Day 0
+    - Treatment Period 1 Day 4
+    - Treatment Period 2 Day 0
+    - Treatment Period 2 Day 4
+    - Follow Up/Early Withdrawal
+  - name: EPOCH
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - Screening
+    - Treatment Period 1
+    - Treatment Period 2
+    - Follow-up
+  - name: LBDTC
+    storage: DateTime
+    minimum: 2013-12-11
+    maximum: 2014-01-13 12:18:00
+    unique:
+    - .na
+  - name: LBDY
+    storage: Numeric
+    minimum: -17
+    maximum: 27
+    unique:
+    - .na
+- Domain: PC
+  Source: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\pc.sas7bdat
+  Type: Processed
+  Columns:
+  - name: STUDYID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - STUDY-01
+  - name: DOMAIN
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - PC
+  - name: USUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - STUDY-01-1
+    - STUDY-01-2
+    - STUDY-01-3
+    - STUDY-01-4
+    - STUDY-01-5
+  - name: PCSEQ
+    storage: Numeric
+    minimum: 1
+    maximum: 28
+    unique:
+    - .na
+  - name: PCGRPID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - Tx Period 1
+    - Tx Period 2
+  - name: PCTESTCD
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ANALYTE1
+  - name: PCTEST
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ANALYTE1
+  - name: PCCAT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - PHARMACOKINETIC CONCENTRATION
+  - name: PCORRES
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - BQL
+    - 0.57
+    - 1.85
+    - 180
+    - 261.25
+  - name: PCORRESU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ng/mL
+    - ''
+  - name: PCSTRESC
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - BQL
+    - 0.57
+    - 1.85
+    - 180
+    - 261.25
+  - name: PCSTRESN
+    storage: Numeric
+    minimum: 0.57
+    maximum: 2475
+    unique:
+    - .na
+  - name: PCSTRESU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ng/mL
+    - ''
+  - name: PCSTAT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - NOT DONE
+  - name: PCREASND
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - PK not collected at 24hr due to AE for chest pain, subject sent to emergency room
+    - No PK sample to be collected, however safety sample will be collected as subject is dismissed from study
+  - name: PCNAM
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - LAB1
+  - name: PCSPEC
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - PLASMA
+  - name: PCLLOQ
+    storage: Numeric
+    minimum: 0.1
+    maximum: 0.1
+    unique:
+    - .na
+  - name: VISITNUM
+    storage: Numeric
+    minimum: 110
+    maximum: 240
+    unique:
+    - .na
+  - name: VISIT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - Treatment Period 1 Day 1
+    - Treatment Period 1 Day 2
+    - Treatment Period 1 Day 3
+    - Treatment Period 1 Day 4
+    - Treatment Period 2 Day 1
+    - Treatment Period 2 Day 2
+    - Treatment Period 2 Day 3
+    - Treatment Period 2 Day 4
+  - name: EPOCH
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - Treatment Period 1
+    - Treatment Period 2
+  - name: TIME
+    storage: DateTime
+    minimum: 2013-12-18 08:12:00
+    maximum: 2014-01-10 09:30:00
+    unique:
+    - .na
+  - name: PCDY
+    storage: Numeric
+    minimum: 1
+    maximum: 14
+    unique:
+    - .na
+  - name: PCTPT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - Pre-dose
+    - 0.5 h
+    - 1 h
+    - 1.5 h
+    - 2 h
+    - 3 h
+    - 4 h
+    - 6 h
+    - 8 h
+    - 12 h
+    - 24 h
+    - 36 h
+    - 48 h
+    - 72 h
+  - name: PCTPTNUM
+    storage: Numeric
+    minimum: -0.05
+    maximum: 72
+    unique:
+    - .na
+DefaultMapping: CDISC 3
+DependentVariables:
+- Name: DV1
+  Domain: PC
+  ID: USUBJID
+  TIME: TIME
+  DV: PCSTRESN
+  EVID: 0
+  CMT: 2
+  BQL: ''
+  LLOQ: ''
+  MDV: ''
+  Units: ''
+  dv.filter: PCSTAT  !=  "NOT DONE"
+  Columns: []
+Covariates:
+- Name: Cov1
+  Domain: DM
+  ID: USUBJID
+  cov.val: 
+  cov.col: 
+  Units: ''
+  cov.filter: ''
+  cov.keys: ID
+  Columns:
+  - Name: AGE
+    Mapping: AGE
+    Units: year
+    Type: Unknown
+    Required: true
+    Fill: ''
+  - Name: SEX
+    Mapping: SEX
+    Units: ''
+    Type: Unknown
+    Required: true
+    Fill: ''
+  - Name: RACE
+    Mapping: RACE
+    Units: ''
+    Type: Unknown
+    Required: true
+    Fill: ''
+  - Name: ETHNIC
+    Mapping: ETHNIC
+    Units: ''
+    Type: Unknown
+    Required: true
+    Fill: ''
+TVCovariates:
+- Name: CovT1
+  Domain: LB
+  ID: USUBJID
+  TIME: LBDTC
+  EVID: 2
+  covT.val: LBSTRESN
+  covT.col: LBTESTCD
+  Units: ''
+  covT.filter: ''
+  Columns:
+  - Name: BILI
+    Mapping: BILI
+    Units: mg/dL
+    Type: Unknown
+    Required: true
+    Fill: ''
+  - Name: CREAT
+    Mapping: CREAT
+    Units: ng/mL, MW=10
+    Type: Unknown
+    Required: true
+    Fill: ''
+Doses:
+- Name: Dose1
+  Domain: EX
+  ID: USUBJID
+  TIME: EXSTDTC
+  AMT: EXDOSE
+  EVID: 1
+  CMT: 1
+  II: ''
+  MEX: ''
+  SPLIT: ''
+  Units: ''
+  ex.filter: ''
+  Columns: []
+PreMergeHook: 
+PostMergeHook: 
+Header: 
+OutputColumns:
+- MappingType: Internal
+  Name: RECID
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: ''
+- MappingType: Internal
+  Name: ELTM
+  Type: Numeric
+  Format: ''
+  Units: h
+  Fill: ''
+- MappingType: Internal
+  Name: TAD
+  Type: Numeric
+  Format: ''
+  Units: h
+  Fill: ''
+- MappingType: Internal
+  Name: TAFD
+  Type: Numeric
+  Format: ''
+  Units: h
+  Fill: ''
+- MappingType: Required
+  Name: ID
+  Type: Text
+  Format: '%s'
+  Units: ''
+  Fill: ''
+- MappingType: Required
+  Name: TIME
+  Type: DateTime
+  Format: ''
+  Units: h
+  Fill: ''
+- MappingType: Required
+  Name: EVID
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: ''
+- MappingType: Required
+  Name: DV
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: ''
+- MappingType: Required
+  Name: CMT
+  Type: Categorical
+  Format: ''
+  Units: ''
+  Fill: ''
+- MappingType: Additional
+  Name: AGE
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+- MappingType: Additional
+  Name: SEX
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+- MappingType: Additional
+  Name: RACE
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+- MappingType: Additional
+  Name: ETHNIC
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+- MappingType: Required
+  Name: AMT
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: ''
+- MappingType: Additional
+  Name: BILI
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: fill_locf(BILI, tolerance=Inf, time="ELTM")
+- MappingType: Additional
+  Name: CREAT
+  Type: Unknown
+  Format: ''
+  Units: nmol/mL, MW=10
+  Fill: fill_locf(CREAT, tolerance=Inf, time="ELTM")
+Diagnostics:
+  DVreconcile: true
+  DVreconcileStrata: ''
+  TimeSummary: true
+  TimeSummaryStrata: ''
+  VarSummary: true
+  VarSummaryColumns: ''
+  VarSummaryGroups: ''
+  Outliers: true
+  OutliersStrata: ''
+  OutlierBinning: ''
+  IndPlots: true
+  SpaghettiPlots: true
+  DVPlotsXaxis: ELTM
+  DVPlotsGrouping: ''
+  DVPlotsStrata: ''
+  DVPlotslogY: false
+  ShowADDL: false

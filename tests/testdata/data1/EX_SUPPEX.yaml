@@ -1,0 +1,100 @@
+ProjectDirectory: C:\Projects\Lilly\PK Data Tool\scratch
+SourceDirectory: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1
+LastSavedAs: C:\Projects\Lilly\PK Data Tool\scratch\EX_SUPPEX.yaml
+Domains:
+- name: EX
+  Mapping: CDISC 3
+  MappedDomain: EX
+  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\ex.sas7bdat
+  InputMappings:
+    MappedDomain: EX
+    Keys: ID
+    Columns:
+    - Name: EXDTC
+      Mapping: iso_to_posix(EXSTDTC)
+      Units: h
+      Type: DateTime
+    - Name: EXSTDTC
+      Mapping: iso_to_posix(EXSTDTC)
+      Units: h
+      Type: DateTime
+    - Name: EXENDTC
+      Mapping: iso_to_posix(EXENDTC)
+      Units: h
+      Type: DateTime
+    - Name: STUDYID
+      Mapping: STUDYID
+      Units: ''
+      Type: Categorical
+    - Name: DOMAIN
+      Mapping: DOMAIN
+      Units: ''
+      Type: Text
+    - Name: USUBJID
+      Mapping: USUBJID
+      Units: ''
+      Type: Text
+    - Name: EXSEQ
+      Mapping: EXSEQ
+      Units: ''
+      Type: Numeric
+    - Name: EXTRT
+      Mapping: EXTRT
+      Units: ''
+      Type: Categorical
+    - Name: EXDOSE
+      Mapping: EXDOSE
+      Units: ''
+      Type: Numeric
+    - Name: EXDOSU
+      Mapping: EXDOSU
+      Units: ''
+      Type: Text
+    - Name: EXDOSFRM
+      Mapping: EXDOSFRM
+      Units: ''
+      Type: Text
+    - Name: EXDOSFRQ
+      Mapping: EXDOSFRQ
+      Units: ''
+      Type: Categorical
+    - Name: EXROUTE
+      Mapping: EXROUTE
+      Units: ''
+      Type: Text
+    - Name: VISITNUM
+      Mapping: VISITNUM
+      Units: ''
+      Type: Numeric
+    - Name: VISIT
+      Mapping: VISIT
+      Units: ''
+      Type: Categorical
+    - Name: EPOCH
+      Mapping: EPOCH
+      Units: ''
+      Type: Categorical
+    - Name: EXSTDY
+      Mapping: EXSTDY
+      Units: ''
+      Type: Numeric
+    - Name: EXENDY
+      Mapping: EXENDY
+      Units: ''
+      Type: Text
+    - Name: EXTPT
+      Mapping: EXTPT
+      Units: ''
+      Type: Text
+    - Name: EXTPTNUM
+      Mapping: EXTPTNUM
+      Units: ''
+      Type: Text
+    PreMergeFile: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\suppex.sas7bdat
+    PreMergeKeys: USUBJID, EXSEQ
+    PreMergeCols: EXSEQ=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL
+    PreMergeSupp: true
+DependentVariables: []
+Covariates: []
+TVCovariates: []
+Doses: []

@@ -1,0 +1,2 @@
+name: Process Settings
+description: Processes a YAML settings file into a functions.R file

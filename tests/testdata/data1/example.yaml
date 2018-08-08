@@ -1,0 +1,3374 @@
+Info: 
+ProjectDirectory: C:\Projects\Lilly\PK Data Tool\Development\PMDatR\tests\testdata\data1
+SourceDirectory: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1
+LastSavedAs: C:\Projects\Lilly\PK Data Tool\Development\PMDatR\tests\testdata\data1\example.yaml
+Domains:
+- name: DM
+  Mapping: CDISC 3
+  MappedDomain: DM
+  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\dm.sas7bdat
+  SourceMetaData:
+    Domain: DM
+    Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\dm.sas7bdat
+    Type: Raw
+    Columns:
+    - name: STUDYID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X9X-XX-SDY4
+    - name: DOMAIN
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - DM
+    - name: USUBJID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X9X-XX-SDY4-129-02160
+      - X9X-XX-SDY4-129-02161
+      - X9X-XX-SDY4-129-02162
+      - X9X-XX-SDY4-129-02163
+      - X9X-XX-SDY4-129-02164
+    - name: SUBJID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 2160
+      - 2161
+      - 2162
+      - 2163
+      - 2164
+    - name: RFSTDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - 2014-06-12T10:15
+      - 2014-07-01T10:07
+      - 2014-07-29T11:14
+      - 2014-08-25T09:15
+    - name: RFENDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - 2014-12-01
+      - 2014-12-17
+      - 2015-01-14
+      - 2015-02-09
+    - name: RFXSTDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - 2014-06-12T10:15
+      - 2014-07-01T10:07
+      - 2014-07-29T11:14
+      - 2014-08-25T09:15
+    - name: RFXENDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - 2014-11-27T07:30
+      - 2014-12-10T08:55
+      - 2015-01-07T11:49
+      - 2014-09-02T08:56
+    - name: RFICDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 2014-05-21
+      - 2014-05-27
+      - 2014-06-16
+      - 2014-06-24
+      - 2014-07-14
+    - name: RFPENDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - 2014-12-01
+      - 2014-12-17
+      - 2015-01-14
+      - 2015-02-09
+    - name: DTHDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: DTHFL
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: SITEID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 129
+      - 132
+      - 105
+      - 106
+      - 125
+    - name: INVID
+      storage: Numeric
+      minimum: 1
+      maximum: 51
+      unique:
+      - .na
+    - name: INVNAM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - DR. AA
+      - DR. AB
+      - DR. AC
+      - DR. AD
+      - DR. AE
+    - name: BRTHDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 1955
+      - 1952
+      - 1960
+      - 1967
+      - 1959
+    - name: AGE
+      storage: Numeric
+      minimum: 27
+      maximum: 80
+      unique:
+      - .na
+    - name: AGEU
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - YEARS
+    - name: SEX
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - M
+      - F
+    - name: RACE
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - WHITE
+      - BLACK OR AFRICAN AMERICAN
+      - ASIAN
+      - MULTIPLE
+      - NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER
+    - name: ETHNIC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - NOT HISPANIC OR LATINO
+      - HISPANIC OR LATINO
+      - NOT APPLICABLE
+      - ''
+    - name: ARMCD
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - SCRNFAIL
+      - A-1
+      - A-3
+      - A-4
+      - A-2
+    - name: ARM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - SCREEN FAILURE
+      - LY9999999-10mg
+      - LY9999999-30mg
+      - LY9999999-50mg or 40mg
+      - LY9999999-15mg
+    - name: ACTARMCD
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - SCRNFAIL
+      - A-1
+      - A-3
+      - A-4
+      - A-2
+    - name: ACTARM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - SCREEN FAILURE
+      - LY999999-10mg
+      - LY999999-30mg
+      - LY999999-50mg or 40mg
+      - LY999999-15mg
+    - name: COUNTRY
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - USA
+      - POL
+      - ROU
+      - PRI
+      - MEX
+  InputMappings:
+    MappedDomain: DM
+    Filter: 
+    Keys: ID
+    Columns:
+    - Name: STUDYID
+      Mapping: STUDYID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: DOMAIN
+      Mapping: DOMAIN
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: USUBJID
+      Mapping: USUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: SUBJID
+      Mapping: SUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: RFSTDTC
+      Mapping: RFSTDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: RFENDTC
+      Mapping: RFENDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: RFXSTDTC
+      Mapping: RFXSTDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: RFXENDTC
+      Mapping: RFXENDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: RFICDTC
+      Mapping: RFICDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: RFPENDTC
+      Mapping: RFPENDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: DTHDTC
+      Mapping: DTHDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: DTHFL
+      Mapping: DTHFL
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: SITEID
+      Mapping: SITEID
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: INVID
+      Mapping: INVID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: INVNAM
+      Mapping: INVNAM
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: BRTHDTC
+      Mapping: BRTHDTC
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: AGE
+      Mapping: AGE
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: AGEU
+      Mapping: AGEU
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: SEX
+      Mapping: SEX
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: RACE
+      Mapping: RACE
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: ETHNIC
+      Mapping: ETHNIC
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: ARMCD
+      Mapping: ARMCD
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: ARM
+      Mapping: ARM
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: ACTARMCD
+      Mapping: ACTARMCD
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: ACTARM
+      Mapping: ACTARM
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: COUNTRY
+      Mapping: COUNTRY
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    PreMergeFile: ''
+    PreMergeKeys: 
+    PreMergeFilter: 
+    PreMergeCols: 
+    PreMergeSupp: false
+    DefaultQuerySettings:
+      ID: USUBJID
+      TIME: ''
+      DV: ''
+      AMT: ''
+      CMT: ''
+      EVID: ''
+      Values: ''
+      Parameter: ''
+    UniqueRecordKeys: ''
+  FileSettings:
+    sep: comma
+    header: true
+    fill: true
+    quote: none
+    comment.char: ''
+    skip: ''
+    sheet: ''
+    range: ''
+    id_cols: ''
+- name: EX
+  Mapping: CDISC 3
+  MappedDomain: EX
+  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\ex.sas7bdat
+  SourceMetaData:
+    Domain: EX
+    Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\ex.sas7bdat
+    Type: Raw
+    Columns:
+    - name: STUDYID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X9X-XX-SDY4
+    - name: DOMAIN
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - EX
+    - name: USUBJID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X9X-XX-SDY4-100-01000
+      - X9X-XX-SDY4-100-01002
+      - X9X-XX-SDY4-100-01003
+      - X9X-XX-SDY4-100-01005
+      - X9X-XX-SDY4-100-01007
+    - name: EXSEQ
+      storage: Numeric
+      minimum: 1
+      maximum: 64
+      unique:
+      - .na
+    - name: EXGRPID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXREFID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXSPID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    - name: EXTRT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - PLACEBO
+      - Other Drug 1
+      - LY9999999
+    - name: EXCAT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - STUDY TREATMENT
+    - name: EXOCCUR
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - Y
+    - name: EXREASND
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXDOSE
+      storage: Numeric
+      minimum: 0
+      maximum: 50
+      unique:
+      - .na
+    - name: EXDOSU
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - mg
+    - name: EXDOSFRM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - INJECTION
+    - name: EXDOSFRQ
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - WEEKLY
+    - name: EXDOSTOT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXDOSRGM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXROUTE
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - SUBCUTANEOUS
+    - name: EXLOT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXLOC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ABDOMEN
+      - ARM
+      - THIGH
+      - BUTTOCK
+      - ''
+    - name: EXVAMT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXVAMTU
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXADJ
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: ETCD
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - PL
+      - EXER2
+      - EXER2OL
+      - LY30
+      - LY30OL
+    - name: EPOCH
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - BLINDED TREATMENT PHASE
+      - OPEN LABEL TREATMENT PHASE
+    - name: VISITNUM
+      storage: Numeric
+      minimum: 2
+      maximum: 20
+      unique:
+      - .na
+    - name: VISIT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - VISIT2
+      - VISIT4
+      - VISIT5
+      - VISIT6
+      - VISIT7
+    - name: EXSTDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 2014-05-15T12:35
+      - 2014-05-20T09:35
+      - 2014-05-27T09:50
+      - 2014-06-03T10:21
+      - 2014-06-10T10:01
+    - name: EXENDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXSTDY
+      storage: Numeric
+      minimum: 1
+      maximum: 191
+      unique:
+      - .na
+    - name: EXENDY
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXTPT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXTPTNUM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXELTM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXTPTREF
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: EXLAT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - .na.character
+      - LEFT
+      - RIGHT
+      - BILATERAL
+    - name: EXPOCCUR
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - Y
+      - .na.character
+      - N
+  InputMappings:
+    MappedDomain: EX
+    Filter: 
+    Keys: ID
+    Columns:
+    - Name: EXDTC
+      Mapping: iso_to_posix(EXSTDTC)
+      Units: h
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: EXSTDTC
+      Mapping: iso_to_posix(EXSTDTC)
+      Units: h
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: EXENDTC
+      Mapping: iso_to_posix(EXENDTC)
+      Units: h
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: STUDYID
+      Mapping: STUDYID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: DOMAIN
+      Mapping: DOMAIN
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: USUBJID
+      Mapping: USUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: EXSEQ
+      Mapping: EXSEQ
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: EXTRT
+      Mapping: EXTRT
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: EXDOSE
+      Mapping: EXDOSE
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: EXDOSU
+      Mapping: EXDOSU
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: EXDOSFRM
+      Mapping: EXDOSFRM
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: EXDOSFRQ
+      Mapping: EXDOSFRQ
+      Units: ''
+      Type: Unknown
+      Required: true
+      Summary: first
+    - Name: EXOCCUR
+      Mapping: EXOCCUR
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: EXROUTE
+      Mapping: EXROUTE
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: VISITNUM
+      Mapping: VISITNUM
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: VISIT
+      Mapping: VISIT
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: EPOCH
+      Mapping: EPOCH
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: EXSTDY
+      Mapping: EXSTDY
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: EXENDY
+      Mapping: EXENDY
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: EXTPT
+      Mapping: EXTPT
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: EXTPTNUM
+      Mapping: EXTPTNUM
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: II
+      Mapping: replace_values(EXDOSFRQ,QD=24,ONCE=0,BID=12,WEEKLY=168)
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    PreMergeFile: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\suppex.sas7bdat
+    PreMergeKeys: USUBJID, EXSEQ
+    PreMergeFilter: RDOMAIN=='EX'
+    PreMergeCols: EXSEQ=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL
+    PreMergeSupp: true
+    DefaultQuerySettings:
+      ID: USUBJID
+      TIME: EXSTDTC
+      DV: 0
+      AMT: EXDOSE
+      CMT: 1
+      EVID: 1
+      Values: ''
+      Parameter: ''
+    UniqueRecordKeys: ''
+  FileSettings:
+    sep: comma
+    header: true
+    fill: true
+    quote: none
+    comment.char: ''
+    skip: ''
+    sheet: ''
+    range: ''
+    id_cols: ''
+- name: LB
+  Mapping: CDISC 3
+  MappedDomain: LB
+  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\lb.sas7bdat
+  SourceMetaData:
+    Domain: LB
+    Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\lb.sas7bdat
+    Type: Raw
+    Columns:
+    - name: STUDYID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X9X-XX-SDY4
+    - name: DOMAIN
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - LB
+    - name: USUBJID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X9X-XX-SDY4-100-01000
+      - X9X-XX-SDY4-100-01001
+      - X9X-XX-SDY4-100-01002
+      - X9X-XX-SDY4-100-01003
+      - X9X-XX-SDY4-100-01004
+    - name: LBSEQ
+      storage: Numeric
+      minimum: 1
+      maximum: 534
+      unique:
+      - .na
+    - name: LBGRPID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: LBREFID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X760619
+      - X760634OR8624
+      - X760634OR8077
+      - X760634OR8078
+      - X760634OR8079
+    - name: LBTESTCD
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ACTFGF21
+      - GLP1AC
+      - TOTFGF21
+      - ALB
+      - ALP
+    - name: LBTEST
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - Active Fibroblast Growth Factor 21
+      - Glucagon-Like Peptide-1, Active Form
+      - Total Fibroblast Growth Factor 21
+      - Albumin
+      - Alkaline Phosphatase
+    - name: LBCAT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - BIOMARKER
+      - CHEMISTRY
+      - ENDOCRINE
+      - HEMATOLOGY
+      - IMMUNOLOGY
+    - name: LBORRES
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - RESULTS PENDING
+      - 0.47130
+      - 0.36002
+      - 0.19509
+      - 0.44010
+    - name: LBORRESU
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ug/L
+      - pmol/L
+      - g/L
+      - U/L
+      - umol/L
+    - name: LBORNRLO
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 0
+      - 33
+      - 35
+      - 6
+      - 28
+    - name: LBORNRHI
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 1E15
+      - 2.88
+      - 49
+      - 123
+      - 34
+    - name: LBSTRESC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - 0.47130
+      - 0.36002
+      - 0.19509
+      - 0.44010
+    - name: LBSTRESN
+      storage: Numeric
+      minimum: 0
+      maximum: 3010000
+      unique:
+      - .na
+    - name: LBSTRESU
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ug/L
+      - pmol/L
+      - g/L
+      - U/L
+      - umol/L
+    - name: LBSTNRLO
+      storage: Numeric
+      minimum: 0
+      maximum: 268
+      unique:
+      - .na
+    - name: LBSTNRHI
+      storage: Numeric
+      minimum: 0
+      maximum: 1e+15
+      unique:
+      - .na
+    - name: LBSTNRC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: LBNRIND
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - NORMAL
+      - HIGH
+      - LOW
+      - ABNORMAL
+    - name: LBSTAT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - NOT DONE
+    - name: LBREASND
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - NO SPECIMEN RECEIVED
+      - HEMOLYSIS-TEST NOT PERFORMED
+      - NOT REQUIRED
+      - TEST ORDERED TO COMPLETE VISIT REQUIREMENTS
+    - name: LBNAM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - PHARMACO LSR
+      - PACIFIC BIOMARKERS INC
+      - COVANCE CENTRAL LABORATORY SERVICES
+      - ARUP LABORATORIES
+      - FOCUS DIAGNOSTICS
+    - name: LBSPEC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - PLASMA
+      - SERUM
+      - BLOOD
+      - ADIPOSE TISSUE
+      - URINE
+    - name: LBSPCCND
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: LBLOC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: LBMETHOD
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - ELECTROCHEMILUMINESCENCE IMMUNOASSAY
+      - RATE BLANKED METHOD
+      - CALCULATION
+      - IMMUNOASSAY
+    - name: LBBLFL
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - Y
+    - name: LBFAST
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - Y
+      - ''
+    - name: LBDRVFL
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: VISITNUM
+      storage: Numeric
+      minimum: 1
+      maximum: 22
+      unique:
+      - .na
+    - name: VISIT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - VISIT2
+      - VISIT7
+      - VISIT12
+      - VISIT16
+      - VISIT20
+    - name: EPOCH
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - SCREENING
+      - BLINDED TREATMENT PHASE
+      - OPEN LABEL TREATMENT PHASE
+      - POST TREATMENT FOLLOW UP
+      - IMMUNOGENICITY FOLLOW UP
+    - name: LBDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 2014-05-15T09:00:00
+      - 2014-05-15T09:45:00
+      - 2014-05-15T10:15:00
+      - 2014-05-15T10:45:00
+      - 2014-05-15T11:15:00
+    - name: LBSTDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: LBENDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: LBDY
+      storage: Numeric
+      minimum: -46
+      maximum: 294
+      unique:
+      - .na
+    - name: LBENDY
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: LBTPT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - VISIT DAY
+      - ''
+    - name: LBTPTNUM
+      storage: Numeric
+      minimum: 1
+      maximum: 1
+      unique:
+      - .na
+    - name: LBELTM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: LBTPTREF
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: LBRFTDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+  InputMappings:
+    MappedDomain: LB
+    Filter: ''
+    Keys: ID
+    Columns:
+    - Name: STUDYID
+      Mapping: STUDYID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: DOMAIN
+      Mapping: DOMAIN
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: USUBJID
+      Mapping: USUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: LBSEQ
+      Mapping: LBSEQ
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: LBTESTCD
+      Mapping: LBTESTCD
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: LBTEST
+      Mapping: LBTEST
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: LBCAT
+      Mapping: LBCAT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: LBORRES
+      Mapping: LBORRES
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: LBORRESU
+      Mapping: LBORRESU
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: LBORNRLO
+      Mapping: LBORNRLO
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: LBORNRHI
+      Mapping: LBORNRHI
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: LBSTRESC
+      Mapping: LBSTRESC
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: LBSTRESN
+      Mapping: LBSTRESN
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: LBSTRESU
+      Mapping: LBSTRESU
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: LBSTNRLO
+      Mapping: LBSTNRLO
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: LBSTNRHI
+      Mapping: LBSTNRHI
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: LBNRIND
+      Mapping: LBNRIND
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: LBSTAT
+      Mapping: LBSTAT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: LBREASND
+      Mapping: LBREASND
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: LBNAM
+      Mapping: LBNAM
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: LBSPEC
+      Mapping: LBSPEC
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: LBSPCCND
+      Mapping: LBSPCCND
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: LBBLFL
+      Mapping: LBBLFL
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: VISITNUM
+      Mapping: VISITNUM
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: VISIT
+      Mapping: VISIT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: EPOCH
+      Mapping: EPOCH
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: LBDTC
+      Mapping: iso_to_posix(LBDTC)
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: LBDY
+      Mapping: LBDY
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    PreMergeFile: ''
+    PreMergeKeys: 
+    PreMergeFilter: 
+    PreMergeCols: 
+    PreMergeSupp: false
+    DefaultQuerySettings:
+      ID: USUBJID
+      TIME: LBDTC
+      DV: ''
+      AMT: ''
+      CMT: ''
+      EVID: 2
+      Values: LBSTRESN
+      Parameter: LBTESTCD
+    UniqueRecordKeys: ''
+  FileSettings:
+    sep: comma
+    header: true
+    fill: true
+    quote: none
+    comment.char: ''
+    skip: ''
+    sheet: ''
+    range: ''
+    id_cols: ''
+- name: PC
+  Mapping: CDISC 3
+  MappedDomain: PC
+  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\pc.sas7bdat
+  SourceMetaData:
+    Domain: PC
+    Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\pc.sas7bdat
+    Type: Raw
+    Columns:
+    - name: STUDYID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X9X-XX-SDY4
+    - name: DOMAIN
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - PC
+    - name: USUBJID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X9X-XX-SDY4-100-01000
+      - X9X-XX-SDY4-100-01002
+      - X9X-XX-SDY4-100-01003
+      - X9X-XX-SDY4-100-01005
+      - X9X-XX-SDY4-100-01007
+    - name: PCSEQ
+      storage: Numeric
+      minimum: 1
+      maximum: 11
+      unique:
+      - .na
+    - name: PCGRPID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: PCREFID
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - X760629
+      - X760626
+      - X760625
+      - Y395086
+      - Y395087
+    - name: PCTESTCD
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - XX9
+    - name: PCTEST
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - LY9999999, PLASMA
+    - name: PCORRES
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - PENDING
+      - 139.7
+      - 556.3
+      - 745.9
+      - 722.1
+    - name: PCORRESU
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ug/L
+      - ''
+    - name: PCSTRESC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - PENDING
+      - 139.7
+      - 556.3
+      - 745.9
+      - 722.1
+    - name: PCSTRESN
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - 139.7
+      - 556.3
+      - 745.9
+      - 722.1
+    - name: PCSTRESU
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ug/L
+      - ''
+    - name: PCSTAT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - NOT DONE
+    - name: PCREASND
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - Specimen received beyond stability
+      - No specimen received
+      - QNS
+      - Specimen thawed in transit
+    - name: PCNAM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - COVANCE BIOANALYTICAL SERVICES, LLC
+    - name: PCSPEC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - PLASMA
+    - name: PCMETHOD
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+    - name: PCBLFL
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - ''
+      - Y
+    - name: VISITNUM
+      storage: Numeric
+      minimum: 2
+      maximum: 98
+      unique:
+      - .na
+    - name: VISIT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - VISIT3
+      - VISIT5
+      - VISIT6
+      - VISIT8
+      - VISIT12
+    - name: EPOCH
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - BLINDED TREATMENT PHASE
+      - OPEN LABEL TREATMENT PHASE
+      - ''
+      - POST TREATMENT FOLLOW UP
+      - SCREENING
+    - name: PCDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 2014-05-20T09:15:00
+      - 2014-05-27T09:45:00
+      - 2014-06-03T08:55:00
+      - 2014-06-12T13:30:00
+      - 2014-07-08T09:45:00
+    - name: PCDY
+      storage: Numeric
+      minimum: -333
+      maximum: 198
+      unique:
+      - .na
+    - name: PCTPT
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - POSTDOSE
+      - ''
+      - PREDOSE
+      - VISIT DAY
+    - name: PCTPTNUM
+      storage: Numeric
+      minimum: 1
+      maximum: 1
+      unique:
+      - .na
+    - name: PCELTM
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - P1D
+      - ''
+      - P0H
+    - name: PCTPTREF
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - VISIT 2 DOSE
+      - ''
+      - VISIT 6 DOSE
+      - VISIT 7 DOSE
+      - VISIT 12 DOSE
+    - name: PCRFTDTC
+      storage: Text
+      minimum: .na
+      maximum: .na
+      unique:
+      - 2014-05-15T12:35
+      - ''
+      - 2014-08-21T11:41
+      - 2014-09-15T10:59
+      - 2014-10-16T11:42
+  InputMappings:
+    MappedDomain: PC
+    Filter: 
+    Keys: ID
+    Columns:
+    - Name: STUDYID
+      Mapping: STUDYID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: DOMAIN
+      Mapping: DOMAIN
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: USUBJID
+      Mapping: USUBJID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: PCSEQ
+      Mapping: PCSEQ
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: PCGRPID
+      Mapping: PCGRPID
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: PCTESTCD
+      Mapping: PCTESTCD
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: PCTEST
+      Mapping: PCTEST
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: PCORRES
+      Mapping: PCORRES
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: PCORRESU
+      Mapping: PCORRESU
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: PCSTRESC
+      Mapping: PCSTRESC
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: PCSTRESN
+      Mapping: PCSTRESN
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: PCSTRESU
+      Mapping: PCSTRESU
+      Units: ''
+      Type: Text
+      Required: true
+      Summary: first
+    - Name: PCSTAT
+      Mapping: PCSTAT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: PCREASND
+      Mapping: PCREASND
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: PCNAM
+      Mapping: PCNAM
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: PCSPEC
+      Mapping: PCSPEC
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: VISITNUM
+      Mapping: VISITNUM
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: VISIT
+      Mapping: VISIT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: EPOCH
+      Mapping: EPOCH
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: TIME
+      Mapping: iso_to_posix(PCDTC)
+      Units: ''
+      Type: DateTime
+      Required: true
+      Summary: first
+    - Name: PCDY
+      Mapping: PCDY
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    - Name: PCTPT
+      Mapping: PCTPT
+      Units: ''
+      Type: Categorical
+      Required: true
+      Summary: first
+    - Name: PCTPTNUM
+      Mapping: PCTPTNUM
+      Units: ''
+      Type: Numeric
+      Required: true
+      Summary: first
+    PreMergeFile: ''
+    PreMergeKeys: 
+    PreMergeFilter: 
+    PreMergeCols: 
+    PreMergeSupp: false
+    DefaultQuerySettings:
+      ID: USUBJID
+      TIME: TIME
+      DV: PCSTRESN
+      AMT: 0
+      CMT: 2
+      EVID: 0
+      Values: ''
+      Parameter: ''
+    UniqueRecordKeys: ''
+  FileSettings:
+    sep: comma
+    header: true
+    fill: true
+    quote: none
+    comment.char: ''
+    skip: ''
+    sheet: ''
+    range: ''
+    id_cols: ''
+DomainMetaData:
+- Domain: DM
+  Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\dm.sas7bdat
+  Type: Processed
+  Columns:
+  - name: STUDYID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - X9X-XX-SDY4
+  - name: DOMAIN
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - DM
+  - name: USUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - X9X-XX-SDY4-129-02160
+    - X9X-XX-SDY4-129-02161
+    - X9X-XX-SDY4-129-02162
+    - X9X-XX-SDY4-129-02163
+    - X9X-XX-SDY4-129-02164
+  - name: SUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - 2160
+    - 2161
+    - 2162
+    - 2163
+    - 2164
+  - name: RFSTDTC
+    storage: DateTime
+    minimum: ''
+    maximum: 2015-02-12T10:20
+    unique:
+    - .na
+  - name: RFENDTC
+    storage: DateTime
+    minimum: ''
+    maximum: 2015-07-21
+    unique:
+    - .na
+  - name: RFXSTDTC
+    storage: DateTime
+    minimum: ''
+    maximum: 2015-02-12T10:20
+    unique:
+    - .na
+  - name: RFXENDTC
+    storage: DateTime
+    minimum: ''
+    maximum: 2015-07-19T10:00
+    unique:
+    - .na
+  - name: RFICDTC
+    storage: DateTime
+    minimum: 2014-04-30
+    maximum: 2015-01-21
+    unique:
+    - .na
+  - name: RFPENDTC
+    storage: DateTime
+    minimum: ''
+    maximum: 2015-07-21
+    unique:
+    - .na
+  - name: DTHDTC
+    storage: DateTime
+    minimum: ''
+    maximum: ''
+    unique:
+    - .na
+  - name: DTHFL
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+  - name: SITEID
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - 129
+    - 132
+    - 105
+    - 106
+    - 125
+    - 600
+    - 301
+    - 601
+    - 605
+    - 121
+    - 124
+    - 112
+    - 604
+    - 114
+    - 702
+    - 109
+    - 118
+    - 107
+    - 126
+    - 130
+    - 101
+    - 133
+    - 300
+    - 403
+    - 700
+    - 122
+    - 127
+    - 108
+    - 701
+    - 304
+    - 606
+    - 123
+    - 103
+    - 119
+    - 602
+    - 400
+    - 102
+    - 120
+    - 117
+    - 402
+    - 303
+    - 401
+    - 100
+    - 131
+    - 404
+    - 115
+    - 302
+    - 116
+    - 134
+    - 603
+    - 128
+    - 110
+    - 113
+    - 135
+  - name: INVID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - 1.0
+    - 2.0
+    - 3.0
+    - 4.0
+    - 5.0
+  - name: INVNAM
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - DR. AA
+    - DR. AB
+    - DR. AC
+    - DR. AD
+    - DR. AE
+  - name: BRTHDTC
+    storage: DateTime
+    minimum: 1934
+    maximum: 1987
+    unique:
+    - .na
+  - name: AGE
+    storage: Numeric
+    minimum: 27
+    maximum: 80
+    unique:
+    - .na
+  - name: AGEU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - YEARS
+  - name: SEX
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - M
+    - F
+  - name: RACE
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - WHITE
+    - BLACK OR AFRICAN AMERICAN
+    - ASIAN
+    - MULTIPLE
+    - NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER
+    - AMERICAN INDIAN OR ALASKA NATIVE
+    - ''
+  - name: ETHNIC
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - NOT HISPANIC OR LATINO
+    - HISPANIC OR LATINO
+    - NOT APPLICABLE
+    - ''
+  - name: ARMCD
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - SCRNFAIL
+    - A-1
+    - A-3
+    - A-4
+    - A-2
+    - A-6
+    - A-5
+    - NOTASSGN
+  - name: ARM
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - SCREEN FAILURE
+    - LY9999999-10mg
+    - LY9999999-30mg
+    - LY9999999-50mg or 40mg
+    - LY9999999-15mg
+    - PLACEBO
+    - Other Drug 1 2mg
+    - NOT ASSIGNED
+  - name: ACTARMCD
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - SCRNFAIL
+    - A-1
+    - A-3
+    - A-4
+    - A-2
+    - A-6
+    - A-5
+    - NOTASSGN
+  - name: ACTARM
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - SCREEN FAILURE
+    - LY999999-10mg
+    - LY999999-30mg
+    - LY999999-50mg or 40mg
+    - LY999999-15mg
+    - PLACEBO
+    - Other Drug 1 2mg
+    - NOT ASSIGNED
+  - name: COUNTRY
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - USA
+    - POL
+    - ROU
+    - PRI
+    - MEX
+- Domain: EX
+  Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\ex.sas7bdat
+  Type: Processed
+  Columns:
+  - name: EXDTC
+    storage: DateTime
+    minimum: 2014-05-14 09:02:00
+    maximum: 2015-07-19 10:00:00
+    unique:
+    - .na
+  - name: EXSTDTC
+    storage: DateTime
+    minimum: 2014-05-14 09:02:00
+    maximum: 2015-07-19 10:00:00
+    unique:
+    - .na
+  - name: EXENDTC
+    storage: DateTime
+    minimum: .na.character
+    maximum: .na.character
+    unique:
+    - .na
+  - name: STUDYID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - X9X-XX-SDY4
+  - name: DOMAIN
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - EX
+  - name: USUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - X9X-XX-SDY4-100-01000
+    - X9X-XX-SDY4-100-01002
+    - X9X-XX-SDY4-100-01003
+    - X9X-XX-SDY4-100-01005
+    - X9X-XX-SDY4-100-01007
+  - name: EXSEQ
+    storage: Numeric
+    minimum: 1
+    maximum: 64
+    unique:
+    - .na
+  - name: EXTRT
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - PLACEBO
+    - Other Drug 1
+    - LY9999999
+  - name: EXDOSE
+    storage: Numeric
+    minimum: 0
+    maximum: 50
+    unique:
+    - .na
+  - name: EXDOSU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - mg
+  - name: EXDOSFRM
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - INJECTION
+  - name: EXDOSFRQ
+    storage: Unknown
+    minimum: .na
+    maximum: .na
+    unique:
+    - WEEKLY
+  - name: EXOCCUR
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - Y
+  - name: EXROUTE
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - SUBCUTANEOUS
+  - name: VISITNUM
+    storage: Numeric
+    minimum: 2
+    maximum: 20
+    unique:
+    - .na
+  - name: VISIT
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - VISIT2
+    - VISIT4
+    - VISIT5
+    - VISIT6
+    - VISIT7
+  - name: EPOCH
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - BLINDED TREATMENT PHASE
+    - OPEN LABEL TREATMENT PHASE
+  - name: EXSTDY
+    storage: Numeric
+    minimum: 1
+    maximum: 191
+    unique:
+    - .na
+  - name: EXENDY
+    storage: Numeric
+    minimum: ''
+    maximum: ''
+    unique:
+    - .na
+  - name: EXTPT
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+  - name: EXTPTNUM
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+  - name: II
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - 168
+- Domain: LB
+  Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\lb.sas7bdat
+  Type: Processed
+  Columns:
+  - name: STUDYID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - X9X-XX-SDY4
+  - name: DOMAIN
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - LB
+  - name: USUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - X9X-XX-SDY4-100-01000
+    - X9X-XX-SDY4-100-01001
+    - X9X-XX-SDY4-100-01002
+    - X9X-XX-SDY4-100-01003
+    - X9X-XX-SDY4-100-01004
+  - name: LBSEQ
+    storage: Numeric
+    minimum: 1
+    maximum: 534
+    unique:
+    - .na
+  - name: LBTESTCD
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ACTFGF21
+    - GLP1AC
+    - TOTFGF21
+    - ALB
+    - ALP
+    - ALT
+    - AMYLASE
+    - AST
+    - BILDIR
+    - BILI
+    - BUN
+    - CA
+    - CREAT
+    - GFRBSA
+    - GLUC
+    - K
+    - LIPASE
+    - PROT
+    - SODIUM
+    - TRIG
+    - URATE
+    - BHYXBTR
+    - CHOLCDC
+    - FATACFR
+    - GLUCT
+    - HDLCDC
+    - LDLCDC
+    - TRIGCDC
+    - ESTRDIOL
+    - FSH
+    - HCG
+    - ADPNCTN
+    - CPEPTIDE
+    - GLUCAGON
+    - HMWADPCN
+    - INSULIN
+    - BASO
+    - EOS
+    - HBA1C
+    - HCT
+    - HGB
+    - LYM
+    - MCHC
+    - MCV
+    - MONO
+    - NEUTSG
+    - PLAT
+    - RBC
+    - RBCMORPH
+    - WBC
+    - LY876A
+    - LY876AT
+    - HBSAG
+    - HCAB
+    - HIV12AB
+    - SDNAR
+    - LEUKASE
+    - OCCBLD
+    - PH
+    - LDL
+    - MACROCY
+    - ANISO
+    - HCVRNA
+    - MICROCY
+    - POIKILO
+    - POLYCHR
+    - CK
+    - GGT
+    - LYMAT
+    - NEUTB
+    - RBCNUCLE
+    - HAPTOG
+    - INR
+    - PT
+    - ANA
+    - SMUSCAB
+    - HAAB
+    - HAABIGM
+    - HBCAB
+    - HBSAB
+    - HEIGGAB
+    - HEIGMAB
+    - HBDNA
+    - HPOCROM
+    - SCHISTO
+    - TRGTCE
+    - MYCY
+    - NEUTMM
+  - name: LBTEST
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - Active Fibroblast Growth Factor 21
+    - Glucagon-Like Peptide-1, Active Form
+    - Total Fibroblast Growth Factor 21
+    - Albumin
+    - Alkaline Phosphatase
+    - Alanine Aminotransferase
+    - Amylase
+    - Aspartate Aminotransferase
+    - Direct Bilirubin
+    - Bilirubin
+    - Blood Urea Nitrogen
+    - Calcium
+    - Creatinine
+    - Glomerular Filtration Rate Adj for BSA
+    - Glucose
+    - Potassium
+    - Triacylglycerol Lipase
+    - Protein
+    - Sodium
+    - Triglycerides
+    - Urate
+    - Beta-Hydroxybutyrate
+    - Cholesterol CDC
+    - Free Fatty Acid
+    - Glucose Timed Collection
+    - HDL Cholesterol CDC
+    - LDL Cholesterol CDC
+    - Triglycerides CDC
+    - Estradiol
+    - Follicle Stimulating Hormone
+    - Choriogonadotropin Beta
+    - Adiponectin
+    - C-peptide
+    - Glucagon
+    - High Molecular Weight Adiponectin
+    - Insulin
+    - Basophils
+    - Eosinophils
+    - Hemoglobin A1C
+    - Hematocrit
+    - Hemoglobin
+    - Lymphocytes
+    - Ery. Mean Corpuscular HGB Concentration
+    - Ery. Mean Corpuscular Volume
+    - Monocytes
+    - Neutrophils, Segmented
+    - Platelets
+    - Erythrocytes
+    - Erythrocyte Cell Morphology
+    - Leukocytes
+    - LY2944876 Antibody
+    - LY2944876 Antibody, Titer
+    - Hepatitis B Virus Surface Antigen
+    - Hepatitis C Virus Antibody
+    - HIV-1/2 Antibody
+    - Stored DNA Received
+    - Leukocyte Esterase
+    - Occult Blood
+    - pH
+    - LDL Cholesterol
+    - Macrocytes
+    - Anisocytes
+    - Hepatitis C Virus RNA
+    - Microcytes
+    - Poikilocytes
+    - Polychromasia
+    - Creatine Kinase
+    - Gamma Glutamyl Transferase
+    - Lymphocytes Atypical
+    - Neutrophils Band Form
+    - Nucleated Erythrocytes/Leukocytes
+    - Haptoglobin
+    - Prothrombin Intl. Normalized Ratio
+    - Prothrombin Time
+    - Antinuclear Antibodies
+    - Smooth Muscle Antibody
+    - Hepatitis A Virus Antibody
+    - Hepatitis A Virus Antibody IgM
+    - Hepatitis B Virus Core Antibody
+    - Hepatitis B Virus Surface Antibody
+    - Hepatitis E Virus IgG Antibody
+    - Hepatitis E Virus IgM Antibody
+    - Hepatitis B DNA
+    - Hypochromia
+    - Schistocytes
+    - Target Cells
+    - Myelocytes
+    - Neutrophilic Metamyelocytes
+  - name: LBCAT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - BIOMARKER
+    - CHEMISTRY
+    - ENDOCRINE
+    - HEMATOLOGY
+    - IMMUNOLOGY
+    - SEROLOGY/VIROLOGY
+    - STORE
+    - URINALYSIS
+    - GENOMICS
+    - COAGULATION
+  - name: LBORRES
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - RESULTS PENDING
+    - 0.47130
+    - 0.36002
+    - 0.19509
+    - 0.44010
+  - name: LBORRESU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ug/L
+    - pmol/L
+    - g/L
+    - U/L
+    - umol/L
+  - name: LBORNRLO
+    storage: Numeric
+    minimum: ''
+    maximum: 9.7
+    unique:
+    - .na
+  - name: LBORNRHI
+    storage: Numeric
+    minimum: ''
+    maximum: 99999999
+    unique:
+    - .na
+  - name: LBSTRESC
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - 0.47130
+    - 0.36002
+    - 0.19509
+    - 0.44010
+  - name: LBSTRESN
+    storage: Numeric
+    minimum: 0
+    maximum: 3010000
+    unique:
+    - .na
+  - name: LBSTRESU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ug/L
+    - pmol/L
+    - g/L
+    - U/L
+    - umol/L
+  - name: LBSTNRLO
+    storage: Numeric
+    minimum: 0
+    maximum: 268
+    unique:
+    - .na
+  - name: LBSTNRHI
+    storage: Numeric
+    minimum: 0
+    maximum: 1e+15
+    unique:
+    - .na
+  - name: LBNRIND
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - NORMAL
+    - HIGH
+    - LOW
+    - ABNORMAL
+  - name: LBSTAT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - NOT DONE
+  - name: LBREASND
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - NO SPECIMEN RECEIVED
+    - HEMOLYSIS-TEST NOT PERFORMED
+    - NOT REQUIRED
+    - TEST ORDERED TO COMPLETE VISIT REQUIREMENTS
+    - SAMPLE CONSUMED IN RETESTING
+    - QUANTITY NOT SUFFICIENT
+    - UNABLE TO CALCULATE
+    - MICROCLOTS
+    - CLOTTED BLOOD RECEIVED
+    - SPECIMEN RECEIVED BEYOND STABILITY
+    - GROUP ORDERED TO COMPLETE VISIT REQUIREMENTS.
+    - ERROR IN SPECIMEN ID ASSIGNMENT
+    - INVALID; QNS FOR REPEAT
+    - CAN'T REPORT INCOR SPEC TYPE
+    - BEYOND STABILITY
+    - SPECIMEN NOT COLLECTED
+    - NOT IDENT. W/IN STABILITY.
+    - SPECIMEN THAWED IN TRANSIT
+    - MISHANDLED BY COVANCE
+    - RESULTS MOVED TO NEW ACC.NUMBER
+    - TEST ORDER NOT IDENTIFIED BEFORE SPECIMEN DISCARDE
+    - IMPROPERLY COLLECTED SPECIMEN
+    - SPECIMEN SEVERELY HEMOLYZED - UNABLE TO PERFORM TE
+    - PROLONGED CELL CONTACT
+    - WRONG TRANSPORT VIAL SUPPLIED
+    - INCORRECT SPECIMEN TYPE
+    - UNLABELED TUBE RECEIVED
+    - CONTAINER RECEIVED EMPTY
+    - INVALID/INTERFER. SUBSTANCE
+    - INVALID/BACTERIA PRESENT
+    - EXPIRED CONTAIN, TEST CANCEL
+    - TUBE BROKEN DURING ANALYSIS
+    - TUBE BROKEN IN TRANSIT
+  - name: LBNAM
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - PHARMACO LSR
+    - PACIFIC BIOMARKERS INC
+    - COVANCE CENTRAL LABORATORY SERVICES
+    - ARUP LABORATORIES
+    - FOCUS DIAGNOSTICS
+  - name: LBSPEC
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - PLASMA
+    - SERUM
+    - BLOOD
+    - ADIPOSE TISSUE
+    - URINE
+  - name: LBSPCCND
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+  - name: LBBLFL
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - Y
+  - name: VISITNUM
+    storage: Numeric
+    minimum: 1
+    maximum: 22
+    unique:
+    - .na
+  - name: VISIT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - VISIT2
+    - VISIT7
+    - VISIT12
+    - VISIT16
+    - VISIT20
+    - FOLLOW UP
+    - SCREENING
+    - VISIT5
+    - VISIT10
+    - VISIT18
+    - VISIT19
+    - VISIT8
+    - IMMUNO FOLLOW UP
+    - VISIT9
+    - VISIT15
+    - VISIT17
+    - VISIT13
+    - VISIT11
+    - VISIT4
+    - VISIT14
+    - VISIT3
+    - VISIT6
+  - name: EPOCH
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - SCREENING
+    - BLINDED TREATMENT PHASE
+    - OPEN LABEL TREATMENT PHASE
+    - POST TREATMENT FOLLOW UP
+    - IMMUNOGENICITY FOLLOW UP
+    - ''
+  - name: LBDTC
+    storage: DateTime
+    minimum: 2014-04-30 09:55:00
+    maximum: 2015-07-17 08:28:00
+    unique:
+    - .na
+  - name: LBDY
+    storage: Numeric
+    minimum: -46
+    maximum: 294
+    unique:
+    - .na
+- Domain: PC
+  Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\pc.sas7bdat
+  Type: Processed
+  Columns:
+  - name: STUDYID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - X9X-XX-SDY4
+  - name: DOMAIN
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - PC
+  - name: USUBJID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - X9X-XX-SDY4-100-01000
+    - X9X-XX-SDY4-100-01002
+    - X9X-XX-SDY4-100-01003
+    - X9X-XX-SDY4-100-01005
+    - X9X-XX-SDY4-100-01007
+  - name: PCSEQ
+    storage: Numeric
+    minimum: 1
+    maximum: 11
+    unique:
+    - .na
+  - name: PCGRPID
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+  - name: PCTESTCD
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - XX9
+  - name: PCTEST
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - LY9999999, PLASMA
+  - name: PCORRES
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - PENDING
+    - 139.7
+    - 556.3
+    - 745.9
+    - 722.1
+  - name: PCORRESU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ug/L
+    - ''
+  - name: PCSTRESC
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - PENDING
+    - 139.7
+    - 556.3
+    - 745.9
+    - 722.1
+  - name: PCSTRESN
+    storage: Numeric
+    minimum: ''
+    maximum: 999.6
+    unique:
+    - .na
+  - name: PCSTRESU
+    storage: Text
+    minimum: .na
+    maximum: .na
+    unique:
+    - ug/L
+    - ''
+  - name: PCSTAT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - NOT DONE
+  - name: PCREASND
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - ''
+    - Specimen received beyond stability
+    - No specimen received
+    - QNS
+    - Specimen thawed in transit
+    - Group ordered to complete visit requirements.
+    - Mishandled by Covance
+    - Error in specimen ID assignment
+  - name: PCNAM
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - COVANCE BIOANALYTICAL SERVICES, LLC
+  - name: PCSPEC
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - PLASMA
+  - name: VISITNUM
+    storage: Numeric
+    minimum: 2
+    maximum: 98
+    unique:
+    - .na
+  - name: VISIT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - VISIT3
+    - VISIT5
+    - VISIT6
+    - VISIT8
+    - VISIT12
+    - VISIT16
+    - VISIT7
+    - VISIT9
+    - VISIT18
+    - VISIT20
+    - ''
+    - VISIT19
+    - VISIT11
+    - VISIT2
+    - VISIT15
+    - VISIT17
+    - VISIT4
+    - FOLLOW UP
+    - VISIT13
+  - name: EPOCH
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - BLINDED TREATMENT PHASE
+    - OPEN LABEL TREATMENT PHASE
+    - ''
+    - POST TREATMENT FOLLOW UP
+    - SCREENING
+  - name: TIME
+    storage: DateTime
+    minimum: 2014-01-02 08:45:00
+    maximum: 2015-07-17 08:00:00
+    unique:
+    - .na
+  - name: PCDY
+    storage: Numeric
+    minimum: -333
+    maximum: 198
+    unique:
+    - .na
+  - name: PCTPT
+    storage: Categorical
+    minimum: .na
+    maximum: .na
+    unique:
+    - POSTDOSE
+    - ''
+    - PREDOSE
+    - VISIT DAY
+  - name: PCTPTNUM
+    storage: Numeric
+    minimum: 1
+    maximum: 1
+    unique:
+    - .na
+DefaultMapping: CDISC 3
+UserMappings: []
+DependentVariables:
+- Name: DV1
+  Domain: PC
+  ID: USUBJID
+  TIME: TIME
+  DV: PCSTRESN
+  EVID: 0
+  CMT: '2'
+  BQL: ''
+  LLOQ: ''
+  MDV: PCSTAT=='NOT DONE'
+  Units: PCSTRESU
+  dv.filter: PCTESTCD=='ANALYTE'
+  Columns:
+  - Name: VISIT
+    Mapping: VISIT
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: EPOCH
+    Mapping: EPOCH
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: DAY
+    Mapping: PCDY
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+Covariates:
+- Name: Demog
+  Domain: DM
+  ID: USUBJID
+  cov.val: ''
+  cov.col: ''
+  Units: ''
+  cov.filter: ARM != "NOT ASSIGNED"
+  cov.keys: ID
+  Columns:
+  - Name: AGE
+    Mapping: AGE
+    Units: AGEU
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: SEX
+    Mapping: SEX
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: RACE
+    Mapping: RACE
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: ETHNIC
+    Mapping: ETHNIC
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: FOOD
+    Mapping: ARM=="FED"
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+- Name: Labs
+  Domain: LB
+  ID: USUBJID
+  cov.val: LBSTRESN
+  cov.col: LBTESTCD
+  Units: LBSTRESU
+  cov.filter: ''
+  cov.keys: ID, EPOCH
+  Columns:
+  - Name: AST
+    Mapping: AST
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: ALT
+    Mapping: ALT
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: ALB
+    Mapping: ALB
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: BILI
+    Mapping: BILI
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: HCT
+    Mapping: HCT
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+TVCovariates:
+- Name: CovT
+  Domain: LB
+  ID: USUBJID
+  TIME: parsedate(LBDTC)
+  EVID: 2
+  covT.val: LBSTRESN
+  covT.col: LBTESTCD
+  Units: LBSTRESU
+  covT.filter: ''
+  Columns:
+  - Name: RBC
+    Mapping: RBC
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: CREAT
+    Mapping: CREAT
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+Doses:
+- Name: Dose
+  Domain: EX
+  ID: USUBJID
+  TIME: parsedate(EXDTC)
+  AMT: EXDOSE
+  EVID: 1
+  CMT: '1'
+  II: ''
+  MEX: ''
+  SPLIT: ''
+  Units: EXDOSU
+  ex.filter: ''
+  Columns:
+  - Name: EPOCH
+    Mapping: EPOCH
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: VISIT
+    Mapping: VISIT
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+  - Name: DAY
+    Mapping: EXSTDY
+    Units: ''
+    Type: Unknown
+    Required: true
+    Summary: first
+PreMergeHook: ''
+PostMergeHook: ''
+Header: ''
+OutputColumns:
+- MappingType: Internal
+  Name: RECID
+  OutputName: RECID
+  Include: true
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: PostTransform
+  Name: ELTM
+  OutputName: ELTM
+  Include: true
+  Type: Numeric
+  Format: ''
+  Units: h
+  Fill: group_by(ID) %>% transform(ELTM=elapsed.time(TIME))
+  Priority: 
+- MappingType: PostTransform
+  Name: TAFD
+  OutputName: TIME
+  Include: true
+  Type: Numeric
+  Format: ''
+  Units: h
+  Fill: time_after_first_dose(groups='ID', .name='TAFD')
+  Priority: 
+- MappingType: PostTransform
+  Name: NDOSE
+  OutputName: NDOSE
+  Include: true
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: group_by(ID) %>% transform(NDOSE = pmax(1,cumsum(EVID==1)))
+  Priority: 
+- MappingType: PostTransform
+  Name: TAD
+  OutputName: TAD
+  Include: true
+  Type: Numeric
+  Format: ''
+  Units: h
+  Fill: time_after_first_dose(groups=.(ID,NDOSE), .name='TAD')
+  Priority: 
+- MappingType: PostTransform
+  Name: EVDT
+  OutputName: EVDT
+  Include: true
+  Type: Text
+  Format: '%s'
+  Units: ''
+  Fill: transform(EVDT=format_date(TIME))
+  Priority: 
+- MappingType: PostTransform
+  Name: EVTM
+  OutputName: EVTM
+  Include: true
+  Type: Text
+  Format: '%s'
+  Units: ''
+  Fill: transform(EVTM=format_time(TIME))
+  Priority: 
+- MappingType: PostTransform
+  Name: FDDTTM
+  OutputName: FDDTTM
+  Include: true
+  Type: DateTime
+  Format: ''
+  Units: ''
+  Fill: group_by(ID) %>% time_of_first_dose('FDDTTM')
+  Priority: 
+- MappingType: PostTransform
+  Name: FDDT
+  OutputName: FDDT
+  Include: true
+  Type: Text
+  Format: '%s'
+  Units: ''
+  Fill: transform(FDDT=format_date(FDDTTM,'%Y%m%d'))
+  Priority: 
+- MappingType: PostTransform
+  Name: FDTM
+  OutputName: FDTM
+  Include: true
+  Type: Text
+  Format: '%s'
+  Units: ''
+  Fill: transform(FDTM=format_time(FDDTTM, '%H%M'))
+  Priority: 
+- MappingType: PostTransform
+  Name: SUBJID
+  OutputName: ID
+  Include: true
+  Type: Text
+  Format: '%s'
+  Units: ''
+  Fill: transform(SUBJID=parse_usubjid(ID,5))
+  Priority: 
+- MappingType: Required
+  Name: ID
+  OutputName: USUBJID
+  Include: true
+  Type: Text
+  Format: '%s'
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Required
+  Name: TIME
+  OutputName: EDTTM
+  Include: true
+  Type: DateTime
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Required
+  Name: EVID
+  OutputName: EVID
+  Include: true
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Required
+  Name: DV
+  OutputName: DV
+  Include: true
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Required
+  Name: CMT
+  OutputName: CMT
+  Include: true
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Required
+  Name: MDV
+  OutputName: MDV
+  Include: true
+  Type: Logical
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Optional
+  Name: DVU
+  OutputName: DVU
+  Include: true
+  Type: Text
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: VISIT
+  OutputName: VISIT
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: EPOCH
+  OutputName: EPOCH
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: DAY
+  OutputName: DAY
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: AGE
+  OutputName: AGE
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: AGEU
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: SEX
+  OutputName: SEX
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: RACE
+  OutputName: RACE
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: ETHNIC
+  OutputName: ETHNIC
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: FOOD
+  OutputName: FOOD
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: AST
+  OutputName: AST
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: ALT
+  OutputName: ALT
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: ALB
+  OutputName: ALB
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: BILI
+  OutputName: BILI
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: HCT
+  OutputName: HCT
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Required
+  Name: AMT
+  OutputName: AMT
+  Include: true
+  Type: Numeric
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Optional
+  Name: AMTU
+  OutputName: AMTU
+  Include: true
+  Type: Text
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: RBC
+  OutputName: RBC
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+- MappingType: Additional
+  Name: CREAT
+  OutputName: CREAT
+  Include: true
+  Type: Unknown
+  Format: ''
+  Units: ''
+  Fill: ''
+  Priority: 
+Diagnostics:
+  DVreconcile: true
+  DVreconcileStrata: ''
+  TimeSummary: true
+  TimeSummaryStrata: ''
+  VarSummary: true
+  VarSummaryColumns: ''
+  VarSummaryGroups: ''
+  Outliers: true
+  OutliersStrata: ''
+  OutlierBinning: ''
+  IndPlots: false
+  SpaghettiPlots: false
+  DVPlotsXaxis: TIME
+  DVPlotsGrouping: ''
+  DVPlotsStrata: ''
+  DVPlotslogY: false
+  ShowADDL: false
+  CheckPlacebo: false
+  PlaceboCriteria: sum_(AMT)==0
+  ObservationCriteria: DV>0
+Options:
+  KeepEvid2: false
+  EVIDorder: '2,1,3,4,0'
+  nPrintRows: 20
+  ExpandADDL: false
+  ADDLTolerance: 0.5
+  SortOrder: ID, TIME, EVID, CMT
+  DropEmptyColumns: true

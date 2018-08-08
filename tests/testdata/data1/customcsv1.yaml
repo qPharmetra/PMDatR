@@ -1,0 +1,191 @@
+name: DM
+Mapping: CDISC 3
+MappedDomain: DM
+filepath: C:\Projects\Lilly\PK Data Tool\Development\PMDatR\tests\testdata\data1\csv\dm.csv
+InputMappings:
+  MappedDomain: DM
+  Keys: ID
+  Columns:
+  - Name: STUDYID
+    Mapping: STUDYID
+    Units: ''
+    Type: Text
+    Required: true
+    Fill: ''
+  - Name: DOMAIN
+    Mapping: DOMAIN
+    Units: ''
+    Type: Text
+    Required: true
+    Fill: ''
+  - Name: USUBJID
+    Mapping: USUBJID
+    Units: ''
+    Type: Text
+    Required: true
+    Fill: ''
+  - Name: SUBJID
+    Mapping: SUBJID
+    Units: ''
+    Type: Text
+    Required: true
+    Fill: ''
+  - Name: RFSTDTC
+    Mapping: RFSTDTC
+    Units: ''
+    Type: DateTime
+    Required: true
+    Fill: ''
+  - Name: RFENDTC
+    Mapping: RFENDTC
+    Units: ''
+    Type: DateTime
+    Required: true
+    Fill: ''
+  - Name: RFXSTDTC
+    Mapping: RFXSTDTC
+    Units: ''
+    Type: DateTime
+    Required: true
+    Fill: ''
+  - Name: RFXENDTC
+    Mapping: RFXENDTC
+    Units: ''
+    Type: DateTime
+    Required: true
+    Fill: ''
+  - Name: RFICDTC
+    Mapping: RFICDTC
+    Units: ''
+    Type: DateTime
+    Required: true
+    Fill: ''
+  - Name: RFPENDTC
+    Mapping: RFPENDTC
+    Units: ''
+    Type: DateTime
+    Required: true
+    Fill: ''
+  - Name: DTHDTC
+    Mapping: DTHDTC
+    Units: ''
+    Type: DateTime
+    Required: true
+    Fill: ''
+  - Name: DTHFL
+    Mapping: DTHFL
+    Units: ''
+    Type: Categorical
+    Required: true
+    Fill: ''
+  - Name: SITEID
+    Mapping: SITEID
+    Units: ''
+    Type: Categorical
+    Required: true
+    Fill: ''
+  - Name: INVID
+    Mapping: INVID
+    Units: ''
+    Type: Text
+    Required: true
+    Fill: ''
+  - Name: INVNAM
+    Mapping: INVNAM
+    Units: ''
+    Type: Text
+    Required: true
+    Fill: ''
+  - Name: BRTHDTC
+    Mapping: BRTHDTC
+    Units: ''
+    Type: DateTime
+    Required: true
+    Fill: ''
+  - Name: AGE
+    Mapping: AGE
+    Units: ''
+    Type: Numeric
+    Required: true
+    Fill: ''
+  - Name: AGEU
+    Mapping: AGEU
+    Units: ''
+    Type: Text
+    Required: true
+    Fill: ''
+  - Name: SEX
+    Mapping: SEX
+    Units: ''
+    Type: Categorical
+    Required: true
+    Fill: ''
+  - Name: RACE
+    Mapping: RACE
+    Units: ''
+    Type: Categorical
+    Required: true
+    Fill: ''
+  - Name: ETHNIC
+    Mapping: ETHNIC
+    Units: ''
+    Type: Categorical
+    Required: true
+    Fill: ''
+  - Name: ARMCD
+    Mapping: ARMCD
+    Units: ''
+    Type: Categorical
+    Required: true
+    Fill: ''
+  - Name: ARM
+    Mapping: ARM
+    Units: ''
+    Type: Categorical
+    Required: true
+    Fill: ''
+  - Name: ACTARMCD
+    Mapping: ACTARMCD
+    Units: ''
+    Type: Categorical
+    Required: true
+    Fill: ''
+  - Name: ACTARM
+    Mapping: ACTARM
+    Units: ''
+    Type: Categorical
+    Required: true
+    Fill: ''
+  - Name: COUNTRY
+    Mapping: COUNTRY
+    Units: ''
+    Type: Text
+    Required: true
+    Fill: ''
+  - Name: DMDTC
+    Mapping: iso_to_posix(DMDTC)
+    Units: ''
+    Type: DateTime
+    Required: true
+    Fill: ''
+  - Name: DMDY
+    Mapping: DMDY
+    Units: ''
+    Type: Numeric
+    Required: true
+    Fill: ''
+  PreMergeFile: C:\Projects\Lilly\PK Data Tool\Examples\qP1\csv\suppdm.csv
+  PreMergeKeys: USUBJID
+  PreMergeFilter: RDOMAIN=='DM'
+  PreMergeCols: QNAM=QNAM, QVAL=QVAL
+  PreMergeSupp: true
+  DefaultQuerySettings:
+    ID: USUBJID
+FileSettings:
+  sep: comma
+  header: true
+  quote: double_quote
+  comment.char: ''
+  sheet: ''
+  range: ''
+  id_cols: ''

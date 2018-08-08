@@ -1,0 +1,115 @@
+name: EX
+Mapping: CDISC 3
+MappedDomain: EX
+filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\ex.sas7bdat
+InputMappings:
+  MappedDomain: EX
+  Keys: USUBJID
+  Columns:
+  - Name: EXDTC
+    Mapping: iso_to_posix(EXSTDTC)
+    Units: h
+    Type: DateTime
+    Required: true
+  - Name: EXSTDTC
+    Mapping: iso_to_posix(EXSTDTC)
+    Units: h
+    Type: DateTime
+    Required: true
+  - Name: EXENDTC
+    Mapping: iso_to_posix(EXENDTC)
+    Units: h
+    Type: DateTime
+    Required: true
+  - Name: STUDYID
+    Mapping: STUDYID
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: DOMAIN
+    Mapping: DOMAIN
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: USUBJID
+    Mapping: USUBJID
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: EXSEQ
+    Mapping: EXSEQ
+    Units: ''
+    Type: Numeric
+    Required: true
+  - Name: EXTRT
+    Mapping: EXTRT
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: EXDOSE
+    Mapping: EXDOSE
+    Units: ''
+    Type: Numeric
+    Required: true
+  - Name: EXDOSU
+    Mapping: EXDOSU
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: EXDOSFRM
+    Mapping: EXDOSFRM
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: EXDOSFRQ
+    Mapping: EXDOSFRQ
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: EXROUTE
+    Mapping: EXROUTE
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: VISITNUM
+    Mapping: VISITNUM
+    Units: ''
+    Type: Numeric
+    Required: true
+  - Name: VISIT
+    Mapping: VISIT
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: EPOCH
+    Mapping: EPOCH
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: EXSTDY
+    Mapping: EXSTDY
+    Units: ''
+    Type: Numeric
+    Required: true
+  - Name: EXENDY
+    Mapping: EXENDY
+    Units: ''
+    Type: Numeric
+    Required: true
+  - Name: EXTPT
+    Mapping: EXTPT
+    Units: ''
+    Type: Text
+    Required: true
+  - Name: EXTPTNUM
+    Mapping: EXTPTNUM
+    Units: ''
+    Type: Text
+    Required: true
+  DefaultQuerySettings:
+    ID: USUBJID
+    TIME: EXSTDTC
+    DV: 0
+    AMT: DOSE
+    CMT: 1
+    EVID: 1

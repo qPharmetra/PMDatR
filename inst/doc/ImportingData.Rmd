@@ -1,0 +1,121 @@
+---
+title: "Importing Data with PMDatR"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Importing Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Draft v. 0.2
+
+This vignette demonstrates the data import features of the PMDatR package.  The basic data import function is based on the Domain object, which contains information on the source data and import options.  Loading a domain then fills in the Domain object with the data from the source file as well as metadata describing the source.  Additional processing to (for instance) remove rows, select and rename columns, perform "pre-merge", or run custom processing steps can be provided by a user specified function.
+
+## Example Data
+
+A small sample data set is present in the package test directory: "<path.package("PMDatR")>/tests".  There are four domain files present (PC, EX, DM, LB) in 4 different file formats (sas7bdat, csv, xlsx, xpt).  The xpt file is a single file containing all 4 domains and is not supported as of release 0.2.
+
+Here we set the path for the data, and load useful libraries:
+```{r}
+library(PMDatR)
+library(parsedate)
+library(dplyr)
+library(yaml)
+```
+
+
+## Creating Domain Objects
+
+Domain objects can be created by passing a list with named members for "filepath" and "name", where "name" contains the name of the domain.
+
+As of version 0.2 the DataManagement object is incomplete.  The intended method for creating domains is to pass the settings list which contains all the domain information to a DataManagement object, which will then load the domains.  here we construct the DataManagement object (variable DM, not to be confused with the DM domain) manually in the script.
+
+```{r}
+
+ex.dom = domain(list(name="EX", filepath="ex.sas7bdat")) 
+
+
+DM=list() 
+DM$domains = list(EX=ex.dom)
+```
+
+
+The DM object is created and we can load the domain sources.
+
+## No Frills Load
+
+This shows a basic load of the domain data.  Note that we must reassign the domain based on the load.  This is due to a feature of R where objects are not changed in place.  That is, if we want to change a variable, we should assign it not count on changes happening as a side-effect of a function call.
+
+```{r}
+ex.dom = load.domain(ex.dom)
+```
+
+A quick look at the names in the ex.dom object.
+
+```{r}
+names(ex.dom)
+```
+
+The $Data member contains the data frame of the domain data.  This is what our data looks like:
+
+```{r}
+ex.dom$Data
+```
+
+## Pre-processing a domain
+
+We can provide a function to pre-process the domain.  Let's remove some of the extraneous columns and convert times to POSIXct (a native date/time format in R).  A preprocessing function can have any name.  It should take a domain object as the only parameter.  It must return the domain object with the data stored in $Data.
+
+```{r}
+preprocess.EX = function(.dom){
+  .dom$Data = .dom$Data %>% mutate(TIME=parse_date(EXSTDTC)) %>% 
+    select(USUBJID, TIME, EXSTDTC, EXSEQ, EXDOSE, VISIT, EPOCH)
+  .dom
+}
+
+ex.dom = load.domain(ex.dom, .fun = preprocess.EX)
+ex.dom$Data
+```
+
+## Metadata
+
+Details about the source and preprocessed domain data are stored in inMeta and outMeta, respectively.  The metadata is stored as a list, but can be saved as YAML.  Let's look at the outMeta in list format here:
+```{r}
+ex.dom$outMeta
+```
+
+The list members are named after the column names.  In addition, the metadata contains fields for:
+
+* name
+* storage (the type of the data)
+* minimum and maximum (for continuous data)
+* unique (for text and factor data, up to 50 unique values)
+
+### YAML
+
+YAML is human editable format for data serialization (reading and writing data).  It is used as the settings format for the DataManagement object and is a convenient way to share the metadata about source and loaded domains with another application (e.g. a GUI).  Here is what YAML looks like for the outMeta object.
+```{r}
+cat(as.yaml(ex.dom$outMeta))
+```
+
+
+## Excel Data
+
+The data can also be loaded from Excel (xls or xlsx files)
+```{r}
+ex.dom = domain(list(name="EX", filepath="ex.xlsx")) 
+ex.dom = load.domain(ex.dom, .fun=preprocess.EX)
+ex.dom$Data
+```
+
+## Text Data
+
+The data can also be loaded from text files (i.e., comma or tab delimited file types).  Note that txtSettings is provided as part of the domain settings with a required sep member.
+```{r}
+
+ex.dom = domain(list(name="EX", filepath="ex.csv", txtSettings = list(sep=",", header=T))) 
+ex.dom = load.domain(ex.dom, .fun=preprocess.EX)
+ex.dom$Data
+```

@@ -1,0 +1,288 @@
+---
+title: "Merging Data with PMDatR"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Merging Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+Draft 0.2
+
+## Overview
+This vignette shows the process by which a one or more domain sources may be loaded and merged into a single dataset.  When used from a graphical user interface, or with standard import settings, the approach is to use a template file which calls dynamically created (based on settings in YAML file) functions in the correct order.  The template should be fixed, while the dynamic functions should change with the settings.  This helps to make the general process clear and repeatable.  This is the template file (with the exception of manually building the DataManagement object.)  Future versions of this template will include additional sections for reporting and diagnostics.
+
+It is important to note that for creating datasets without a GUI and YAML settings, a much more compact, monolithic script can be used. 
+
+This script is based on the data files available in the tests/testdata/data1/sas directory of the installed package.  The dynamic functions can be found in tests/testthat/DMfunctions_spoofed.R
+
+## Setup
+
+As of version 0.2 the YAML setup file doesn't exist yet, so some basic information is encoded in the DataManagement object.  This section would normally be setup by the PMDatR::DataManagement functions.
+
+```{r}
+library(PMDatR)
+library(dplyr)
+
+#DM = DataManagement(settings.path) would generate the DM object that we construct here
+
+# these lists come from the settings.path YAML file
+pc.settings = domain(list(name="PC",filepath="pc.sas7bdat"))
+ex.settings = domain(list(name="EX",filepath="ex.sas7bdat"))
+dm.settings = domain(list(name="DM",filepath="dm.sas7bdat"))
+lb.settings = domain(list(name="LB",filepath="lb.sas7bdat"))
+
+DM=list()
+DM$domains = list(PC=pc.settings, EX=ex.settings, DM=dm.settings, LB=lb.settings)
+```
+
+
+## DataManagement Object
+
+At this point the DataManagement object is created.  In this simple example, we've done this by hand and only created the domain data.  We'll have a look at the DM object structure.
+```{r}
+DM
+```
+
+
+## Merge script
+
+This is where the bulk of the merge script code goes.  
+
+### Source the file created by DM object initialization
+The DM object as part of processing a settings file, will create an R file with dynamically created functions.  This file is sourced into the data management script and the functions are available for the script to use.
+
+```{r}
+source("DMfunctions_spoofed.R")
+```
+
+```{r echo=F}
+# This is just to display the definitions of the dynamic functions
+library(knitr)
+
+# Define insert_fun.
+insert_fun = function(name) {
+  read_chunk(lines = capture.output(dump(name, '')), labels = paste(name, 'source', sep = '-'))
+}
+
+insert_fun("preprocess.domains") # display in chunck labelled "preprocess.domains-source"
+insert_fun("preprocess.DM") # display in chunck labelled "preprocess.DM-source"
+insert_fun("preprocess.EX") # display in chunck labelled "preprocess.EX-source"
+insert_fun("preprocess.LB") # display in chunck labelled "preprocess.LB-source"
+insert_fun("preprocess.PC") # display in chunck labelled "preprocess.PC-source"
+insert_fun("process.EX") # display in chunck labelled "process.EX-source"
+insert_fun("process.DV") # display in chunck labelled "process.DV-source"
+insert_fun("process.Cov") # display in chunck labelled "process.Cov-source"
+insert_fun("process.CovT") # display in chunck labelled "process.CovT-source"
+insert_fun("pre.merge.hook") # display in chunck labelled "pre.merge.hook-source"
+insert_fun("post.merge.hook") # display in chunck labelled "post.merge.hook-source"
+insert_fun("post.transform") # display in chunck labelled "post.transform-source"
+insert_fun("post.filter") # display in chunck labelled "post.filter-source"
+insert_fun("apply.exclusions") # display in chunck labelled "apply.exclusions-source"
+```
+
+## Pre-process domains (load, filter, pre-merge etc)
+
+In this part of the script, the domain sources are preprocessed.  The preprocess.domains function directs loading of the sources and additional pre-processing, including filtering, pre-merge, transforms, and custom code can be added by the preprocess.XX functions.
+
+The function definitions given in DMfunctions file are shown here for informational purposes.  All the preprocessing functions here are currently empty.  They would normally be omitted by the DM object in such a case, but are provided here as stubs for further customization and experimentation.
+
+```{r preprocess.domains-source, eval=F}
+```
+
+```{r preprocess.EX-source, eval=F}
+```
+
+```{r preprocess.PC-source, eval=F}
+```
+
+```{r preprocess.DM-source, eval=F}
+```
+
+```{r preprocess.LB-source, eval=F}
+```
+
+Here we load and process the domains
+```{r}
+DM = preprocess.domains(DM)
+```
+
+## Process Dosing
+
+The dosing domain is processed according to the dynamic function process.EX, shown here.  
+```{r process.EX-source, eval=F}
+```
+
+Note that the process.EX function calls getIndividualDoses, which takes required arguments for ID, TIME, and AMT columns.  Additional columns may be specified, as well as a filter expression to select rows of the dataset.  Column specifications may contain functions to transform data.  Additional help is available ??PMDatR::getIndividualDoses.
+
+Here we process the doses.  Note that process.EX could have multiple calls to get functions for dosing, depending upon the complexity of the dosing data.
+
+```{r}
+EX.df = process.EX(DM)
+```
+
+EVID was not provided, so it was added and defaulted to 1.
+
+A quick look at the EX data:
+```{r}
+glimpse(EX.df)
+```
+
+
+## Process DV items
+The observation data is processed according to the dynamic function process.DV, shown here. 
+```{r process.DV-source, eval=F}
+```
+
+Here we process the observations  Note that process.DV could have multiple calls to getDV, to build up data with multiple observations from potentially multiple domains (e.g. PC, LB, AE...)
+```{r}
+DV.df = process.DV(DM)
+```
+
+EVID was not provided, so it was added and defaulted to 0.
+
+A quick look at the DV data:
+```{r}
+glimpse(DV.df)
+```
+
+## Process Covariate items
+process.Cov creates a list of covariate datasets to merge into the Events data (DV, EX, and CovT).  The dynamically created function is shown here:
+
+```{r process.Cov-source, eval=F}
+```
+
+Note that covariates can be combined across multiple files.  Also, covariates may be processed from both long format (presented like LB domain, where tests are stacked) or wide format (like DM domain, where covariates are in individual columns) sources.  The merge keys are specified in the getCov() call, which groups the returned data by the keys.  The grouping is interpreted when merging the data.
+
+Here we process the covariates in the LB and DM domains.
+```{r}
+Cov.l = process.Cov(DM)
+```
+
+A quick look at the Covariate data:
+```{r}
+glimpse(Cov.l[[1]])
+glimpse(Cov.l[[2]])
+```
+
+## Process Time-Varying Covariate items (CovT)
+
+Time varying covariates are stacked with dosing and observations.  As such, TIME should be specified along with ID.  The covariates are expected to present in stacked form.  If multiple domains provide time-varying covariates, the data will be stacked.  A filter can be applied to select rows.
+
+```{r process.CovT-source, eval=F}
+```
+
+Here we process the time varying covariates in the LB domain.
+```{r}
+CovT.df = process.CovT(DM)
+```
+
+EVID was not provided, so it was added and defaulted to 2.
+
+A quick look at the CovT data:
+```{r}
+glimpse(CovT.df)
+```
+
+## Ready for Merging
+
+The main pieces of the data are now available for merging.  This is a good time to run a report and check for errors.
+## Check for errors and report
+
+But we don't have that ready just yet.
+
+### PRE-MERGE HOOK GOES HERE
+
+Custom code can be injected in the pre.merge.hook function, shown here:
+```{r pre.merge.hook-source, eval=F}
+```
+
+We'll call it, even though it doesn't actually do anything in this example.
+```{r}
+pre.merge.hook()
+```
+
+
+### Append events
+
+The EX and DV files can be combined by the PMDatR::append.events function.  A new data frame is returned that contains the stacked events, sorted by ID and TIME.
+```{r}
+events.df = append.events(EX.df, DV.df)
+```
+
+### Append CovT
+
+The time-varying covariates are then appended to the events, using PMDatR::append.CovT.  We overwrite the events.df data frame.
+
+```{r}
+events.df = append.CovT(events.df, CovT.df)
+```
+
+### Merge covariates
+
+The covariate data frames are contained in a list.  They are each merged with the events, according to the specified keys.  No events are deleted as an effect of this merge, and no unmatched covariates are kept - this is a left_join.
+
+```{r}
+database.df = merge.Cov(events.df, Cov.l)
+```
+
+## Check for errors and report
+Not currently implemented.
+
+## POST-MERGE HOOK GOES HERE
+
+We'll demonstrate the post merge hook by using it to reassign M and F to MALE and FEMALE in the SEX column, and to get rid of na values in PCSTAT.  Here's the function definition:
+
+```{r post.merge.hook-source, eval=F}
+```
+
+And now run it.
+```{r}
+post.merge.hook()
+```
+
+## Filter, Transform, Exclude
+
+PMDatR::post.merge.refactoring applies some smarts to make sure that our data are going to be ready for nonmem.  It adds in a RECID column, which just enumerates the rows in the dataframe.  We also get ELTM (elapsed time) which defaults to hours since the first event per subject.  Then dynamic functions for transforming, filtering and exluding data can be applied.
+
+Transform
+
+Many data transformations that we'd want need to operate over all of the data in a subject, or even across the entire dataset.  The post.transform function handles such operations specified in the settings.  In this example we use it to apply a last observation carried forward (locf) interpolation for the time-varying covarites (which were NA for the other events).  The function definition is shown here:
+```{r post.transform-source, eval=F}
+```
+
+Filter
+
+The filter operation can be used here to remove data that somehow escaped removal in preprocessing of domains, or selection of EX, DV, and CovT.  Or possibly we need the full context of the joined data to determine if removal is desired.  Filtering data at this point will generate a gap in RECID.  Here we remove the record with RECID==27 (by way of example), as shown:
+
+```{r post.filter-source, eval=F}
+```
+
+Exclusions
+
+We use a single exclusion column (EXCL) to indicate data disposition.  The EXCL column can be used in NONMEM to exclude data from a run.  PMDatR provides a useful function, conditionalValues, which allows us to apply criteria - in order - to set the Exclusion flag.  In addition, flags can be set to indicate if a criteria was T or F.  Since the EXCL column can only include a single value per record, exclusions should be ordered by egregiousness so that the reported reason for exclusion will be the most egregious.  This single value exclusion method ensures that data dispostion reports won't double count data.  Here we exclude with reasons BQL or ND (Not Done), with the default value being OK.
+
+```{r apply.exclusions-source, eval=F}
+```
+
+```{r}
+database.df = post.merge.refactoring(database.df, 
+                                     fun.transform = post.transform, 
+                                     fun.filter = post.filter,
+                                     fun.exclude = apply.exclusions)
+```
+
+
+
+## Look at the data
+
+Lets review the data for the first subject.  See that RECID 27 is missing, per our post.filter operation.
+
+Note that remaining NA values will be converted to appropriate missing values when writing the NONMEM file. Also, ELTM will simply output a number without units. Writing a NONMEM ready file is not complete as of version 0.2
+
+```{r width=12}
+kable(database.df %>% filter(ID=="STUDY-01-1"))
+```
+
+

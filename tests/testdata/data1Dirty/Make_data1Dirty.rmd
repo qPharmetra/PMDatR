@@ -1,0 +1,61 @@
+---
+title: "Make Dirty Data1"
+author: "Jason Chittenden, PhD"
+date: "November 24, 2016"
+output: html_document
+---
+
+```{r include=F}
+library(dplyr)
+```
+
+Create a dirty dataset from the Data1 example.  Modifications include:
+
+* Adding Treatment columns to the domains
+    * DM: TRTP, TRTA
+    * PC: TRTP, TRTA
+        * Mismatch subject 1 TRTP and subject 2 TRTA
+    * EX: TRTA, TRTP
+        * no problems
+    * LB: TRTP only
+        * Mismatch subject 1 TRTP
+
+## Load data1
+```{r}
+dm.df = read.csv("../data1/csv/dm.csv")
+ex.df = read.csv("../data1/csv/ex.csv")
+pc.df = read.csv("../data1/csv/pc.csv")
+lb.df = read.csv("../data1/csv/lb.csv")
+```
+
+## TRT assignment
+
+```{r}
+set.seed(12345)
+TRTP=c("A", "B", sample(nrow(dm.df) -2, x=c("A","B"), replace=T))
+TRTA=TRTP
+TRTA[1:2]=c("B","A")
+TRTPbad=TRTP
+TRTPbad[1]="B"
+TRTAbad=TRTA
+TRTAbad[2]="B"
+TRTS.df = data_frame(USUBJID=dm.df$USUBJID, TRTP,TRTA,TRTPbad,TRTAbad)
+TRTS.df
+```
+
+## Modify data
+```{r}
+dm.df = left_join(dm.df,TRTS.df %>% select(USUBJID,TRTP,TRTA))
+ex.df = left_join(ex.df,TRTS.df %>% select(USUBJID,TRTP,TRTA))
+pc.df = left_join(pc.df,TRTS.df %>% select(USUBJID,TRTP=TRTPbad,TRTA=TRTAbad))
+lb.df = left_join(lb.df,TRTS.df %>% select(USUBJID,TRTP=TRTPbad))
+```
+
+## Save data2
+```{r}
+write.csv(dm.df, "csv/dm.csv", row.names = F)
+write.csv(ex.df, "csv/ex.csv", row.names = F)
+write.csv(pc.df, "csv/pc.csv", row.names = F)
+write.csv(lb.df, "csv/lb.csv", row.names = F)
+```
+

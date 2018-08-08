@@ -1,0 +1,129 @@
+README
+====
+
+```{r echo = F}
+library(pmunits)
+suppressWarnings(library(tidyverse, quietly = T))
+```
+
+# Units API
+
+### setting units
+
+units are an attribute labeled `pmunits` (to not clash with udunits or other units labels).
+
+Units are set via `set_units`
+
+```{r}
+set_units(10, "mg/L")
+set_units(1:10, "mg/L")
+```
+
+and can be used to set units to columns in dplyr.
+
+```{r}
+head(Theoph %>% mutate(conc = set_units(conc, "mg/L")))
+```
+
+`set_units` expects udunits2 parseable units, so will error
+
+```{r eval=F}
+set_units(10, "mg/imnotaunit")
+
+#> Error in set_units(10, "mg/imnotaunit") : units not parseable
+```
+
+A list of column-name/units can be provided to set units across a dataframe.
+
+```{r}
+theoph_units <- set_units_from_list(Theoph, list(Wt = "kg", Dose = "mg/kg", Time = "hours", conc = "mg/L"))
+lapply(theoph_units, attributes)
+```
+
+### arithmetic
+
+the common arithmetic `+-*/` functions have been provided, so that unitful columns will be managed.
+
+When adding/subtracting, the resulting units will be those of the left-hand-side of the operator
+
+`x mg/L + y ug/L --> z mg/L` 
+
+```{r}
+set_units(10, "mg/L") + set_units(100, "ug/L")
+```
+
+To add or subtract, the units must be convertible
+
+```{r eval=F}
+set_units(10, "mg/L") + set_units(1, "km/hour")
+
+#> Error in `+.pmunits`(set_units(10, "mg/L"), set_units(1, "km/hour")) : units incompatible
+```
+
+However, for multiplication/division, the unit combination is more lazy, passing along until the user
+requests a conversion
+
+```{r}
+nonsense_unit <- set_units(10, "mg")/set_units(1, "km")
+nonsense_unit
+```
+
+When a divisor is present, `pmunits` will automatically add parenthesis around the original unit sets to distinguish
+
+```{r}
+set_units(10, "mg/kg")*set_units(100, "kg")
+```
+
+This is especially important when dealing with more complex units, for example, with molar conversions
+the unit set `mg/L/g/mol` will not parse but `(mg/L)/(g/mol)` will properly parse and can be converted
+
+
+Units may also be multiplied against 'constants' however there is no magic here, if the multiplication is
+actually _not_ a constant or one that would affect the units in any way, the user must reset the units to be safe.
+
+```{r}
+set_units(10, "mg/kg")*10
+```
+```{r}
+set_units(10, "mg/kg")/10
+```
+
+### conversion via `convert`
+
+pmunit vectors may ultimately be converted to the final expected result via `convert`, which takes the form:
+
+`convert(<units_col>, "<units/to/convert>")`
+
+```{r}
+convert(set_units(10, "mg/L"), "ug/L")
+```
+
+```{r}
+is_mg <- set_units(10, "mg/kg")*set_units(100, "kg")
+is_mg
+```
+
+`convert` can also be used to confirm a combination of units can be properly reduced
+```{r}
+convert(is_mg, "mg")
+```
+
+
+### Additional conversions
+
+Specific complex conversion have been pre-baked into the library, namely
+
+* molar conversion - `conc_to_molar`
+
+```{r}
+conc_to_molar(set_units(10, "mg/L"), set_units(50, "g/mol"))
+```
+
+```{r}
+conc_to_molar(set_units(10, "mg/L"), set_units(50, "g/mol"), "umol/L")
+```
+
+
+## NOT considered
+
+* what about statistical transformation - log(DV)

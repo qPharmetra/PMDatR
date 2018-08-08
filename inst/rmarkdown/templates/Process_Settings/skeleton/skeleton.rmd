@@ -1,0 +1,89 @@
+---
+title: "Process Settings"
+author: "`r Sys.info()['user']`"
+date: "`r Sys.time()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    mathjax: null
+params:
+  settings_file: ""
+---
+
+```{r preamble, include=F}
+library(PMDatR)
+library(knitr)
+opts_chunk$set(error=TRUE)
+```
+
+## PMDatR: Process Settings
+
+This script processes a settings file to create R code that can be run in the PMDatR data management template.  The settings are checked for syntactical errors during the generation of the code.  Errors are reported in this script.
+
+
+## Create DataManagement Object
+Peek into structure of the created DataManagement object
+```{r createDM, echo=F}
+DMobj=list()
+if(params$settings_file!=""){
+  DMobj = DataManagement(params$settings_file)
+  code_text = WriteCode.DataManagement(DMobj)
+}
+str(DMobj$Settings)
+```
+
+```{r errorreport, echo=F, results='asis'}
+# dynamic generations of error report
+print_error_qry = function(qry){
+  if(!qry$valid){
+    cat(sprintf("### Errors in Query %s\n", qry$mappings$Name))
+    cat(sapply(qry$errors,toString),sep="\n\n")
+    cat("\n")
+    }
+}
+
+print_error_dom = function(dom){
+  if(!dom$valid){
+    cat(sprintf("### Errors in Domain Settings: %s\n", dom$name))
+    cat(sapply(dom$errors,toString),sep="\n\n")
+    cat("\n")
+    }
+}
+
+print_error_DM = function(dmo){
+  if(length(dmo$errors)){
+    cat(sprintf("### Errors in Data Management Object\n"))
+    cat(sapply(dmo$errors,toString),sep="\n\n")
+    cat("\n")
+  }
+}
+
+
+if(!DMobj$valid){
+  cat("## Errors in Settings\n")
+  #cycle through the elements to print errors
+  print_error_DM(DMobj)
+  for(dom in DMobj$Domains) print_error_dom(dom)
+  for(qry in DMobj$DVs) print_error_qry(qry)
+  for(qry in DMobj$IndDoses) print_error_qry(qry)
+  for(qry in DMobj$Covs) print_error_qry(qry)
+  for(qry in DMobj$CovTs) print_error_qry(qry)
+
+}
+
+```
+
+## Write dynamic functions file
+```{r writeFuncs, echo=F, results='asis'}
+fname = paste0(tools::file_path_sans_ext(basename(params$settings_file)), "_funcs.r")
+if(DMobj$valid){
+  cat(code_text$text.tidy, file=fname, sep="\n",append=F)
+  cat(sprintf("Functions written to file: %s\n\nMD5 = %s", fname, tools::md5sum(fname)))
+} else{ 
+  cat("Functions not written due to errors in settings file.  Please correct errors and try again.")
+}
+
+```
+
+

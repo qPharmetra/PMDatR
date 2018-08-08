@@ -1,0 +1,123 @@
+---
+title: "Domain Load Report: {{domname}}"
+author: "`r Sys.info()['user']`"
+date: "`r Sys.time()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    mathjax: null
+
+---
+
+```{r preamble {{domname}}, include=F}
+library(knitr)
+library(dplyr)
+library(PMDatR)
+
+opts_chunk$set(error=TRUE)
+knit_hooks$set(error = function(x, options) print(PMDatR:::reinterpret_errors(x)))
+knit_hooks$set(warning = function(x,options)print(PMDatR:::reinterpret_errors(x)))
+
+## Notes about this template:
+### This file MUST be run through knit_expand to convert the {{domname}} tags to the appropriate domain name
+### A {{domname}} tag MUST appear in each chunk name so that this template can be run from the merge template
+###   or else there will duplicate tags if multiple domains are run
+```
+
+
+```{r header {{domname}}, echo=F, results='asis', comment=NA}
+if(exists("ii")){
+  cat("## Header Processing\n\n")
+  if(any(ii)){
+  cat("There were problems in the header hook:\n\n")
+  evaluate::replay(res[ii])
+  } else {
+    cat("Header hook was processed without problems.\n\n")
+  }
+}
+
+```
+
+## Overview
+
+```{r validation_errors {{domname}}, echo=F, results='asis'}
+# if settings not valid, print errors and get out
+if(!dom$valid){
+  cat(sprintf("### Errors in Domain Settings: %s\n", dom$name))
+  cat(sapply(dom$errors,toString),sep="\n\n")
+  cat("\n\n")
+  knitr::knit_exit()
+}
+```
+
+```{r load_errors {{domname}}, echo=F, results='asis'}
+# if failed to load
+if(!dom$Loaded){
+  cat(sprintf("### Domain failed to load due to errors: %s\n", dom$name))
+  cat(sapply(dom$errors,toString),sep="\n\n")
+  cat("\n\n")
+  knitr::knit_exit()
+}
+
+```
+
+```{r changed_mappings{{domname}}, echo=F, results='asis'}
+if(!is.null(dom$ChangedMappings)){
+  if(nrow(dom$ChangedMappings)){
+  cat(sprintf("### Mappings Changed from %s Mapping\n\n", dom$Mapping))
+  print(kable(dom$ChangedMappings %>% 
+                 rename_(.dots=setNames(c("map1","map2"),
+                                       c(dom$Mapping, "Actual")
+                                       )
+                 ), "markdown"))
+  cat("'.' indicates a setting that is missing.\n\n")
+  }
+} else {
+  cat(sprintf("### No Default Mappings for Domain %s in Mapping %s\n\n", 
+              dom$MappedDomain,
+              dom$Mapping))
+}
+
+```
+
+Domain loaded: `r dom$Loaded`
+
+    Source File:     `r dom$filepath` [`r dom$in.info$nrow` x `r dom$in.info$ncol`]
+    MD5 sum:         `r dom$in.info$md5`
+    File Size:       `r format(structure(dom$in.info$size, class="object_size"), units="auto")`
+    Last Modified:   `r dom$in.info$mtime`
+    
+    Loaded Data:     [`r dom$out.info$nrow` x `r dom$out.info$ncol`] at `r dom$out.info$timestamp`
+    Records removed: `r dom$in.info$nrow - dom$out.info$nrow` by filter `r dom$InputMappings$Filter`
+    
+## Domain Summary
+
+This table of metadata displays the column names and types as well as the "Range" of the data.  For categorical columns all unique values are shown in Range.  For text or unknown column types, only the first few unique values are shown.
+    
+```{r overview {{domname}}, echo=F}
+kable(as.data.frame(dom$outMeta), "markdown")
+```
+
+## Diagnostics
+
+```{r diagnostics {{domname}}, echo=F, results='asis'}
+diagnostics = diagnostics.domain(dom)
+
+if(!is.null(diagnostics)){
+  cat(paste(unlist(diagnostics), collapse="\n\n"))
+  
+} else{
+    cat("Diagnostics failed to run \n")
+}
+
+```
+
+## Domain Data
+
+The structure of the loaded data is shown here.
+
+```{r rawData {{domname}}, echo=F}
+kable(head(dom$Data))
+```
+
