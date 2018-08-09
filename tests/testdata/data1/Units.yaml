@@ -1,15 +1,15 @@
-Info: 
-ProjectDirectory: '\\localhost\C$\Projects\Lilly\PK Data Tool\scratch\Sprint11\Units'
-SourceDirectory: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas
-LastSavedAs: '\\localhost\C$\Projects\Lilly\PK Data Tool\scratch\Sprint11\Units\units.yaml'
+Info:
+ProjectDirectory: '.'
+SourceDirectory: .\data1\sas
+LastSavedAs: './Units.yaml'
 Domains:
 - name: DM
   Mapping: CDISC 3
   MappedDomain: DM
-  filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\dm.sas7bdat
+  filepath: .\data1\sas\dm.sas7bdat
   InputMappings:
     MappedDomain: DM
-    Filter: 
+    Filter:
     Keys: ID
     Columns:
     - Name: STUDYID
@@ -180,20 +180,20 @@ Domains:
       Type: Numeric
       Required: true
       Fill: ''
-    PreMergeFile: 
-    PreMergeKeys: 
-    PreMergeFilter: 
-    PreMergeCols: 
+    PreMergeFile:
+    PreMergeKeys:
+    PreMergeFilter:
+    PreMergeCols:
     PreMergeSupp: false
     DefaultQuerySettings:
       ID: USUBJID
-      TIME: 
-      DV: 
-      AMT: 
-      CMT: 
-      EVID: 
-      Values: 
-      Parameter: 
+      TIME:
+      DV:
+      AMT:
+      CMT:
+      EVID:
+      Values:
+      Parameter:
   FileSettings:
     sep: ','
     header: true
@@ -206,10 +206,10 @@ Domains:
 - name: EX
   Mapping: CDISC 3
   MappedDomain: EX
-  filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\ex.sas7bdat
+  filepath: .\data1\sas\ex.sas7bdat
   InputMappings:
     MappedDomain: EX
-    Filter: 
+    Filter:
     Keys: ID
     Columns:
     - Name: EXDTC
@@ -344,10 +344,10 @@ Domains:
       Type: Text
       Required: true
       Fill: ''
-    PreMergeFile: 
-    PreMergeKeys: 
-    PreMergeFilter: 
-    PreMergeCols: 
+    PreMergeFile:
+    PreMergeKeys:
+    PreMergeFilter:
+    PreMergeCols:
     PreMergeSupp: false
     DefaultQuerySettings:
       ID: USUBJID
@@ -356,8 +356,8 @@ Domains:
       AMT: EXDOSE
       CMT: 1
       EVID: 1
-      Values: 
-      Parameter: 
+      Values:
+      Parameter:
   FileSettings:
     sep: ','
     header: true
@@ -370,7 +370,7 @@ Domains:
 - name: LB
   Mapping: CDISC 3
   MappedDomain: LB
-  filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\lb.sas7bdat
+  filepath: .\data1\sas\lb.sas7bdat
   InputMappings:
     MappedDomain: LB
     Filter: ''
@@ -550,17 +550,17 @@ Domains:
       Type: Numeric
       Required: true
       Fill: ''
-    PreMergeFile: 
-    PreMergeKeys: 
-    PreMergeFilter: 
-    PreMergeCols: 
+    PreMergeFile:
+    PreMergeKeys:
+    PreMergeFilter:
+    PreMergeCols:
     PreMergeSupp: false
     DefaultQuerySettings:
       ID: USUBJID
       TIME: LBDTC
-      DV: 
-      AMT: 
-      CMT: 
+      DV:
+      AMT:
+      CMT:
       EVID: 2
       Values: LBSTRESN
       Parameter: LBTESTCD
@@ -576,10 +576,10 @@ Domains:
 - name: PC
   Mapping: CDISC 3
   MappedDomain: PC
-  filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\pc.sas7bdat
+  filepath: .\data1\sas\pc.sas7bdat
   InputMappings:
     MappedDomain: PC
-    Filter: 
+    Filter:
     Keys: ID
     Columns:
     - Name: STUDYID
@@ -732,10 +732,10 @@ Domains:
       Type: Numeric
       Required: true
       Fill: ''
-    PreMergeFile: 
-    PreMergeKeys: 
-    PreMergeFilter: 
-    PreMergeCols: 
+    PreMergeFile:
+    PreMergeKeys:
+    PreMergeFilter:
+    PreMergeCols:
     PreMergeSupp: false
     DefaultQuerySettings:
       ID: USUBJID
@@ -744,8 +744,8 @@ Domains:
       AMT: 0
       CMT: 2
       EVID: 0
-      Values: 
-      Parameter: 
+      Values:
+      Parameter:
   FileSettings:
     sep: ','
     header: true
@@ -757,7 +757,7 @@ Domains:
     id_cols: ''
 DomainMetaData:
 - Domain: DM
-  Source: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\dm.sas7bdat
+  Source: .\data1\sas\dm.sas7bdat
   Type: Processed
   Columns:
   - name: STUDYID
@@ -945,7 +945,7 @@ DomainMetaData:
     unique:
     - .na
 - Domain: EX
-  Source: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\ex.sas7bdat
+  Source: .\data1\sas\ex.sas7bdat
   Type: Processed
   Columns:
   - name: EXDTC
@@ -1082,7 +1082,7 @@ DomainMetaData:
     unique:
     - 0
 - Domain: LB
-  Source: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\lb.sas7bdat
+  Source: .\data1\sas\lb.sas7bdat
   Type: Processed
   Columns:
   - name: STUDYID
@@ -1409,7 +1409,7 @@ DomainMetaData:
     unique:
     - .na
 - Domain: PC
-  Source: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\pc.sas7bdat
+  Source: .\data1\sas\pc.sas7bdat
   Type: Processed
   Columns:
   - name: STUDYID
@@ -1620,8 +1620,8 @@ Covariates:
 - Name: Cov1
   Domain: DM
   ID: USUBJID
-  cov.val: 
-  cov.col: 
+  cov.val:
+  cov.col:
   Units: ''
   cov.filter: ''
   cov.keys: ID
@@ -1687,9 +1687,9 @@ Doses:
   Units: ''
   ex.filter: ''
   Columns: []
-PreMergeHook: 
-PostMergeHook: 
-Header: 
+PreMergeHook:
+PostMergeHook:
+Header:
 OutputColumns:
 - MappingType: Internal
   Name: RECID

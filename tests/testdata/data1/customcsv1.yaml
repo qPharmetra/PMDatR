@@ -1,7 +1,7 @@
 name: DM
 Mapping: CDISC 3
 MappedDomain: DM
-filepath: C:\Projects\Lilly\PK Data Tool\Development\PMDatR\tests\testdata\data1\csv\dm.csv
+filepath: .\testdata\data1\csv\dm.csv
 InputMappings:
   MappedDomain: DM
   Keys: ID

@@ -12,7 +12,7 @@ get.meta.col.names = function(meta) unlist(lapply(meta,"[[","name"))
 
 # example.yaml contains valid settings for different query types in data1 example
 
-settings = yaml::yaml.load_file(file.path(path.testroot, "testdata/data1/units.yaml"))
+settings = yaml::yaml.load_file(file.path(path.testroot, "testdata/data1/Units.yaml"))
 #spoof PC metadata
 metadata_pc=list()
 metadata_pc$Source="spoof"

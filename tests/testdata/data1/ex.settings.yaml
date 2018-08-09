@@ -1,7 +1,7 @@
 name: EX
 Mapping: CDISC 3
 MappedDomain: EX
-filepath: C:\Projects\Lilly\PK Data Tool\Examples\qP1\sas\ex.sas7bdat
+filepath: .\testdata\data1\sas\ex.sas7bdat
 InputMappings:
   MappedDomain: EX
   Keys: USUBJID

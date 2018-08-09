@@ -1,11 +1,11 @@
-ProjectDirectory: C:\Projects\Lilly\PK Data Tool\scratch
-SourceDirectory: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1
-LastSavedAs: C:\Projects\Lilly\PK Data Tool\scratch\EX_SUPPEX.yaml
+ProjectDirectory: .\testdata\data2
+SourceDirectory: .\testdata\data2\sas
+LastSavedAs: .\testdata\data2\EX_SUPPEX.yaml
 Domains:
 - name: EX
   Mapping: CDISC 3
   MappedDomain: EX
-  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\ex.sas7bdat
+  filepath: .\testdata\data2\sas\ex.sas7bdat
   InputMappings:
     MappedDomain: EX
     Keys: ID
@@ -90,7 +90,7 @@ Domains:
       Mapping: EXTPTNUM
       Units: ''
       Type: Text
-    PreMergeFile: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\suppex.sas7bdat
+    PreMergeFile: .\testdata\data2\sas\suppex.sas7bdat
     PreMergeKeys: USUBJID, EXSEQ
     PreMergeCols: EXSEQ=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL
     PreMergeSupp: true

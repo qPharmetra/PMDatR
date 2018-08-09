@@ -97,12 +97,12 @@ test_that("load.domain() imports a csv file from settings yaml",{
   dm.settings = yaml::yaml.load_file(file.path(path.testroot,"/testdata/data1/customcsv1.yaml"))
   #create a domain object
   dm.settings$InputMappings$PreMergeFile=""
+  dm.settings$filepath = file.path(path.testroot,"/testdata/data1/csv/dm.csv")
   test.dom = domain(dm.settings)
   test.dom = load.domain(test.dom)
   expect_is(test.dom$Data,"tbl_df") #expect tbl_df
   expect_true(test.dom$Loaded) #Loaded should be true
   expect_equal(dim(test.dom$Data),c(10,28)) #check the dimensions
-  #remove the file
-  file.remove(testcsv)
+
 })
 

@@ -1,15 +1,15 @@
-Info: 
-ProjectDirectory: C:\Projects\Lilly\PK Data Tool\Development\PMDatR\tests\testdata\data1
-SourceDirectory: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1
-LastSavedAs: C:\Projects\Lilly\PK Data Tool\Development\PMDatR\tests\testdata\data1\example.yaml
+Info:
+ProjectDirectory: .\testdata\data2
+SourceDirectory: .\
+LastSavedAs: .\testdata\data2\sas\example.yaml
 Domains:
 - name: DM
   Mapping: CDISC 3
   MappedDomain: DM
-  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\dm.sas7bdat
+  filepath: .\testdata\data2\sas\dm.sas7bdat
   SourceMetaData:
     Domain: DM
-    Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\dm.sas7bdat
+    Source: .\testdata\data2\sas\dm.sas7bdat
     Type: Raw
     Columns:
     - name: STUDYID
@@ -242,7 +242,7 @@ Domains:
       - MEX
   InputMappings:
     MappedDomain: DM
-    Filter: 
+    Filter:
     Keys: ID
     Columns:
     - Name: STUDYID
@@ -402,9 +402,9 @@ Domains:
       Required: true
       Summary: first
     PreMergeFile: ''
-    PreMergeKeys: 
-    PreMergeFilter: 
-    PreMergeCols: 
+    PreMergeKeys:
+    PreMergeFilter:
+    PreMergeCols:
     PreMergeSupp: false
     DefaultQuerySettings:
       ID: USUBJID
@@ -429,10 +429,10 @@ Domains:
 - name: EX
   Mapping: CDISC 3
   MappedDomain: EX
-  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\ex.sas7bdat
+  filepath: .\testdata\data2\sas\ex.sas7bdat
   SourceMetaData:
     Domain: EX
-    Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\ex.sas7bdat
+    Source: .\testdata\data2\sas\ex.sas7bdat
     Type: Raw
     Columns:
     - name: STUDYID
@@ -691,7 +691,7 @@ Domains:
       - N
   InputMappings:
     MappedDomain: EX
-    Filter: 
+    Filter:
     Keys: ID
     Columns:
     - Name: EXDTC
@@ -826,7 +826,7 @@ Domains:
       Type: Text
       Required: true
       Summary: first
-    PreMergeFile: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\suppex.sas7bdat
+    PreMergeFile: .\testdata\data2\sas\suppex.sas7bdat
     PreMergeKeys: USUBJID, EXSEQ
     PreMergeFilter: RDOMAIN=='EX'
     PreMergeCols: EXSEQ=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL
@@ -854,10 +854,10 @@ Domains:
 - name: LB
   Mapping: CDISC 3
   MappedDomain: LB
-  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\lb.sas7bdat
+  filepath: .\testdata\data2\sas\lb.sas7bdat
   SourceMetaData:
     Domain: LB
-    Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\lb.sas7bdat
+    Source: .\testdata\data2\sas\lb.sas7bdat
     Type: Raw
     Columns:
     - name: STUDYID
@@ -1372,9 +1372,9 @@ Domains:
       Required: true
       Summary: first
     PreMergeFile: ''
-    PreMergeKeys: 
-    PreMergeFilter: 
-    PreMergeCols: 
+    PreMergeKeys:
+    PreMergeFilter:
+    PreMergeCols:
     PreMergeSupp: false
     DefaultQuerySettings:
       ID: USUBJID
@@ -1399,10 +1399,10 @@ Domains:
 - name: PC
   Mapping: CDISC 3
   MappedDomain: PC
-  filepath: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\pc.sas7bdat
+  filepath: .\testdata\data2\sas\pc.sas7bdat
   SourceMetaData:
     Domain: PC
-    Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\pc.sas7bdat
+    Source: .\testdata\data2\sas\pc.sas7bdat
     Type: Raw
     Columns:
     - name: STUDYID
@@ -1634,7 +1634,7 @@ Domains:
       - 2014-10-16T11:42
   InputMappings:
     MappedDomain: PC
-    Filter: 
+    Filter:
     Keys: ID
     Columns:
     - Name: STUDYID
@@ -1776,9 +1776,9 @@ Domains:
       Required: true
       Summary: first
     PreMergeFile: ''
-    PreMergeKeys: 
-    PreMergeFilter: 
-    PreMergeCols: 
+    PreMergeKeys:
+    PreMergeFilter:
+    PreMergeCols:
     PreMergeSupp: false
     DefaultQuerySettings:
       ID: USUBJID
@@ -1802,7 +1802,7 @@ Domains:
     id_cols: ''
 DomainMetaData:
 - Domain: DM
-  Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\dm.sas7bdat
+  Source: .\testdata\data2\sas\dm.sas7bdat
   Type: Processed
   Columns:
   - name: STUDYID
@@ -2073,7 +2073,7 @@ DomainMetaData:
     - PRI
     - MEX
 - Domain: EX
-  Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\ex.sas7bdat
+  Source: .\testdata\data2\sas\ex.sas7bdat
   Type: Processed
   Columns:
   - name: EXDTC
@@ -2220,7 +2220,7 @@ DomainMetaData:
     unique:
     - 168
 - Domain: LB
-  Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\lb.sas7bdat
+  Source: .\testdata\data2\sas\lb.sas7bdat
   Type: Processed
   Columns:
   - name: STUDYID
@@ -2668,7 +2668,7 @@ DomainMetaData:
     unique:
     - .na
 - Domain: PC
-  Source: C:\Projects\Lilly\PK Data Tool\Examples\Lilly1\pc.sas7bdat
+  Source: .\testdata\data2\sas\pc.sas7bdat
   Type: Processed
   Columns:
   - name: STUDYID
@@ -3036,7 +3036,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: ELTM
   OutputName: ELTM
@@ -3045,7 +3045,7 @@ OutputColumns:
   Format: ''
   Units: h
   Fill: group_by(ID) %>% transform(ELTM=elapsed.time(TIME))
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: TAFD
   OutputName: TIME
@@ -3054,7 +3054,7 @@ OutputColumns:
   Format: ''
   Units: h
   Fill: time_after_first_dose(groups='ID', .name='TAFD')
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: NDOSE
   OutputName: NDOSE
@@ -3063,7 +3063,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: group_by(ID) %>% transform(NDOSE = pmax(1,cumsum(EVID==1)))
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: TAD
   OutputName: TAD
@@ -3072,7 +3072,7 @@ OutputColumns:
   Format: ''
   Units: h
   Fill: time_after_first_dose(groups=.(ID,NDOSE), .name='TAD')
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: EVDT
   OutputName: EVDT
@@ -3081,7 +3081,7 @@ OutputColumns:
   Format: '%s'
   Units: ''
   Fill: transform(EVDT=format_date(TIME))
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: EVTM
   OutputName: EVTM
@@ -3090,7 +3090,7 @@ OutputColumns:
   Format: '%s'
   Units: ''
   Fill: transform(EVTM=format_time(TIME))
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: FDDTTM
   OutputName: FDDTTM
@@ -3099,7 +3099,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: group_by(ID) %>% time_of_first_dose('FDDTTM')
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: FDDT
   OutputName: FDDT
@@ -3108,7 +3108,7 @@ OutputColumns:
   Format: '%s'
   Units: ''
   Fill: transform(FDDT=format_date(FDDTTM,'%Y%m%d'))
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: FDTM
   OutputName: FDTM
@@ -3117,7 +3117,7 @@ OutputColumns:
   Format: '%s'
   Units: ''
   Fill: transform(FDTM=format_time(FDDTTM, '%H%M'))
-  Priority: 
+  Priority:
 - MappingType: PostTransform
   Name: SUBJID
   OutputName: ID
@@ -3126,7 +3126,7 @@ OutputColumns:
   Format: '%s'
   Units: ''
   Fill: transform(SUBJID=parse_usubjid(ID,5))
-  Priority: 
+  Priority:
 - MappingType: Required
   Name: ID
   OutputName: USUBJID
@@ -3135,7 +3135,7 @@ OutputColumns:
   Format: '%s'
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Required
   Name: TIME
   OutputName: EDTTM
@@ -3144,7 +3144,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Required
   Name: EVID
   OutputName: EVID
@@ -3153,7 +3153,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Required
   Name: DV
   OutputName: DV
@@ -3162,7 +3162,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Required
   Name: CMT
   OutputName: CMT
@@ -3171,7 +3171,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Required
   Name: MDV
   OutputName: MDV
@@ -3180,7 +3180,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Optional
   Name: DVU
   OutputName: DVU
@@ -3189,7 +3189,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: VISIT
   OutputName: VISIT
@@ -3198,7 +3198,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: EPOCH
   OutputName: EPOCH
@@ -3207,7 +3207,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: DAY
   OutputName: DAY
@@ -3216,7 +3216,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: AGE
   OutputName: AGE
@@ -3225,7 +3225,7 @@ OutputColumns:
   Format: ''
   Units: AGEU
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: SEX
   OutputName: SEX
@@ -3234,7 +3234,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: RACE
   OutputName: RACE
@@ -3243,7 +3243,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: ETHNIC
   OutputName: ETHNIC
@@ -3252,7 +3252,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: FOOD
   OutputName: FOOD
@@ -3261,7 +3261,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: AST
   OutputName: AST
@@ -3270,7 +3270,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: ALT
   OutputName: ALT
@@ -3279,7 +3279,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: ALB
   OutputName: ALB
@@ -3288,7 +3288,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: BILI
   OutputName: BILI
@@ -3297,7 +3297,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: HCT
   OutputName: HCT
@@ -3306,7 +3306,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Required
   Name: AMT
   OutputName: AMT
@@ -3315,7 +3315,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Optional
   Name: AMTU
   OutputName: AMTU
@@ -3324,7 +3324,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: RBC
   OutputName: RBC
@@ -3333,7 +3333,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 - MappingType: Additional
   Name: CREAT
   OutputName: CREAT
@@ -3342,7 +3342,7 @@ OutputColumns:
   Format: ''
   Units: ''
   Fill: ''
-  Priority: 
+  Priority:
 Diagnostics:
   DVreconcile: true
   DVreconcileStrata: ''
