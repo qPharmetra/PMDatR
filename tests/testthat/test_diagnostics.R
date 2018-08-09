@@ -91,33 +91,49 @@ ex.df = read.csv(exFile)
 
 test_that("check_iso_date_formats: all same format",{
   dates = ex.df$EXSTDTC
-  PMDatR:::check_iso_date_formats(dates)
+  expect_true(all(unlist(PMDatR:::check_iso_date_formats(dates))))
 })
 
 test_that("check_iso_date_formats: blank",{
   dates = ex.df$EXSTDTC
   dates[1]=""
-  PMDatR:::check_iso_date_formats(dates)
+  expect_true(all(unlist(PMDatR:::check_iso_date_formats(dates))))
 })
 
 test_that("check_iso_date_formats: all are blank",{
   dates = ex.df$EXSTDTC
   dates=rep("",10)
-  PMDatR:::check_iso_date_formats(dates)
+  expect_true(!all(unlist(PMDatR:::check_iso_date_formats(dates))))
 })
 
 test_that("check_iso_date_formats: NA",{
   dates = ex.df$EXSTDTC
   dates[1]=NA
-  PMDatR:::check_iso_date_formats(dates)
+  expect_true(all(unlist(PMDatR:::check_iso_date_formats(dates))))
 })
 
 test_that("check_iso_date_formats: all are NA",{
   dates = ex.df$EXSTDTC
   dates=rep(NA,10)
-  PMDatR:::check_iso_date_formats(dates)
+  expect_true(!all(unlist(PMDatR:::check_iso_date_formats(dates))))
 })
 
+test_that("check_iso_date_formats: mixed no time",{
+  dates = ex.df$EXSTDTC
+  dates[1]="2010-01-01"
+  expect_equal(unlist(PMDatR:::check_iso_date_formats(dates), use.names = F),c(T,T,F,T))
+})
+
+test_that("check_iso_date_formats: mixed no date no time",{
+  dates = ex.df$EXSTDTC
+  dates[1]="2010"
+  expect_equal(unlist(PMDatR:::check_iso_date_formats(dates), use.names = F),c(T,F,F,T))
+})
+
+test_that("check_iso_date_formats: all zero time",{
+  dates=rep("2010-01-01T00:00",10)
+  expect_equal(unlist(PMDatR:::check_iso_date_formats(dates), use.names = F),c(T,T,T,F))
+})
 #### check validnumeric
 
 test_that("ValidNumeric: T for all numeric",{

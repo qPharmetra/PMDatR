@@ -1,29 +1,26 @@
 
-### Header
-library(PMDatRLillyExt)
-
 ### Load and Preprocess domains
 preprocess.domains <- function(DMobj) {
     DMobj$Domains$DM = load.domain(DMobj$Domains$DM, 
-        .fun = preprocess_DM)
+        .fun = preprocess_DM, .hook = preprocessHook_DM)
     # put the data into a global variable named after
     # the domain
     
     DM <<- DMobj$Domains$DM$Data
     DMobj$Domains$EX = load.domain(DMobj$Domains$EX, 
-        .fun = preprocess_EX)
+        .fun = preprocess_EX, .hook = preprocessHook_EX)
     # put the data into a global variable named after
     # the domain
     
     EX <<- DMobj$Domains$EX$Data
     DMobj$Domains$LB = load.domain(DMobj$Domains$LB, 
-        .fun = preprocess_LB)
+        .fun = preprocess_LB, .hook = preprocessHook_LB)
     # put the data into a global variable named after
     # the domain
     
     LB <<- DMobj$Domains$LB$Data
     DMobj$Domains$PC = load.domain(DMobj$Domains$PC, 
-        .fun = preprocess_PC)
+        .fun = preprocess_PC, .hook = preprocessHook_PC)
     # put the data into a global variable named after
     # the domain
     
@@ -31,11 +28,24 @@ preprocess.domains <- function(DMobj) {
     DMobj
 }
 
-## pre-processing functions apply filters,
-## transformations, pre-merge specified by settings.
-## Set data in dom$Data, and return dom
+## Preprocess hook functions allow for free form
+## modification of loaded data.  Modify the data
+## object and return it.
 
-# pre-processing function for domain: DM
+
+## Mapping functions apply filters, transformations,
+## pre-merge specified by settings.  Set data in
+## dom$Data, and return dom.
+
+# pre-processing hook for domain: DM
+
+preprocessHook_DM <- function(data) {
+    
+    data
+}
+
+
+# Mapping function for domain: DM
 
 preprocess_DM <- function(dom) {
     dom$Data = getDomain(dom$Data, STUDYID = STUDYID, 
@@ -51,7 +61,15 @@ preprocess_DM <- function(dom) {
 }
 
 
-# pre-processing function for domain: EX
+# pre-processing hook for domain: EX
+
+preprocessHook_EX <- function(data) {
+    
+    data
+}
+
+
+# Mapping function for domain: EX
 
 preprocess_EX <- function(dom) {
     dom$Data = getDomain(dom$Data, EXDTC = iso_to_posix(EXSTDTC), 
@@ -68,7 +86,15 @@ preprocess_EX <- function(dom) {
 }
 
 
-# pre-processing function for domain: LB
+# pre-processing hook for domain: LB
+
+preprocessHook_LB <- function(data) {
+    
+    data
+}
+
+
+# Mapping function for domain: LB
 
 preprocess_LB <- function(dom) {
     dom$Data = getDomain(dom$Data, STUDYID = STUDYID, 
@@ -86,7 +112,15 @@ preprocess_LB <- function(dom) {
 }
 
 
-# pre-processing function for domain: PC
+# pre-processing hook for domain: PC
+
+preprocessHook_PC <- function(data) {
+    
+    data
+}
+
+
+# Mapping function for domain: PC
 
 preprocess_PC <- function(dom) {
     dom$Data = getDomain(dom$Data, STUDYID = STUDYID, 
