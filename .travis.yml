@@ -3,6 +3,7 @@
 language: R
 sudo: false
 cache: packages
+warnings_are_errors: false
 
 before_install:
   - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
