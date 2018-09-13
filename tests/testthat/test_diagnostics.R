@@ -150,6 +150,7 @@ test_that("ValidNumeric: NA for non-numeric type",{
 
 test_that("ValidNumeric: NA for no type",{
   x=1:10
+  attributes(x)=list(thing=1)
   expect_equal(validNumeric(x),NA)
 })
 
