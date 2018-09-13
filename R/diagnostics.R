@@ -73,7 +73,7 @@ diagnostics.domain = function(dom){
 validNumeric = function(x){
   # make sure we have columns from input mappings
   att = attributes(x)
-  if(!is.null(att))
+  if(!is.null(att$type))
   {
     if(att$type=="Numeric")
     {
