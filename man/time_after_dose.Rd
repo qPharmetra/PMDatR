@@ -4,8 +4,8 @@
 \alias{time_after_dose}
 \title{time after dose}
 \usage{
-time_after_dose(.df, groups = "ID", .name = "TAD", .criteria = EVID \%in\%
-  c(1, 4), .name_fn = NULL, .time = "TIME", units = "hours",
+time_after_dose(.df, groups = "ID", .name = "TAD", .criteria = EVID
+  \%in\% c(1, 4), .name_fn = NULL, .time = "TIME", units = "hours",
   digits = 10)
 }
 \arguments{

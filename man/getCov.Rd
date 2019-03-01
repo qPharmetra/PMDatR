@@ -4,8 +4,8 @@
 \alias{getCov}
 \title{Processes domain data for merged covariates}
 \usage{
-getCov(.data, ID, cov.col, cov.val, cov.filter, cov.keys, fun.summary, Units,
-  ...)
+getCov(.data, ID, cov.col, cov.val, cov.filter, cov.keys, fun.summary,
+  Units, ...)
 }
 \arguments{
 \item{.data}{The domain data frame}

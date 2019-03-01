@@ -8,11 +8,11 @@
 \usage{
 fill_NA(.data, column, value, groups = "ID")
 
-fill_locf(.data, column, groups = "ID", tolerance = Inf, time = "TIME",
-  backfill = T)
+fill_locf(.data, column, groups = "ID", tolerance = Inf,
+  time = "TIME", backfill = T)
 
-fill_nocb(.data, column, groups = "ID", tolerance = Inf, time = "TIME",
-  backfill = T)
+fill_nocb(.data, column, groups = "ID", tolerance = Inf,
+  time = "TIME", backfill = T)
 }
 \arguments{
 \item{.data}{A data.frame in which to modify the column}
