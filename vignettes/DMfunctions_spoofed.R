@@ -165,3 +165,11 @@ apply.exclusions = function(.data){
   .data %>% mutate(EXCL=conditional_values(BQL=BQL==T & EVID==0, ND=PCSTAT=="NOT DONE", default="OK")) %>%
     mutate(BQL.fl=BQL==T & EVID==0, ND.fl=PCSTAT=="NOT DONE")
 }
+
+
+#### for mergingdata.rmd  - relocated here so build_site won't choke on it
+
+# Define insert_fun.
+insert_fun = function(name) {
+  read_chunk(lines = capture.output(dump(name, '')), labels = paste(name, 'source', sep = '-'))
+}

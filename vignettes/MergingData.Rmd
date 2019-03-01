@@ -61,10 +61,7 @@ source("DMfunctions_spoofed.R")
 # This is just to display the definitions of the dynamic functions
 library(knitr)
 
-# Define insert_fun.
-insert_fun = function(name) {
-  read_chunk(lines = capture.output(dump(name, '')), labels = paste(name, 'source', sep = '-'))
-}
+
 
 insert_fun("preprocess.domains") # display in chunck labelled "preprocess.domains-source"
 insert_fun("preprocess.DM") # display in chunck labelled "preprocess.DM-source"
