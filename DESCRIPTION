@@ -10,7 +10,8 @@ LazyData: true
 Depends:
     R (>= 3.3.3)
 Suggests:
-    testthat
+    testthat,
+    covr
 Imports:
     dplyr(>= 0.6.0),
     methods(>= 3.3.3),
@@ -33,4 +34,4 @@ Imports:
     purrr (>= 0.2.3),
     purrrlyr
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

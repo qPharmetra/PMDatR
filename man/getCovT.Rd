@@ -4,8 +4,8 @@
 \alias{getCovT}
 \title{Processes domain data for time-varying covariates}
 \usage{
-getCovT(.data, ID, TIME, EVID, covT.col, covT.val, covT.filter, fun.summary,
-  Units, ...)
+getCovT(.data, ID, TIME, EVID, covT.col, covT.val, covT.filter,
+  fun.summary, Units, ...)
 }
 \arguments{
 \item{.data}{The domain data frame}
