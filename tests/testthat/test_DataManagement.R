@@ -6,13 +6,30 @@ context("DataManagement")
 
 path.testroot = "tests" # for testing in console
 path.testroot = ".." # for build
+setwd(path.testroot)
 
 # utility function to use here
 get.meta.col.names = function(meta) unlist(lapply(meta,"[[","name"))
 
 # example.yaml contains valid settings for different query types in data1 example
-settings_file = file.path(path.testroot, "testdata/data1/example.yaml")
+settings_file =  "testdata/data2/example.yaml"
 
+settings = yaml::yaml.load_file(settings_file)
+
+test_that("Check structure DM",{
+  #create queryDV
+  DM = DataManagement(settings_file)
+  expect_equal(DM$valid,TRUE)
+})
+
+test_that("DM15 duplicate names",{
+  #create queryDV
+  test_settings = settings
+  test_settings$DependentVariables[[1]]$Name="EX"
+  DM = DataManagement(settings=test_settings)
+  expect_equal(DM$valid,FALSE)
+  expect_match(DM$errors[[1]], "Error DM15.+")
+})
 
 # This test fails because of a weird bug in CHECK which makes it say it can't find the template
 # test_that("RMD creates function text",{

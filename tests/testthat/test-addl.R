@@ -289,8 +289,8 @@ describe("get_addl_dosing works as expected for QD", {
   it("works for QD with single missing dose at a different time", {
 
     # given a dosing time of a missed dose that does NOT correspond with the next dose time,
-    # the time should be adjusted to match. In this case, the 7:00 "estimate" should be
-    # adjusted to 10:00
+    # the time should not be adjusted to match. The 7:00 time should be
+    # preserved, even though the next dose time is 10:00
     input <- tibble::tribble(
       ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,     ~II, ~EVID,
       1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,    24,   1,
@@ -303,7 +303,7 @@ describe("get_addl_dosing works as expected for QD", {
       ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,     ~II, ~EVID, ~ADDL,
       1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,     0,   1,     0,
       1,	"01/02/2017 10:00",	"A",	100,	"QD",	  FALSE,    24,   1,     2,
-      1,	"01/05/2017 10:00", "A",  0,	  "QD",	  TRUE,      0,   1,     0,
+      1,	"01/05/2017 07:00", "A",  0,	  "QD",	  TRUE,      0,   1,     0,
       1,	"01/06/2017 10:00",	"A",	100,	"QD",	  FALSE,    24,   1,     4,
       1,	"01/11/2017 10:00", "A",	100,	"QD",	  FALSE,     0,   1,     0
     ) %>% dplyr::mutate(
@@ -436,7 +436,7 @@ it("works for BID where next dose sequence time is different than previous", {
      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,  ~II, ~EVID, ~ADDL,
      1,	"01/01/2017 10:00",	"A",	100,	"BID",  FALSE,     0,   1,     0,
      1,	"01/01/2017 21:00",	"A",	100,	"BID",  FALSE,    12,   1,     11,
-     1,	"01/07/2017 21:00", "A",  0,	  "BID",  TRUE,      0,   1,     0,
+     1,	"01/07/2017 22:00", "A",  0,	  "BID",  TRUE,      0,   1,     0,
      1,	"01/08/2017 09:00",  "A",	100,	"BID",  FALSE,     0,   1,     0,
      1,	"01/08/2017 21:00", "A",  100,  "BID",  FALSE,    12,   1,     4,
      1,	"01/11/2017 09:00",  "A",	100,	"BID",  FALSE,     0,   1,     0,

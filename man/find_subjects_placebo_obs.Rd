@@ -4,7 +4,8 @@
 \alias{find_subjects_placebo_obs}
 \title{Find placebo subjects with positive DV}
 \usage{
-find_subjects_placebo_obs(.data, is.placebo, condition = "DV>0")
+find_subjects_placebo_obs(.data, is.placebo, condition = "DV>0",
+  ID = "ID")
 }
 \arguments{
 \item{.data}{a data.frame or tbl object}
@@ -12,6 +13,8 @@ find_subjects_placebo_obs(.data, is.placebo, condition = "DV>0")
 \item{is.placebo}{An R expression, as character, that is used to determine if a subject is a placebo subject.}
 
 \item{condition}{An R expression, as character, that is tested for the placebo subjects.}
+
+\item{ID}{A character value giving the column containing subject IDs}
 }
 \value{
 a single column tbl with unique IDs for placebo subjects meeting the criteria

@@ -3,6 +3,7 @@
 #' Create a Data Management Object
 #'
 #' @param settings_file The YAML settings file to use
+#' @param settings A list of settings to use instead of a file
 #'
 #' @return A DataManagement object
 #' @importFrom yaml yaml.load_file
@@ -10,10 +11,13 @@
 #' @export
 #'
 
-DataManagement <- function(settings_file){
+DataManagement <- function(settings_file="", settings=NULL){
 
-  # load the settings file
-  settings = yaml.load_file(settings_file)
+  if(is.null(settings)){
+    # load the settings file
+    settings = yaml.load_file(settings_file)
+  }
+
   # flag errors
   all_valid = T
   #setup error list, and function for easy appending to it
@@ -127,6 +131,16 @@ DataManagement <- function(settings_file){
     }
   }
 
+  ## check unique names in domains and queries
+  unames = c(map_chr(settings$Domains, "name"),
+             map_chr(c(settings$DependentVariables, settings$Doses,
+                       settings$TVCovariates, settings$Covariates),
+                     "Name"))
+  if(any(duplicated(unames))){
+    append.err(sprintf("Error DM15: Source and Query names [%s] are not unique.",
+                       paste(unames[duplicated(unames)], collapse=", ")))
+  }
+
   ## Check MergeOptions
   merge_options=NULL
   if(!is.null(settings$Options)){
@@ -156,6 +170,12 @@ DataManagement <- function(settings_file){
         append.err("Error DM12: ADDLTolerance must be numeric between 0 and 1.")
       }
     }
+    # check SaveIntermediateFiles
+    if(!is.empty.yaml(merge_options$SaveIntermediateFiles)){
+      if(!is.logical(merge_options$SaveIntermediateFiles)){
+        append.err("Error DM16: SaveIntermediateFiles must be TRUE or FALSE")
+      }
+    }
     # check KeepEVID2
     if(!is.empty.yaml(merge_options$KeepEvid2)){
       if(!is.logical(merge_options$KeepEvid2)) append.err("Error DM10: KeepEVID2 must be TRUE or FALSE.")
@@ -174,6 +194,21 @@ DataManagement <- function(settings_file){
     } else{
       #if SortOrder is empty, ensure it is null
       merge_options$SortOrder=NULL
+    }
+    # check ADDLGrouping
+    if(!is.empty.yaml(merge_options$ADDLGrouping)){
+      # convert to character array, and check that all elements are in OutputColumns
+      merge_options$ADDLGrouping = tokenize(merge_options$ADDLGrouping)
+      badcols=character() #initialze to zero length
+      if(!is.empty.yaml(settings$OutputColumns))
+        # remove - from SortOrder when comparing with column names
+        badcols = setdiff(gsub("^-", "", merge_options$ADDLGrouping),names(settings$OutputColumns))
+      if(length(badcols)>0)
+        append.err(sprintf("Error DM14: ADDLGrouping must contain valid Output Column names. Bad names: [%s]",
+                           paste(badcols, collapse=", ")))
+    } else{
+      #if ADDLGrouping is empty, ensure it is null
+      merge_options$ADDLGrouping=NULL
     }
 
   }

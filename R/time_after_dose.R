@@ -65,17 +65,20 @@ time_after_dose <- function(.df,
     .df <- group_by_(.df, .dots = groups)
   }
   #.df <- .df %>% mutate(DOSENUM__ = cumsum(ifelse(AMT > 0 , 1, 0))) %>%
-  .df <- .df %>% mutate_(.dots=setNames(list(lazyeval::interp(~cumsum(crit),
+  .df <- .df %>% mutate_(.dots=setNames(list(lazyeval::interp(~pmax(cumsum(crit), 1),
                                              crit=lazy(.criteria))),"DOSENUM__")) %>%
     group_by(DOSENUM__, add = TRUE)
-  output_list <- diff_col(.df, .col, as.character(unlist(dplyr::groups(.df))), .name = .name, .name_fn = .name_fn)
+  output_list <- diff_col(.df, .col, as.character(unlist(dplyr::groups(.df))),
+                          .name = .name, .name_fn = .name_fn,
+                          .criteria) # added to handle pre-dose observations TAD
   output <- output_list$df %>% mutate_(.dots = setNames(list(
     lazyeval::interp(~ round(as.numeric(.diffcol)/unit_sf, digits),
                      .diffcol = as.name(output_list$.diff_name)
     )), output_list$.diff_name)) %>% select(-DIFF__)
   if ("ADDL" %in% names(.df)) {
     # collapse back down
-    output <- output %>% filter(ADDL != -1)
+    # don't remove ADDL=NA
+    output <- output %>% filter(ADDL != -1 | is.na(ADDL))
   }
   return(output)
 }

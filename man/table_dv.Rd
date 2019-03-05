@@ -4,10 +4,12 @@
 \alias{table_dv}
 \title{Summarise observations by EVID in NONMEM dataset}
 \usage{
-table_dv(.data, strata = "")
+table_dv(.data, strata = "", ID = "ID")
 }
 \arguments{
 \item{.data}{data}
+
+\item{ID}{a character value giving the column containing subject IDs}
 
 \item{MAP}{map}
 }

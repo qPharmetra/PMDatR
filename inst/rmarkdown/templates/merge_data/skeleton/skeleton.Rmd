@@ -107,6 +107,9 @@ for(dom in DMO$Domains)
   cat(knit(text=xpd, quiet=T))
   cat("\n\n")
   
+  if(DMO$MergeOptions$SaveIntermediateFiles){
+    try(readr::write_csv(dom$Data, tolower(file.path(DMO$Settings$TempDir, sprintf("%s.loaded.csv", dom$name)))))
+  }
 }
 ```
 
@@ -133,11 +136,18 @@ if(length(dnost$mismatchedTRT)!=0){
 
 ```{r}
 EX.df = Process_Dose()
-EX.df = post_process_dosing(EX.df, expandADDL = DMO$MergeOptions$ExpandADDL, 
-                            ADDLTolerance = DMO$MergeOptions$ADDLTolerance)
+EX.df = post_process_dosing(EX.df, 
+                            expandADDL = DMO$MergeOptions$ExpandADDL, 
+                            ADDLTolerance = DMO$MergeOptions$ADDLTolerance,
+                            ADDLgroups=DMO$MergeOptions$ADDLGrouping)
+
 kable(head(EX.df,nPrintRows))
 
 kable(as_data_frame(unit_cols(EX.df)))
+
+if(DMO$MergeOptions$SaveIntermediateFiles){
+  try(readr::write_csv(EX.df, tolower(file.path(DMO$Settings$TempDir, "ex.df.csv"))))
+}
 ```
 
 ## Process DV items
@@ -147,16 +157,27 @@ DV.df = Process_DV()
 kable(head(DV.df,nPrintRows))
 
 kable(as_data_frame(unit_cols(DV.df)))
+
+if(DMO$MergeOptions$SaveIntermediateFiles){
+  try(readr::write_csv(DV.df, tolower(file.path(DMO$Settings$TempDir, "dv.df.csv"))))
+}
 ```
 
 ## Process Covariate items
 
 ```{r results='asis'}
 Cov.l = Process_Cov()
-for(df in Cov.l){
+cov.names = names(Cov.l)
+
+for(i in seq_along(Cov.l)){
+  df = Cov.l[[i]]
   print(kable(head(df,nPrintRows)))
   
   print(kable(as_data_frame(unit_cols(df))))
+  
+  if(DMO$MergeOptions$SaveIntermediateFiles){
+    try(readr::write_csv(df, tolower(file.path(DMO$Settings$TempDir, sprintf("%s.cov.df.csv", cov.names[i])))))
+  }
 }
 ```
 
@@ -167,6 +188,10 @@ CovT.df = Process_CovT()
 kable(head(CovT.df,nPrintRows))
 
 kable(as_data_frame(unit_cols(CovT.df)))
+
+if(DMO$MergeOptions$SaveIntermediateFiles){
+  try(readr::write_csv(CovT.df, tolower(file.path(DMO$Settings$TempDir, "covt.df.csv"))))
+}
 ```
 
 ## Ready for Merging
@@ -193,6 +218,10 @@ events.df = append.CovT(events.df, CovT.df)
 
 ```{r}
 database.df = merge.Cov(events.df, Cov.l)
+
+if(DMO$MergeOptions$SaveIntermediateFiles){
+  try(readr::write_csv(database.df, tolower(file.path(DMO$Settings$TempDir, "After_Merge.df.csv"))))
+}
 ```
 
 ## Post-Merge Transforms
@@ -204,6 +233,10 @@ database.df = post.merge.refactoring(database.df, fun.transform = post.transform
                                      options=DMO$MergeOptions)
 kable(head(database.df,nPrintRows))
 kable(as_data_frame(unit_cols(database.df)))
+
+if(DMO$MergeOptions$SaveIntermediateFiles){
+  try(readr::write_csv(database.df, tolower(file.path(DMO$Settings$TempDir, "After_Transforms.df.csv"))))
+}
 ```
 
 ## POST-MERGE HOOK GOES HERE

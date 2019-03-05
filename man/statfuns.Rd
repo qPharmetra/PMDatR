@@ -11,6 +11,9 @@
 \alias{first_}
 \alias{last_}
 \alias{nth_}
+\alias{mode_}
+\alias{any_}
+\alias{all_}
 \title{Summary functions overridden by PMDatR}
 \usage{
 mean_(x, ..., na.rm = TRUE)
@@ -28,18 +31,27 @@ first_(x, default = NA)
 last_(x, default = NA)
 
 nth_(x, n, default = NA)
+
+mode_(x, na.rm = TRUE, tie.order = NULL)
+
+any_(..., na.rm = TRUE)
+
+all_(..., na.rm = TRUE)
 }
 \arguments{
 \item{x}{An R object with a mean method (e.g. numeric/logical vectors)}
 
-\item{...}{Additional arguuments passed to or from other methods}
+\item{...}{Additional arguments passed to or from other methods}
 
 \item{na.rm}{TRUE (the default) if NA values should be ignored in the calculation}
 
 \item{n}{For 'nth' the selector to use.  Note that NAs are skipped.}
+
+\item{tie.order}{NULL (the default) to return the first mode, or a character vector of the order in
+which to choose from the ties.}
 }
 \value{
-The value of the summary function applied to vector
+The value of the summary function applied to vector x
 }
 \description{
 Summary functions overridden by PMDatR
@@ -47,7 +59,10 @@ Summary functions overridden by PMDatR
 \details{
 Some summary functions have been overridden to make them easier to use from custom function.
   All of these skip NA values.  If all values in x are NA, then these functions return NA, rather than
-  other values such as -Inf, Inf, or NaN
+  other values such as -Inf, Inf, or NaN.
+
+  In the event of a tie (i.e. multiple modes) mode_ returns the first mode encountered in x, or if
+  tie.order is provided then the first in the list.
 }
 \examples{
 mean(c(1,NA,3)) #2
@@ -55,4 +70,15 @@ median(c(1,NA,3, NA, 5)) #3
 sum(c(1,NA,3)) #4
 min(c(1,NA,3, NA, 5)) #1
 max(c(1,NA,3, NA, 5)) #5
+# with character values
+vals = letters[c(1,1,1,2,2,1,1,1,2,3,3,2,3,3,3,2,1)]
+mode_(vals)
+# with factors
+mode_(as.factor(vals))
+# with integers
+mode_(as.integer(as.factor(vals)))
+# with double
+mode_(as.double(as.factor(vals))/7)
+# breaking ties in desired order
+mode_(c("A","B","C","A","B","C", NA, NA), na.rm=F, tie.order=c("C","A","B", NA))
 }

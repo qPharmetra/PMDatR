@@ -5,7 +5,7 @@
 \title{Plot individual subject profiles in NONMEM dataset}
 \usage{
 plot_individual(.data, idv = "TIME", strata = "", grouping = "",
-  logY = F, showADDL = F)
+  logY = F, showADDL = F, ID = "ID")
 }
 \arguments{
 \item{.data}{NONMEM data as a data.frame}
@@ -13,6 +13,8 @@ plot_individual(.data, idv = "TIME", strata = "", grouping = "",
 \item{idv}{A comma delimited string of variables for the x axis}
 
 \item{grouping}{A comma delimited string of grouping variables.}
+
+\item{ID}{a character value giving the column containing subject IDs}
 
 \item{strat}{A comma delimited string of stratification variables.}
 }

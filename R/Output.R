@@ -101,12 +101,17 @@ formatForNONMEM = function(df, column_info=NULL){
       attributes(y) = c(attributes(x), list(levels=c("FALSE","TRUE")))
     }
     if(ctype=="DateTime"){
+      if(!inherits(x,"POSIXct")){
+        warning(sprintf("Column [%s] is formatted as DateTime, but is actually type %s",
+                        attr(x,"Name"), class(x)[1]))
+      }
       y = as.character(x) #as.POSIXct(x, origin="1970-01-01", tz="GMT"))
       attributes(y) = attributes(x)
       class(y) = "character" # otherwise print.posix will cause NA values
     }
     if(ctype=="Text"){
       y=as.character(x)
+      y[is.na(y)]="" # LPK-379 don't write NA -> "." for Text
       attributes(y) = attributes(x)
     }
     y

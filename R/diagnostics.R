@@ -273,14 +273,18 @@ get_domain_subjects = function(dom){
 #' Summarise observations by EVID in NONMEM dataset
 #' @param .data data
 #' @param MAP map
+#' @param ID a character value giving the column containing subject IDs
+#'
 #' @return A dataframe
 #' @importFrom dplyr group_by_ summarise
 #' @export
-table_dv = function(.data, strata="")
+table_dv = function(.data, strata="", ID="ID")
 {
+  if(ID=="") ID="ID"
   #.data = apply.map(.data, map = MAP)
   grps = c("EVID",tokenize(strata))
   result = .data %>% group_by_(.dots=grps) %>%
+    mutate_(.dots=setNames(list(ID),list("id"))) %>%
     summarise(n_subjects = lunique(ID),
               n_observations=length(DV),
               observation_range=special.range(DV),
@@ -443,6 +447,7 @@ plot_outlier_byCuts = function(.data
 #' @param idv A comma delimited string of variables for the x axis
 #' @param strat A comma delimited string of stratification variables.
 #' @param grouping A comma delimited string of grouping variables.
+#' @param ID a character value giving the column containing subject IDs
 #'
 #' @return a list of ggplot2 plot objects, one for each idv.
 #' @importFrom ggplot2 ggplot geom_line geom_point facet_grid aes
@@ -453,24 +458,26 @@ plot_spaghetti = function(.data
                           , grouping=""
                           , idv="TIME"
                           , logY=F
+                          , ID="ID"
 )
 {
   #.data = apply.map(.data, map = MAP) %>% filter(EVID!=2) # remove simulation points
   .data = .data %>% filter(EVID!=2)
   if(idv=="") idv="TIME" # reset default
+  if(ID=="") ID="ID" # reset default
 
   spagplot = function(.idv, .df)
   {
     if(grouping!="")
     {
-    p = ggplot(.df, aes_string(y="DV", x=.idv, group="ID",
+    p = ggplot(.df, aes_string(y="DV", x=.idv, group=ID,
                                color= sprintf("interaction(%s)", grouping)
                                )
                )
     }
     else
     {
-      p = ggplot(.df, aes_string(y="DV", x=.idv, group="ID"))
+      p = ggplot(.df, aes_string(y="DV", x=.idv, group=ID))
     }
     p=p+
       geom_line(data = subset(.df,EVID==0)) +
@@ -494,6 +501,7 @@ plot_spaghetti = function(.data
 #' @param idv A comma delimited string of variables for the x axis
 #' @param strat A comma delimited string of stratification variables.
 #' @param grouping A comma delimited string of grouping variables.
+#' @param ID a character value giving the column containing subject IDs
 #'
 #' @return a list of ggplot2 plot objects, one for each idv.
 #' @importFrom ggplot2 ggplot geom_line geom_point facet_grid aes
@@ -509,11 +517,14 @@ plot_individual = function(.data
                            , grouping=""
                            , logY=F
                            , showADDL=F
+                           , ID="ID"
+
 )
 {
   # remove simulation points and non-finite DV
   .data = .data %>% filter(EVID!=2)
   if(idv=="") idv="TIME" # reset default
+  if(ID=="") ID="ID" # reset default
 
   indplot = function(.idv, .df)
   {
@@ -531,8 +542,8 @@ plot_individual = function(.data
     p=p+
       geom_line(data = subset(.df,EVID==0)) +
       geom_point(data = subset(.df,EVID==0),alpha = 0.33)
-    if(showADDL==T & all(c("ID","ADDL","II") %in% names(.df))){
-      p = p + geom_vline(data=.df %>% filter((EVID==1 | EVID==4) & ADDL!=-1) %>% select_(TIME=.idv,"ADDL","II","ID") %>% expand_addl(ii_scale=1),
+    if(showADDL==T & all(c(ID,"ADDL","II") %in% names(.df))){
+      p = p + geom_vline(data=.df %>% filter((EVID==1 | EVID==4) & ADDL!=-1) %>% select_(TIME=.idv,"ADDL","II",ID) %>% expand_addl(ii_scale=1),
                          aes(xintercept = TIME,
                              linetype = factor(ifelse(ADDL == -1, 2, ifelse(ADDL ==0, 4, 3))))
                              ) +
@@ -543,11 +554,12 @@ plot_individual = function(.data
     }
     if(logY) p=p+scale_y_log10()
     if(strata!="")
-    {  p=p + facet_grid(sprintf("%s~ID",paste(tokenize(strata),collapse = "+")),
+    {  p=p + facet_grid(sprintf("%s~%s",paste(tokenize(strata),collapse = "+"),
+                                ID),
                         scales = "free")}
     else
     {
-      p=p+facet_grid(.~ID, scales="free")
+      p=p+facet_grid(as.formula(paste(".~", ID)), scales="free")
     }
     p + labs(color="Groups") + theme_bw()
   }
@@ -558,29 +570,39 @@ plot_individual = function(.data
 #' Find subjects with no dosing records
 #'
 #' @param .data a data.frame or tbl object
+#' @param ID a character value giving the column containing subject IDs
 #'
 #' @return a single column tbl with unique IDs for subjects with no dosing records
 #' @importFrom dplyr group_by summarise filter select
 #' @export
 #'
 
-find_subjects_no_dosing = function(.data)
+find_subjects_no_dosing = function(.data, ID="ID")
 {
-  .data %>% group_by(ID) %>% summarise(n=sum(EVID==1)) %>% filter(n==0) %>% select(ID)
+  .data %>%
+    group_by_(.dots=ID) %>%
+    summarise(n=sum(EVID==1)) %>%
+    filter(n==0) %>%
+    select_(.dots=ID)
 }
 
 
 #' Find subjects with no observation records
 #'
 #' @param .data a data.frame or tbl object
+#' @param ID a character value giving the column containing subject IDs
 #'
 #' @return a single column tbl with unique IDs for subjects with no observations
 #' @importFrom dplyr group_by summarise filter select
 #' @export
 #'
-find_subjects_no_obs = function(.data)
+find_subjects_no_obs = function(.data, ID="ID")
 {
-  .data %>% group_by(ID) %>% summarise(n=sum(EVID==0)) %>% filter(n==0) %>% select(ID)
+  .data %>%
+    group_by_(.dots=ID) %>%
+    summarise(n=sum(EVID==0)) %>%
+    filter(n==0) %>%
+    select_(.dots=ID)
 }
 
 #' Find placebo subjects with positive DV
@@ -592,12 +614,13 @@ find_subjects_no_obs = function(.data)
 #' @param .data a data.frame or tbl object
 #' @param is.placebo An R expression, as character, that is used to determine if a subject is a placebo subject.
 #' @param condition An R expression, as character, that is tested for the placebo subjects.
+#' @param ID A character value giving the column containing subject IDs
 #'
 #' @return a single column tbl with unique IDs for placebo subjects meeting the criteria
 #' @importFrom dplyr group_by summarise filter select
 #' @export
 #'
-find_subjects_placebo_obs = function(.data, is.placebo, condition="DV>0")
+find_subjects_placebo_obs = function(.data, is.placebo, condition="DV>0", ID="ID")
 {
   # need to identify placebo subjects in argument is.placebo
   if(missing(is.placebo)) stop("Placebo condition (e.g. TRTA=='placebo') must be supplied")
@@ -606,7 +629,9 @@ find_subjects_placebo_obs = function(.data, is.placebo, condition="DV>0")
   is.placebo = lazyeval::as.lazy(is.placebo,env=parent.frame())
   condition = lazyeval::as.lazy(condition,env=parent.frame())
   # then wrap mutate_cond and return just the obs we find
-  .data %>% filter_(is.placebo, condition, "EVID==0") %>% dplyr::distinct(ID)
+  .data %>%
+    filter_(is.placebo, condition, "EVID==0") %>%
+    dplyr::distinct_(.dots=ID)
 }
 
 

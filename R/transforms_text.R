@@ -57,3 +57,40 @@ parse_usubjid = function(id, pick_parts, sep="-", max_parts=5){
 enumerate = function(vals){
   as.numeric(as.factor(vals))
 }
+
+
+#' Combine several numbers together into a string
+#'
+#' @param ... expressions containing numerical values to concatenate
+#' @param sep An optional separator to insert between the values in ...
+#'
+#' @return A character vector with the concatenated values in ...
+#' @export
+#' @importFrom purrr map
+#' @importFrom lazyeval lazy_dots
+#'
+#' @details Any number of values can be concatenated.  Numerize is
+#' meant to work with number-like data, but will only warn if the
+#' expressions return non-integer values.  The returned values are character
+#' representations of (ideally) numbers, but if non-integer values are included
+#' they will still appear.
+#'
+#' @examples
+#' numerize(as.character(1:10), 11:20, sep=".")
+#' numerize(as.character(1:10), letters[1:10], sep=".")
+#' numerize(as.character(1:10), 11:20/3, sep=".")
+
+numerize = function(..., sep=""){
+  # ensure all args are numeric
+  # first get the expressions from ... (has to come first or promise is invalid)
+  #dotsexpr = purrr::map(lazyeval::lazy_dots(...), "expr")
+  # evaluate ...
+  dots = list(...)
+  # which vectors in ... have entries that can't be coerced to integer
+  isnumeric = unlist(lapply(lapply(dots,is.integral),all))
+  if(!all(isnumeric)){
+    warning("Argument(s) have non integer entries.")#,
+                    #paste(dotsexpr[!isnumeric],collapse = ", ")))
+  }
+  paste(..., sep=sep)
+}

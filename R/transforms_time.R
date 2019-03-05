@@ -126,6 +126,21 @@ conditional_values = function(..., method=c("first", "last"), default="", asfact
 
 is.number = function(x){ suppressWarnings(!is.na(as.numeric(x)))}
 
+#' Determine if a value can be coerced to an integer type
+#'
+#' @param x A value to test.  May be an vector.
+#'
+#' @return A vector of same size as x or T, if the corresponding value can be coerced, or F.
+#' @export
+#'
+#' @examples
+#' is.integral(c(NA,"A","12", "1.2"))
+
+is.integral = function(x){
+  y=suppressWarnings(as.numeric(x) %% 1==0)
+  y[is.na(y)]=FALSE
+  y
+  }
 
 #' Test if value in x is one of several values
 #'
@@ -148,6 +163,16 @@ is_one_of = function(x,...){
 #' @param .time If dtc is date-only, a time to use as an offset.  If length is not 1 or
 #' same as dtc, .time is recycled with a warning.
 #' @param .tz The timezone for the dtc values.  Default is UTC.
+#' @param .month If dtc is year only, a month to use a default.  If length is not 1 or
+#' same as dtc, .time is recycled with a warning.
+#' @param .day If dtc is year-month only, a month to use a default.  If length is not 1 or
+#' same as dtc, .time is recycled with a warning.
+#'
+#' @details The conversion does its best to guess at the format of the time and to fill in any missing
+#' parts, defaulting to Jan, the first of the month, and midnight.  The default day, month, and time can
+#' be provided, but it's important to note that the infill of these values won't cross more than
+#' one division.  That is, "1990" will default to "1990-01-01 00:00", even if .time is given as 06:35.
+#' The missing pieces must be filled in in order.
 #'
 #' @return date/time as R POSIXct native type.
 #' @importFrom anytime anytime
@@ -157,7 +182,32 @@ is_one_of = function(x,...){
 #' iso_to_posix("2016-10-03T21:22:45")
 #' iso_to_posix(c("2016-10-03","2016-10-03T12:34"),"09:00")
 #' iso_to_posix(c("2016-10-03","2016-10-03","2016-10-03"), c("09:00", "10:10")) #gives a warning about length of .times
-iso_to_posix = function(dtc, .time, .tz="UTC"){
+#' iso_to_posix(c("1980", "1980-06", "1980-06-15"), .time="09:34")
+#' iso_to_posix(c("1980", "1980-06", "1980-06-15"), .time="09:34", .day=15, .month=6)
+iso_to_posix = function(dtc, .time, .tz="UTC", .day, .month){
+  # check for year only and update with month
+  if(!missing(.month)){
+    if(!length(.month) %in% c(1,length(dtc))){
+      # reuse .month by rep, and issue a warning
+      warning(".month should be equal in length to dtc or of length 1.  .month has been replicated to the required length.")
+    }
+    if(length(.month)!=length(dtc)) .month=rep(.month, length.out=length(dtc))
+    idx=grep("^[0-9]{4}$", dtc)
+    dtc[idx]=sprintf("%s-%02d",dtc[idx], as.numeric(.month[idx]))
+  }
+
+  #check for yearn and month only in dtc, and if not present tack on day
+  if(!missing(.day))
+  {
+    if(!length(.day) %in% c(1,length(dtc))){
+      # reuse .day by rep, and issue a warning
+      warning(".day should be equal in length to dtc or of length 1.  .day has been replicated to the required length.")
+    }
+    if(length(.day)!=length(dtc)) .day=rep(.day, length.out=length(dtc))
+    idx=grep("^[0-9]{4}-[0-9]{2}$", dtc)
+    dtc[idx]=sprintf("%s-%02d",dtc[idx], as.numeric(.day[idx]))
+  }
+
   #check for T in dtc, and if not present tack on time
   if(!missing(.time))
   {
@@ -166,7 +216,7 @@ iso_to_posix = function(dtc, .time, .tz="UTC"){
       warning(".time should be equal in length to dtc or of length 1.  .time has been replicated to the required length.")
     }
     if(length(.time)!=length(dtc)) .time=rep(.time, length.out=length(dtc))
-    idx=grep(".*T.*", dtc, invert=T)
+    idx=grep("^[0-9]{4}-[0-9]{2}-[0-9]{2}$", dtc)
     dtc[idx]=sprintf("%sT%s",dtc[idx], .time[idx])
   }
 
@@ -198,7 +248,7 @@ iso_duration = function(x, units="h"){
   y[is.na(y)]=0
   storage.mode(y)="numeric"
   # compute seconds (assume month is 30 days... should not be doing this with month)
-  z = (y[,-1] %*% c(31536000,2592000,604800,86400,3600,60,1))*y[,1]
+  z = as.vector((y[,-1] %*% c(31536000,2592000,604800,86400,3600,60,1))*y[,1])
   # convert to specified units
   udunits2::ud.convert(z,"s",units)
 }
@@ -296,4 +346,60 @@ count_if = function(criteria, fill.na=T)
   x=criteria
   if(fill.na) x[is.na(x)]=FALSE
   cumsum(x)
+}
+
+#' Enumerate on condition 1 when followed by condition 2
+#'
+#' @param x1 The main condition on which to enumerate
+#' @param x2 A predicate condition which must be TRUE following x1
+#' as TRUE, in order to increment the occasion.
+#' @param .lead_in One of "combine" (default), "separate" or "missing" to indicate what
+#' to do for elements appearing before the first occasion.
+#'
+#' @return An integer array, of the length of x1, enumerating occasions.
+#' @details x1 and x2 are expressions that evaluate to TRUE or FALSE.
+#' When x1 is TRUE a counter is incremented, but only if x2 is TRUE
+#' prior to the next value of x1 being TRUE.  That is, consecutive x1 TRUE
+#' values count as a single occasion.  The occasion is only incremented
+#' if an x2 value of TRUE falls between TRUE values of x1.  Note that x2
+#' can fall anywhere between TRUE values of x1 - the exact position is
+#' not specified.
+#' @importFrom dplyr data_frame mutate filter if_else
+#' @export
+#'
+#' @examples
+#' # increment occasion only when 1 is followed by 2.
+#' vals = c(1,2,3,2,3,2,1,1,1,2,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
+#' occasion(vals==1, vals==2)
+#' #' # increment occasion only when 1 is followed by 2, .lead_in options.
+#' vals = c(2,1,1,2,3,2,3,2,1,1,1,2,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
+#' occasion(vals==1, vals==2, .lead_in="combine")
+#' occasion(vals==1, vals==2, .lead_in="separate")
+#' occasion(vals==1, vals==2, .lead_in="missing")
+#' # increment occasion only when 1 is IMMEDIATELY followed by 2.
+#' vals = c(1,2,3,2,3,2,1,1,1,2,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
+#' occasion(vals==1 & lead(vals)==2)
+#' # increment when evid=0 and cmt 2 is observed
+#' evid = c(1,0,0,0,0,0,1,0,0,1,0,1,1,0,1,0,0,0,0,1,0,1,0,1,0)
+#' occasion(evid==1, evid==0 & vals==2)
+occasion = function(x1, x2=TRUE, .lead_in=c("combine", "separate", "missing")){
+  .lead_in=match.arg(.lead_in)
+  df = data_frame(X1=x1==TRUE, X2=x2==TRUE) %>%
+    mutate(rowid=1:n()) %>%
+    filter(X1==TRUE | X2==TRUE) %>%
+    mutate(start_occ = if_else(X1==TRUE & lead(X2)==TRUE, TRUE, FALSE)) %>%
+    filter(start_occ==TRUE)
+  occ = rep(F, length(x1))
+  occ[df$rowid]=TRUE
+  # cumulative sum of changepoint rows
+  occ = cumsum(occ)
+  # handle lead in occasion
+  if(.lead_in=="missing"){
+    occ[occ==0] = NA
+  } else if(.lead_in=="combine"){
+    occ[occ==0] = 1
+  } else if(.lead_in=="separate"){
+    occ = occ+1
+  }
+  occ
 }

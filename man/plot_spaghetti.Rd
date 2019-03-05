@@ -5,7 +5,7 @@
 \title{Plot NONMEM data as spaghetti plot}
 \usage{
 plot_spaghetti(.data, strata = "", grouping = "", idv = "TIME",
-  logY = F)
+  logY = F, ID = "ID")
 }
 \arguments{
 \item{.data}{NONMEM data as a data.frame}
@@ -13,6 +13,8 @@ plot_spaghetti(.data, strata = "", grouping = "", idv = "TIME",
 \item{grouping}{A comma delimited string of grouping variables.}
 
 \item{idv}{A comma delimited string of variables for the x axis}
+
+\item{ID}{a character value giving the column containing subject IDs}
 
 \item{strat}{A comma delimited string of stratification variables.}
 }

@@ -4,7 +4,8 @@
 \alias{getIndividualDoses}
 \title{Processes domain data for individual doses}
 \usage{
-getIndividualDoses(.data, ID, TIME, AMT, EVID, MDV, ex.filter, Units, ...)
+getIndividualDoses(.data, ID, TIME, AMT, EVID, MDV, ex.filter, Units,
+  combine.tol = 0, ...)
 }
 \arguments{
 \item{.data}{The domain data frame}

@@ -20,7 +20,7 @@ library(ggplot2)
 library(Hmisc)
 library(PMDatR)
 
-opts_chunk$set(error=TRUE, echo=F)
+opts_chunk$set(error=TRUE, echo=F, fig.width=10, fig.height = 7)
 knit_hooks$set(error = function(x, options) print(PMDatR:::reinterpret_errors(x)))
 knit_hooks$set(warning = function(x,options)print(PMDatR:::reinterpret_errors(x)))
 ```
@@ -43,6 +43,8 @@ if(params$settings_file!=""){
   if(file.exists(nm.file)) nm.df = read.csv(nm.file, na.strings = ".")
 }
 DSet=settingsYAML$Diagnostics
+
+
 ```
 
 
@@ -55,32 +57,51 @@ if(!exists("db.df")){
   cat("#### ERROR PM1: Database file not found. Check for errors in the process_settings and merge_data files.")
   knitr::knit_exit()
 }
+
+```
+
+
+```{r}
+IDcol = DSet$IDColumn
+if(PMDatR:::is.empty.yaml(IDcol)){
+  # look for id-like columns
+  potids = c("subjid","subj","usubjid","patient","id","nmid","xid")
+  # find possible IDcols in order
+  cols = potids[potids %in% tolower(names(db.df))]
+  IDcol = cols[1]
+  if(is.na(IDcol)){
+    cat("#### ERROR PM2: Cannot identify ID Column.  Please set IDColumn in settings.")
+    knitr::knit_exit()    
+  }
+}
+
+cat(sprintf("ID column identified as: %s\n\n", IDcol))
 ```
 
 ## Error Detection
 
 ```{r check errors, echo=F, results="asis"}
-nodoses = find_subjects_no_dosing(db.df)
-noobs = find_subjects_no_obs(db.df)
+nodoses = find_subjects_no_dosing(db.df, IDcol)
+noobs = find_subjects_no_obs(db.df, IDcol)
 
 
 
 if(nrow(nodoses)>0){
-  cat(sprintf("Subjects with no dosing records: %s\n\n", paste(nodoses$ID,collapse=", ")))
+  cat(sprintf("Subjects with no dosing records: %s\n\n", paste(nodoses[["IDcol"]],collapse=", ")))
 } else{
   cat("No subjects without doses\n\n")
 }
 
 if(nrow(noobs)>0){
-  cat(sprintf("Subjects with no observation records: %s\n\n", paste(noobs$ID,collapse=", ")))
+  cat(sprintf("Subjects with no observation records: %s\n\n", paste(noobs[["IDcol"]],collapse=", ")))
 } else{
   cat("No subjects without observations\n\n")
 }
 
 if(DSet$CheckPlacebo){
-  placeboerr = find_subjects_placebo_obs(db.df, DSet$PlaceboCriteria, DSet$ObservationCriteria)
+  placeboerr = find_subjects_placebo_obs(db.df, DSet$PlaceboCriteria, DSet$ObservationCriteria, IDcol)
   if(nrow(placeboerr)>0){
-    cat(sprintf("Placebo subjects with non-zero observations: %s\n\n", paste(placeboerr$ID,collapse=", ")))
+    cat(sprintf("Placebo subjects with non-zero observations: %s\n\n", paste(placeboerr[["IDcol"]],collapse=", ")))
   } else{
     cat("No placebo subjects with observations\n\n")
   }
@@ -126,7 +147,7 @@ if(DSet$VarSummary)
   
   #get first non-NA value for each subject
   first.not.na = function(x) Find(function(x){!is.na(x)},x)
-  x.df = db.df %>% group_by(ID) %>% summarise_each(funs(first.not.na))
+  x.df = db.df %>% group_by_(.dots=IDcol) %>% summarise_each(funs(first.not.na))
   
   # summarise over subjects
   summary_table(x.df, cols=DSet$VarSummaryColumns, grouping=DSet$VarSummaryGroups,conFn=conDataFun,catFn=catDataFun) %>% kable("markdown")
@@ -168,7 +189,7 @@ if(DSet$Outliers)
 if(DSet$VarSummary)
 {
 
-  plist=covariate_plots(db.df %>% group_by(ID) %>% summarise_each(funs(first.not.na)), 
+  plist=covariate_plots(db.df %>% group_by_(.dots=IDcol) %>% summarise_each(funs(first.not.na)), 
                         cols=DSet$VarSummaryColumns,
                         grouping=DSet$VarSummaryGroups)
   for (i in seq_along(plist)) print(plist[[i]])
@@ -185,7 +206,8 @@ if(DSet$SpaghettiPlots){
   plist= plot_spaghetti(db.df,idv="TAD,TIME", 
                               grouping=DSet$DVPlotsGrouping,
                               strata=DSet$DVPlotsStrata,
-                              logY = DSet$DVPlotslogY)
+                              logY = DSet$DVPlotslogY,
+                              ID=IDcol)
   for (i in seq_along(plist)) print(plist[[i]])
 } else cat("skipped")
 ```
@@ -201,18 +223,18 @@ data are dropped.
 
 if(DSet$IndPlots){
   len=1
-  x=unique(db.df$ID)
+  x=unique(db.df[[IDcol]])
   pages = split(x, ceiling(seq_along(x)/len))
   
   #convert character to factor (to preserve scales across plots) and remove non-finite DV
   plot.df = db.df %>% mutate_if(is.character,as.factor) %>% filter(is.finite(DV))
   
   for(id in x){
-    pind.df = plot.df %>% filter(ID == id)
+    pind.df = plot.df %>% filter_(sprintf("%s == '%s'", IDcol, id))
     if(nrow(pind.df)>0){
       plist = pind.df %>%
         plot_individual(idv=DSet$DVPlotsXaxis, grouping=DSet$DVPlotsGrouping,
-                        strata=DSet$DVPlotsStrata, logY = DSet$DVPlotslogY, showADDL=DSet$ShowADDL)
+                        strata=DSet$DVPlotsStrata, logY = DSet$DVPlotslogY, showADDL=DSet$ShowADDL, IDcol)
     } else{
       cat(sprintf("Subject %s has no finite observations.  Skipping individual plot.", id))
     }

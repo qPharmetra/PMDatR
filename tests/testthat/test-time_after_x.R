@@ -58,21 +58,22 @@ describe("time after first dose works", {
     expect_equal(time_after_first_dose(input,.time="ELTM")$TAFD, output)
   })
 
-#   it("works for time after first dose with excluded dose", {
-#     input <- tibble::tribble(
-#       ~ID,	~TIME,	         ~TRT, ~AMT, ~II, ~EVID, ~ADDL, ~CRE, ~EXCL,
-#       1,	"01/01/2017 10:00",	"A",	100,  0,   1,     0,  0.3,    1,
-#       1,	"01/01/2017 18:00",	"A",	0  ,  0,   2,     0,  0.3,    0,
-#       1,	"01/02/2017 10:00",	"A",	100, 24,   1,     8,  0.2,    0,
-#       1,	"01/04/2017 12:00",	"A",	0  , 24,   2,     0,  0.2,    0,
-#       1,	"01/11/2017 10:00", "A",	100,  0,   1,     0,  0.5,    0,
-#       1,	"01/11/2017 12:00", "A",	0  ,  0,   1,     0,  0.5,    0,
-#       1,	"01/11/2017 14:00", "A",	0  ,  0,   1,     0,  0.5,    0
-#     ) %>% dplyr::mutate(
-#       TIME = as.POSIXct(anytime::anytime(TIME, tz = "UTC", asUTC = TRUE), origin = "1970-01-01")
-#     )
-#     expect_equal(time_after_first_dose(input, .exclude = EXCL==1)$TAFD, c(0, 8, 24, 74, 240, 242, 244))
-#   })
+  it("can select different baseline (EVID==4)", {
+    input <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT, ~II, ~EVID, ~ADDL, ~CRE,
+      1,	"01/01/2017 10:00",	"A",	0,  0,   1,     0,  0.3,
+      1,	"01/01/2017 18:00",	"A",	0  ,  0,   2,     0,  0.3,
+      1,	"01/02/2017 10:00",	"A",	100, 24,   1,     8,  0.2,
+      1,	"01/04/2017 12:00",	"A",	0  , 24,   2,     0,  0.2,
+      1,	"01/11/2017 10:00", "A",	100,  0,   4,     0,  0.5,
+      1,	"01/11/2017 12:00", "A",	0  ,  0,   1,     0,  0.5,
+      1,	"01/11/2017 14:00", "A",	0  ,  0,   1,     0,  0.5
+    ) %>% dplyr::mutate(
+      TIME = as.POSIXct(anytime::anytime(TIME, tz = "UTC", asUTC = TRUE), origin = "1970-01-01")
+    )
+    output=c(-240, -232, -216, -166, 0, 2, 4)
+    expect_equal(time_after_first_dose(input,.time="TIME", .criteria=EVID==4)$TAFD, output)
+  })
 
   it("works for time after dose", {
     input <- tibble::tribble(
@@ -108,7 +109,7 @@ describe("time after first dose works", {
       1,	"01/01/2017 10:00",	"A",	100,  0,   1,     0,  0.3,
       1,	"01/01/2017 18:00",	"A",	0  ,  0,   2,     0,  0.3,
       1,	"01/02/2017 10:00",	"A",	100, 24,   1,     8,  0.2,
-      1,	"01/04/2017 12:00",	"A",	0  , 24,   2,     0,  0.2,
+      1,	"01/04/2017 12:00",	"A",	0  ,  0,   2,     0,  0.2,
       1,	"01/11/2017 10:00", "A",	100,  0,   1,     0,  0.5,
       1,	"01/11/2017 12:00", "A",	0  ,  0,   4,     0,  0.5,
       1,	"01/11/2017 14:00", "A",	0  ,  0,   1,     0,  0.5
@@ -117,6 +118,45 @@ describe("time after first dose works", {
     )
     expect_equal(time_after_dose(input)$TAD, c(0, 8, 0, 2, 0, 0, 0))
     expect_equal(time_after_dose(input, .criteria = AMT>0)$TAD, c(0, 8, 0, 2, 0, 2, 4))
+  })
+
+  it("works for time after dose with expanding addl and ADDL=NA in obs", {
+    input <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT, ~II, ~EVID, ~ADDL, ~CRE,
+      1,	"01/01/2017 10:00",	"A",	100,  0,   1,     0,  0.3,
+      1,	"01/01/2017 18:00",	"A",	0  ,  0,   2,     0,  0.3,
+      1,	"01/02/2017 10:00",	"A",	100, 24,   1,     8,  0.2,
+      1,	"01/04/2017 12:00",	"A",	0  ,  0,   2,     0,  0.2,
+      1,	"01/11/2017 10:00", "A",	100,  0,   1,     0,  0.5,
+      1,	"01/11/2017 12:00", "A",	0  ,  0,   4,     0,  0.5,
+      1,	"01/11/2017 14:00", "A",	0  ,  0,   1,     0,  0.5
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME),
+      ADDL = ifelse(EVID!=1,NA,ADDL)
+    )
+    expect_equal(time_after_dose(input)$TAD, c(0, 8, 0, 2, 0, 0, 0))
+    expect_equal(time_after_dose(input, .criteria = AMT>0)$TAD, c(0, 8, 0, 2, 0, 2, 4))
+  })
+
+  it("works for time after dose with expanding addl and predose obs giving negative TAD", {
+    input <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT, ~II, ~EVID, ~ADDL, ~CRE,
+      1,	"01/01/2017 09:15",	"A",	0  ,  0,   0,     0,  0.3,
+      1,	"01/01/2017 09:45",	"A",	0  ,  0,   0,     0,  0.3,
+      1,	"01/01/2017 10:00",	"A",	100,  0,   1,     0,  0.3,
+      1,	"01/01/2017 18:00",	"A",	0  ,  0,   0,     0,  0.3,
+      1,	"01/02/2017 10:00",	"A",	100, 24,   1,     8,  0.2,
+      1,	"01/04/2017 12:00",	"A",	0  ,  0,   2,     0,  0.2,
+      1,	"01/11/2017 10:00", "A",	100,  0,   1,     0,  0.5,
+      1,	"01/11/2017 12:00", "A",	0  ,  0,   4,     0,  0.5,
+      1,	"01/11/2017 14:00", "A",	0  ,  0,   1,     0,  0.5
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+    expect_equal(time_after_dose(input)$TAD,
+                 c(-.75, -.25, 0, 8, 0, 2, 0, 0, 0))
+    expect_equal(time_after_dose(input, .criteria = AMT>0)$TAD,
+                 c(-.75, -.25, 0, 8, 0, 2, 0, 2, 4))
   })
 
   it("works for time of first dose", {

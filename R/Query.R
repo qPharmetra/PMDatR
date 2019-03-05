@@ -283,7 +283,7 @@ Query_CovT = function(node, meta_data=NULL){
 Query_IndDose = function(node, meta_data=NULL){
   ## create Query object
   reqMaps = c("ID", "TIME", "AMT")
-  optMaps = c("EVID", "II", "MEX", "SPLIT", "ex.filter")
+  optMaps = c("EVID", "II", "MEX", "SPLIT", "ex.filter", "combine.tol")
   # get the metadata
   vnames = NULL
   if(!is.null(meta_data)){

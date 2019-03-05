@@ -79,13 +79,14 @@ test_that("post.merge.refactoring works with defaults",{
 })
 
 test_that("post.merge.refactoring fails with bad fun.transform",{
-  # should get a message "object 'NOPE' not found"
+  # no problems expected
+
   events.df = PMDatR::append.events(ex.df, pc.df)
   events.df = PMDatR::append.CovT(events.df,vs.df)
   events.df = PMDatR::merge.Cov(events.df,list(dm.df))
   tranfun = function(.data){.data %>% mutate_each(funs(locf),NOPE,BPDIA)}
 
-  expect_warning(post.merge.refactoring(events.df, fun.transform = tranfun, options=NULL), ".+'NOPE'.+")
+  events.df = post.merge.refactoring(events.df, fun.transform = tranfun, options=NULL)
 
 })
 
@@ -113,7 +114,6 @@ test_that("post.merge.refactoring works with KeepEVID2",{
   expect_equal(events.df$HT,events.df$ID)
   expect_equal(events.df$BPSYS,events.df$ID)
   expect_equal(events.df$BPDIA,events.df$ID)
-  expect_equal(unique(events.df$EVID),2:0)
 
 })
 
@@ -303,7 +303,7 @@ test_that("post_process_dosing works with  missed doses",{
     1, "2016-12-14 09:00:00",     "A",     1,   100,     0, FALSE,     0,
     1, "2016-12-21 10:12:00",     "A",     1,   100,     0, FALSE,     0,
     1, "2016-12-22 07:33:00",     "A",     1,   100,    24, FALSE,     9,
-    1, "2017-01-01 07:33:00",     "A",     1,     0,     0,  TRUE,     0,
+    1, "2017-01-01 00:00:00",     "A",     1,     0,     0,  TRUE,     0,
     1, "2017-01-02 07:33:00",     "A",     1,   100,    24,  FALSE,     8,
     1, "2017-01-11 07:33:00",     "A",     1,   100,     0, FALSE,     0
   ) %>% mutate(TIME=iso_to_posix(TIME))
@@ -319,7 +319,7 @@ test_that("post_process_dosing EVID=1 on missed DOSE is reset",{
     1, "2016-12-14 09:00:00",     "A",     1,   100,     0, FALSE,     0,
     1, "2016-12-21 10:12:00",     "A",     1,   100,     0, FALSE,     0,
     1, "2016-12-22 07:33:00",     "A",     1,   100,    24, FALSE,     9,
-    1, "2017-01-01 07:33:00",     "A",     1,     0,     0,  TRUE,     0,
+    1, "2017-01-01 00:00:00",     "A",     1,     0,     0,  TRUE,     0,
     1, "2017-01-02 07:33:00",     "A",     1,   100,    24, FALSE,     8,
     1, "2017-01-11 07:33:00",     "A",     1,   100,     0, FALSE,     0
   ) %>% mutate(TIME=iso_to_posix(TIME))
@@ -335,7 +335,7 @@ test_that("post_process_dosing DOSE<>0 on missed DOSE is reset",{
       1, "2016-12-14 09:00:00",     "A",     1,   100,     0, FALSE,     0,
       1, "2016-12-21 10:12:00",     "A",     1,   100,     0, FALSE,     0,
       1, "2016-12-22 07:33:00",     "A",     1,   100,    24, FALSE,     9,
-      1, "2017-01-01 07:33:00",     "A",     1,     0,     0,  TRUE,     0,
+      1, "2017-01-01 00:00:00",     "A",     1,     0,     0,  TRUE,     0,
       1, "2017-01-02 07:33:00",     "A",     1,   100,    24, FALSE,     8,
       1, "2017-01-11 07:33:00",     "A",     1,   100,     0, FALSE,     0
     ) %>% mutate(TIME=iso_to_posix(TIME))
@@ -388,27 +388,28 @@ test_that("post_process_dosing works with multiple subjects",{
     select(-MDV)
   ref= tribble(
     ~ID,	~TIME,	~AMT,	~EVID,	~CMT,	~II,	~MEX, ~ADDL,
-    "STUDY-01-1",	"2013-12-18T09:00",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
-    "STUDY-01-1",	"2013-12-22T08:30",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
-    "STUDY-01-1",	"2013-12-23T10:27",	100,	1,	"ANALYTE1.1",	24,	FALSE,		4,
-    "STUDY-01-1",	"2013-12-28T10:27",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
+    "STUDY-01-1",	"2013-12-18 09:00",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
+    "STUDY-01-1",	"2013-12-22 08:30",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
+    "STUDY-01-1",	"2013-12-23 10:27",	100,	1,	"ANALYTE1.1",	24,	FALSE,		4,
+    "STUDY-01-1",	"2013-12-28 10:27",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
 
-    "STUDY-01-3",	"2013-12-18T09:10",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
-    "STUDY-01-3",	"2013-12-22T08:10",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
-    "STUDY-01-3",	"2013-12-22T18:55",	100,	1,	"ANALYTE1.1",	12,	FALSE,		2,
-    "STUDY-01-3",	"2013-12-24T06:55",	0,	  1,	"ANALYTE1.1",	0,	TRUE,		  0,
-    "STUDY-01-3",	"2013-12-24T18:55",	100,	1,	"ANALYTE1.1",	12,	FALSE,		6,
-    "STUDY-01-3",	"2013-12-28T06:55",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
+    "STUDY-01-3",	"2013-12-18 09:10",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
+    "STUDY-01-3",	"2013-12-22 08:10",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
+    "STUDY-01-3",	"2013-12-22 18:55",	100,	1,	"ANALYTE1.1",	12,	FALSE,		2,
+    "STUDY-01-3",	"2013-12-24 00:00",	0,	  1,	"ANALYTE1.1",	0,	TRUE,		  0,
+    "STUDY-01-3",	"2013-12-24 18:55",	100,	1,	"ANALYTE1.1",	12,	FALSE,		6,
+    "STUDY-01-3",	"2013-12-28 06:55",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
 
-    "STUDY-01-4",	"2013-12-18T09:00",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
-    "STUDY-01-4",	"2013-12-18T09:00",	100,	1,	"ANALYTE1.2",	0,	FALSE,		0,
-    "STUDY-01-4",	"2013-12-22T08:30",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
-    "STUDY-01-4",	"2013-12-22T08:30",	100,	1,	"ANALYTE1.2",	0,	FALSE,		0,
-    "STUDY-01-4",	"2013-12-23T10:27",	100,	1,	"ANALYTE1.1",	24,	FALSE,		4,
-    "STUDY-01-4",	"2013-12-23T10:27",	100,	1,	"ANALYTE1.2",	24,	FALSE,		4,
-    "STUDY-01-4",	"2013-12-28T10:27",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
-    "STUDY-01-4",	"2013-12-28T10:27",	100,	1,	"ANALYTE1.2",	0,	FALSE,		0
-  ) %>% mutate(TIME = iso_to_posix(TIME))
+    "STUDY-01-4",	"2013-12-18 09:00",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
+    "STUDY-01-4",	"2013-12-18 09:00",	100,	1,	"ANALYTE1.2",	0,	FALSE,		0,
+    "STUDY-01-4",	"2013-12-22 08:30",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
+    "STUDY-01-4",	"2013-12-22 08:30",	100,	1,	"ANALYTE1.2",	0,	FALSE,		0,
+    "STUDY-01-4",	"2013-12-23 10:27",	100,	1,	"ANALYTE1.1",	24,	FALSE,		4,
+    "STUDY-01-4",	"2013-12-23 10:27",	100,	1,	"ANALYTE1.2",	24,	FALSE,		4,
+    "STUDY-01-4",	"2013-12-28 10:27",	100,	1,	"ANALYTE1.1",	0,	FALSE,		0,
+    "STUDY-01-4",	"2013-12-28 10:27",	100,	1,	"ANALYTE1.2",	0,	FALSE,		0
+  ) %>% mutate(TIME = iso_to_posix(TIME)) %>%
+    select(ID, TIME, AMT, EVID, II, MEX, CMT, ADDL)
 
   expect_equal(post_process_dosing(test_df) %>% arrange(ID,TIME),ref)
 })
