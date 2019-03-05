@@ -275,7 +275,7 @@ post.merge.refactoring = function(.data, fun.transform, fun.filter, fun.exclude,
       all(is.na(x) | grepl("^\\s*$", x))
     }
     emptycol = purrr::map_lgl(.data,is_empty_col)
-    .data = .data %>% select_if(Negate(emptycol))
+    .data = .data %>% select_if(Negate(is_empty_col))
     message(sprintf("Dropped empty columns [%s]", paste(names(emptycol)[emptycol],collapse=", ")))
   }
 

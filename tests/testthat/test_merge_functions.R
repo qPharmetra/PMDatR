@@ -86,7 +86,7 @@ test_that("post.merge.refactoring fails with bad fun.transform",{
   events.df = PMDatR::merge.Cov(events.df,list(dm.df))
   tranfun = function(.data){.data %>% mutate_at(vars(NOPE, BPDIA), funs(locf))}
 
-  events.df = post.merge.refactoring(events.df, fun.transform = tranfun, options=NULL)
+  expect_warning(post.merge.refactoring(events.df, fun.transform = tranfun, options=NULL), ".+'NOPE'.+")
 
 })
 
@@ -114,6 +114,7 @@ test_that("post.merge.refactoring works with KeepEVID2",{
   expect_equal(events.df$HT,events.df$ID)
   expect_equal(events.df$BPSYS,events.df$ID)
   expect_equal(events.df$BPDIA,events.df$ID)
+  expect_equal(unique(events.df$EVID),2:0)
 
 })
 
