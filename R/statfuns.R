@@ -103,7 +103,7 @@ nth_ <- function(x, n, default=NA){
 #' # with double
 #' mode_(as.double(as.factor(vals))/7)
 #' # breaking ties in desired order
-#' mode_(c("A","B","C","A","B","C", NA, NA), na.rm=F, tie.order=c("C","A","B", NA))
+#' mode_(c("A","B","C","A","B","C", NA, NA), na.rm=FALSE, tie.order=c("C","A","B", NA))
 mode_ <- function(x, na.rm=TRUE, tie.order=NULL){
   # find the most frequent value in x
   # be careful if x is not factor, char, or int.  numbers are converted to

@@ -1,6 +1,6 @@
 Package: PMDatR
 Title: Pharmacometric Data Management in R
-Version: 1.1.0
+Version: 1.1.1
 Author: qPharmetra, LLC
 Maintainer: Jason Chittenden <jason.chittenden@qpharmetra.com>
 Description: Provides tools for building datasets for pharmacometric analyses,

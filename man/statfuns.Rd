@@ -80,5 +80,5 @@ mode_(as.integer(as.factor(vals)))
 # with double
 mode_(as.double(as.factor(vals))/7)
 # breaking ties in desired order
-mode_(c("A","B","C","A","B","C", NA, NA), na.rm=F, tie.order=c("C","A","B", NA))
+mode_(c("A","B","C","A","B","C", NA, NA), na.rm=FALSE, tie.order=c("C","A","B", NA))
 }

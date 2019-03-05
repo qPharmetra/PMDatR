@@ -31,6 +31,7 @@ can fall anywhere between TRUE values of x1 - the exact position is
 not specified.
 }
 \examples{
+library(dplyr)
 # increment occasion only when 1 is followed by 2.
 vals = c(1,2,3,2,3,2,1,1,1,2,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
 occasion(vals==1, vals==2)

@@ -25,7 +25,7 @@ Combine data frame rows by tolerance on a value
 set.seed(12345)
 vals = runif(100,0,100)
 vals = vals[order(vals)]
-data1 = data_frame(TIME=vals, SEX=sample(x=0:1,size = 100,replace=TRUE), AMT=100)
+data1 = data.frame(TIME=vals, SEX=sample(x=0:1,size = 100,replace=TRUE), AMT=100)
 # make groups where start is within tol=0.5
 combine_rows_by_tol(data1, values="TIME", tol=0.5, AMT=sum(AMT))
 }
