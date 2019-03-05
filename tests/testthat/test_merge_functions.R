@@ -32,7 +32,7 @@ test_that("merge process works correctly",{
   events.df = PMDatR::append.events(ex.df, pc.df)
   events.df = PMDatR::append.CovT(events.df,vs.df)
   events.df = PMDatR::merge.Cov(events.df,list(dm.df))
-  events.df = events.df %>% mutate_each(funs(locf),BPSYS,BPDIA)
+  events.df = events.df %>% mutate_at(vars(BPSYS, BPDIA), funs(locf))
 
   expect_equal(names(events.df),c('ID','TIME','AMT','EVID','DV','BPSYS','BPDIA','WT','AGE','HT')) #check column names
   expect_equal(events.df$ID,rep(1:3, each=15)) #check ID
@@ -58,7 +58,7 @@ test_that("post.merge.refactoring works with defaults",{
   events.df = PMDatR::append.events(ex.df, pc.df)
   events.df = PMDatR::append.CovT(events.df,vs.df)
   events.df = PMDatR::merge.Cov(events.df,list(dm.df))
-  tranfun = function(.data){.data %>% mutate_each(funs(locf),BPSYS,BPDIA)}
+  tranfun = function(.data){.data %>% mutate_at(vars(BPSYS, BPDIA), funs(locf))}
 
   events.df = post.merge.refactoring(events.df, fun.transform = tranfun, options=NULL)
 
@@ -84,7 +84,7 @@ test_that("post.merge.refactoring fails with bad fun.transform",{
   events.df = PMDatR::append.events(ex.df, pc.df)
   events.df = PMDatR::append.CovT(events.df,vs.df)
   events.df = PMDatR::merge.Cov(events.df,list(dm.df))
-  tranfun = function(.data){.data %>% mutate_each(funs(locf),NOPE,BPDIA)}
+  tranfun = function(.data){.data %>% mutate_at(vars(NOPE, BPDIA), funs(locf))}
 
   events.df = post.merge.refactoring(events.df, fun.transform = tranfun, options=NULL)
 
@@ -95,7 +95,7 @@ test_that("post.merge.refactoring works with KeepEVID2",{
   events.df = PMDatR::append.events(ex.df, pc.df)
   events.df = PMDatR::append.CovT(events.df,vs.df)
   events.df = PMDatR::merge.Cov(events.df,list(dm.df))
-  tranfun = function(.data){.data %>% mutate_each(funs(locf),BPSYS,BPDIA)}
+  tranfun = function(.data){.data %>% mutate_at(vars(BPSYS, BPDIA), funs(locf))}
 
   events.df = post.merge.refactoring(events.df, fun.transform = tranfun,
                                      options=list(KeepEvid2=T))
@@ -125,7 +125,7 @@ test_that("post.merge.refactoring works with EVID Sort Order different",{
   events.df = PMDatR::append.events(ex.df, pc.df)
   events.df = PMDatR::append.CovT(events.df,vs2.df)
   events.df = PMDatR::merge.Cov(events.df,list(dm.df))
-  tranfun = function(.data){.data %>% mutate_each(funs(locf),BPSYS,BPDIA)}
+  tranfun = function(.data){.data %>% mutate_at(vars(BPSYS, BPDIA), funs(locf))}
 
   events.df = post.merge.refactoring(events.df, fun.transform = tranfun,
                                      options=list(EVIDorder=c(2,1,0,3,4),
@@ -157,7 +157,7 @@ test_that("post.merge.refactoring works with custom sort order",{
   events.df = PMDatR::append.events(ex.df, pc.df)
   events.df = PMDatR::append.CovT(events.df,vs.df)
   events.df = PMDatR::merge.Cov(events.df,list(dm.df))
-  tranfun = function(.data){.data %>% mutate_each(funs(locf),BPSYS,BPDIA)}
+  tranfun = function(.data){.data %>% mutate_at(vars(BPSYS, BPDIA), funs(locf))}
 
   events.df = post.merge.refactoring(events.df, fun.transform = tranfun,
                                      options=list(SortOrder=c("TIME","ID")))

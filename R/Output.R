@@ -158,7 +158,7 @@ formatForNONMEM = function(df, column_info=NULL){
     }
   }
 
-  df= df %>% ungroup() %>%  mutate_each(funs(formatColumn(.)))
+  df= df %>% ungroup() %>%  mutate_all(funs(formatColumn(.)))
 
   # strip levels from ID, this is a kluge until we can carry type info through the merge
   attributes(df$ID)$levels<-NULL

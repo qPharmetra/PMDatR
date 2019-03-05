@@ -151,7 +151,8 @@ post.merge.hook = function() {
 
 post.transform = function(.data){
   # apply interpolation rules for CovT columns
-  .data %>% mutate_each(funs(locf),ALB,AST,ALT,BILI,CREAT)
+  #.data %>% mutate_each(funs(locf),ALB,AST,ALT,BILI,CREAT) deprecated
+  .data %>% mutate_at(vars(ALB,AST,ALT,BILI,CREAT), funs(locf))
 }
 
 post.filter = function(.data){
