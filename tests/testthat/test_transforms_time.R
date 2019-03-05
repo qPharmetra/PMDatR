@@ -140,3 +140,60 @@ test_that("conditional_values works with data frame in dplyr",{
   expect_equal(df$risk, c("high","low","low","low"))
 })
 
+## occasion
+
+test_that("occasion works standalone",
+  {
+    # increment occasion only when 1 is followed by 2.
+    vals = c(1,3,2,2,3,2,1,1,1,2,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
+    expect_equal(occasion(vals==1, vals==2),
+                 c(1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3,
+                   3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7))
+    # increment occasion only when 1 is followed by 2, combine defaulted
+    vals = c(2,1,1,3,2,2,3,2,1,1,1,2,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
+    expect_equal(occasion(vals==1, vals==2),
+                 c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3,
+                   3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7))
+    # increment occasion only when 1 is followed by 2, combine
+    vals = c(2,1,1,3,2,2,3,2,1,1,1,2,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
+    expect_equal(occasion(vals==1, vals==2, .lead_in="combine"),
+                 c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3,
+                   3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7))
+    # increment occasion only when 1 is followed by 2, missing
+    vals = c(2,1,1,3,2,2,3,2,1,1,1,2,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
+    expect_equal(occasion(vals==1, vals==2, .lead_in="missing"),
+                 c(NA, NA, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3,
+                   3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7))
+    # increment occasion only when 1 is followed by 2, separate
+    vals = c(2,1,1,3,2,2,3,2,1,1,1,2,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
+    expect_equal(occasion(vals==1, vals==2, .lead_in="separate"),
+                 c(0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3,
+                   3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7)+1)
+    # increment occasion only when 1 is IMMEDIATELY followed by 2.
+    vals = c(1,3,2,2,3,2,1,1,1,3,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2)
+    expect_equal(occasion(vals==1 & lead(vals)==2),
+                 c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,
+                   1, 2, 2, 2, 2, 3, 3, 4, 4, 5, 5))
+    # increment when evid=0 and cmt 2 is observed
+    evid = c(1,0,0,0,0,0,1,0,0,1,0,1,1,0,1,0,0,0,0,1,0,1,0,1,0)
+    expect_equal(occasion(evid==1, evid==0 & vals==2),
+                 c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2,
+                   3, 3, 3, 3, 3, 4, 4, 5, 5, 6, 6))
+  })
+
+test_that("occasion works in mutate",
+  {
+    test.df = data_frame(vals = c(1,3,2,2,3,2,1,1,1,3,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2),
+                         evid = c(1,0,0,0,0,0,1,0,0,1,0,1,1,0,1,0,0,0,0,1,0,1,0,1,0))
+    test.df = test.df %>% mutate(occ=occasion(evid==1, evid==0 & vals==2))
+    expect_equal(test.df$occ,
+                 c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3,
+                   4, 4, 5, 5, 6, 6) )
+  })
+
+test_that("iso_duration works and is list-like",{
+  test=iso_duration(.(PT1H,-PT1H,PT.5H,-PT.5H,P1D,PT24H,P1W,PT336H))
+  ref=c(1,-1,.5,-.5,24,24,168,336)
+  expect_identical(test,ref)
+})
+

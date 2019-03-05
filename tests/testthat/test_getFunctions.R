@@ -11,7 +11,7 @@ context("domain get* functions")
 
 ### TEST getting doses
 # individual doses EX data set
-dosedays = c("2011-03-27T08:30:00", "2011-04-01T9:27:00", "2011-04-12T7:49:00")
+dosedays = c("2011-03-27T08:30:00", "2011-04-01T09:27:00", "2011-04-12T07:49:00")
 pos.dosedays=parsedate::parse_date(dosedays)
 ch.dosedays = as.character(pos.dosedays) #"2011-03-27 08:30:00" "2011-04-01 09:27:00" "2011-04-12 07:49:00"
 ex.df = data.frame(USUBJID=1:3, EXSTDTC=dosedays, EXENDTC=dosedays, EXDOSE=c(100,100,0), VISIT="TREATMENT DAY 1")
@@ -102,6 +102,23 @@ test_that("getIndividualDoses works without AMT provided errors",{
 
 test_that("getIndividualDoses errors with bad mapping",{
   expect_error(getIndividualDoses(ex.df,ID=USUBJID,AMT=100,TIME=arglebargle(EXSTDTC)),"*Error in column*")
+})
+
+test_that("getIndividualDoses combines doses",{
+  ex.test = ex.df %>% mutate(EXSTDTC=iso_to_posix(EXSTDTC))
+  ex.test2 = ex.test %>% mutate(EXSTDTC = EXSTDTC+60*5, EXDOSE=EXDOSE+111) %>% bind_rows(ex.test) %>%
+    arrange(USUBJID, EXSTDTC) %>%
+    mutate(EXSTDTC = as.character(EXSTDTC))
+
+  ex.get.df = getIndividualDoses(ex.test2,ID=USUBJID,TIME=iso_to_posix(EXSTDTC),AMT=EXDOSE, combine.tol = 5)
+  #EVID gets defaulted to 1
+  #MDV gets defaulted to 1
+  expect_equal(names(ex.get.df),c("ID","TIME","AMT","EVID", "MDV")) #check column names
+  expect_equal(ex.get.df$ID,1:3) #check ID
+  expect_equal(as.character(ex.get.df$TIME), ch.dosedays) # check dates
+  expect_equal(ex.get.df$EVID,rep(1,3)) #check EVID
+  expect_equal(ex.get.df$MDV,rep(1,3)) #check MDV
+  expect_equal(ex.get.df$AMT,c(311,311,111)) #check MDV
 })
 
 

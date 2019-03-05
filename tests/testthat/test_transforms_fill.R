@@ -14,10 +14,7 @@ test1 = data_frame(ID=1,TIME=0:10,BW=runif(11,50,80))
 
 test_that("Fill value replaces with a constant value",
           {
-          df=test1
-          df$BW=NA
-          df = df %>% fill_NA(BW, 100)
-          expect_equal(df$BW[4:6],rep(100,3))
+
           })
 
 test_that("Fill value replaces with an expression",
@@ -91,3 +88,12 @@ test_that("fill_nocb takes 2 groups with . function and tol=1",
             expect_equal(df$BW[4:6],df$BW[c(NA,NA,7)])
           })
 
+test_that("fill_occasion works",
+          {
+            test.df = data_frame(vals = c(1,3,2,2,3,2,1,1,1,3,3,2,1,2,1,1,2,2,2,1,2,1,2,1,2),
+                                 evid = c(1,0,0,0,0,0,1,0,0,1,0,1,1,0,1,0,0,0,0,1,0,1,0,1,0))
+            test.df = test.df %>% fill_occasion(OCC, evid==1, evid==0 & vals==2)
+            expect_equal(test.df$OCC,
+                         c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3,
+                           4, 4, 5, 5, 6, 6) )
+          })

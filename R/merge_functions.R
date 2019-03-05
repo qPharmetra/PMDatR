@@ -78,7 +78,7 @@ append.CovT = function(event.df, ...){
 #' values in the covariate data will result in NA in the covariate column.  Covariate data
 #' with unmatched keys will be silently dropped.  For example, if merging covariates by
 #' ID and VISIT, if the SCREENING visit was not included in the covariate data then
-#' observations or doses occuring in (or associated with) the SCREENING VISIT will have
+#' observations or doses occurring in (or associated with) the SCREENING VISIT will have
 #' NA values for the covariates.  Conversely, if the Follow-up VISIT is not present in the event
 #' data, no covariate data is present in the result for the Follow-up visit.  This ensures that
 #' new rows are not added that would not have the correct variables (TIME, AMT, DV, EVID, etc.)
@@ -100,6 +100,14 @@ merge.Cov = function(events.df, covs.l){
   for(cov.df in covs.l){
     #get the keys from the cov.df
     keys = as.character(groups(cov.df))
+    # check keys in events.df
+    if(!all(keys %in% names(events.df))){
+      msg = paste0("Columns [%s] are used as keys in a static covariate merge. ",
+                   "All key columns must be present in the event data (Dependent ",
+                   "Variables, Dosing, Time-Varying Covariates. Please ",
+                   "ensure that key columns are mapped in each of the Queries.")
+      stop(sprintf(msg,paste(keys,collapse=", ")))
+    }
     #get the join type and switch the function out
     jtype = attributes(cov.df)$join_type
     if(is.null(jtype)) {jtype = "left"}
@@ -113,6 +121,22 @@ merge.Cov = function(events.df, covs.l){
                    "the only covariate column names that match observation or dosing ",
                    "column names are used as merge keys.")
       warning(sprintf(msg,paste(dupcols,collapse=", ")))
+    }
+    # check for missing key values
+    na.cols = events.df %>%
+      select_(.dots=keys) %>% # just look at key columns
+      select_if(function(x) any(is.na(x))) %>% # only keep columns with NA values
+      colnames()
+    if(length(na.cols)){
+      msg = paste0("Columns [%s] are used as keys in a static covariate merge. ",
+                   "NA values have been detected in the key columns in the ",
+                   "events data (Dependent Variables, Dosing, Time-Varying ",
+                   "Covariates.  At best, static covariates will be missing ",
+                   "for these cases.  At worst, static covariates with NA key ",
+                   "values could be erroneously merged with these rows.  Please ",
+                   "ensure that key columns do not have NA values.  Check Query ",
+                   "specifications to ensure that key columns are mapped.")
+      warning(sprintf(msg,paste(na.cols,collapse=", ")))
     }
     fun = switch(jtype,
                  right = right_join,
@@ -174,6 +198,7 @@ post.merge.refactoring = function(.data, fun.transform, fun.filter, fun.exclude,
   # TIME must be posixct or numeric (no NA)
   if(!("POSIXct" %in% col.typ[["TIME"]])) stop("Post Merge: TIME column must be class POSIXct.
                                              Try using PMDatR transformation functions to create the TIME variable")
+
   # columns where NA not allowed
   .data = .data %>% fill_NA(AMT, 0)
 
@@ -206,7 +231,6 @@ post.merge.refactoring = function(.data, fun.transform, fun.filter, fun.exclude,
   tryCatch({
     # Default Time Transformations
     ## elapsed time & time after first dose
-    # capture incoming column order
     incols = names(.data)
     .data = .data %>% group_by(ID) %>%
       mutate(ELTM = elapsed.time(TIME),
@@ -216,7 +240,7 @@ post.merge.refactoring = function(.data, fun.transform, fun.filter, fun.exclude,
       mutate(TAD = difftime(TIME,TIME[Position(function(i) i==1, EVID)], units="hours")) %>%
       ungroup()
     # put columns back in order
-    .data = .data %>% select_(.dots=c(incols, "ELTM", "TAFD", "NDOSE", "TAD"))
+    .data = .data %>% select_(.dots=c(incols,"ELTM","TAFD","NDOSE","TAD"))
     },
     error = function(cond){
       warning("Post Merge: Unable process default Time Transformations.  ELTM, TAD, TAFD defaults not computed.")
@@ -363,9 +387,17 @@ pre.merge = function(dom1, dom2, keys, .filter, jointype="left", supp=F, ...){
 #' @importFrom dplyr mutate select "%>%" arrange_ group_by_
 #' @export
 #'
-post_process_dosing = function(df, expandADDL=F, ADDLTolerance=0.5){
+post_process_dosing = function(df,
+                               expandADDL=F,
+                               ADDLTolerance=0.5,
+                               ADDLgroups=c("ID","CMT")
+                               )
+  {
   if(!is.data.frame(df)) stop("argument 'df' must be derivative of type data.frame")
   if(is.null(ADDLTolerance)){ADDLTolerance=0.5}
+  if(is.null(ADDLgroups)){ADDLgroups=c("ID","CMT")}
+
+
   # if grouped, capture groups and make sure the same when giving back
   original_groups <- as.character(dplyr::groups(df))
 
@@ -374,7 +406,11 @@ post_process_dosing = function(df, expandADDL=F, ADDLTolerance=0.5){
     if(!is.numeric(df$II)) stop("II must be numeric")
     message(sprintf("ADDL Tolerance set to %s", ADDLTolerance))
     # impute ADDL
-    grouping = df_names[df_names %in% c("ID","CMT")]
+    grouping = ADDLgroups[ADDLgroups %in% df_names]
+    if(length(grouping)<length(ADDLgroups)){
+      warning(sprintf("Column(s) [%s] is in ADDL grouping but is not in the dataset.  Check the mappings",
+                      paste(setdiff(ADDLgroups, grouping),collapse=", ")))
+    }
     df = df %>% group_by_(grouping) %>%
       #dplyr 0.5 arrange no longer obeys grouping
       #arrange(TIME) %>%
@@ -383,7 +419,7 @@ post_process_dosing = function(df, expandADDL=F, ADDLTolerance=0.5){
       group_by_(grouping) %>% arrange(TIME)
     if(expandADDL){
       # expand ADDL records
-      df = expand_addl(df)
+      df =  expand_addl(df)
     }
   }
 

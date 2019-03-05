@@ -4,10 +4,12 @@
 \alias{find_subjects_no_obs}
 \title{Find subjects with no observation records}
 \usage{
-find_subjects_no_obs(.data)
+find_subjects_no_obs(.data, ID = "ID")
 }
 \arguments{
 \item{.data}{a data.frame or tbl object}
+
+\item{ID}{a character value giving the column containing subject IDs}
 }
 \value{
 a single column tbl with unique IDs for subjects with no observations

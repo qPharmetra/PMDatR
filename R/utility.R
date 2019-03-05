@@ -40,14 +40,14 @@ mutate_cond <- function(.data, condition, ..., envir = parent.frame()) {
 }
 
 # given a column with potentially delimited values, duplicate rows for those values.
-separate_rows = function(df, col, sep="\\s*,\\s*"){
-  # NSE for column name
-  .col=deparse(substitute(col))
-  # sep can be a regex, so handle backslashes.  Split the column on the sep, creates a list column
-  expr = sprintf("strsplit(as.character(%s), '%s')", .col, gsub("\\\\","\\\\\\\\", sep))
-  #unnest the list column
-  df %>% mutate_(.dots=setNames(list(expr), .col)) %>% tidyr::unnest_(.col)
-}
+# separate_rows = function(df, col, sep="\\s*,\\s*"){
+#   # NSE for column name
+#   .col=deparse(substitute(col))
+#   # sep can be a regex, so handle backslashes.  Split the column on the sep, creates a list column
+#   expr = sprintf("strsplit(as.character(%s), '%s')", .col, gsub("\\\\","\\\\\\\\", sep))
+#   #unnest the list column
+#   df %>% mutate_(.dots=setNames(list(expr), .col)) %>% tidyr::unnest_(.col)
+# }
 
 special.range = function(x, unique.value, sep = " - ")
 {

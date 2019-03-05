@@ -4,10 +4,12 @@
 \alias{DataManagement}
 \title{Create a Data Management Object}
 \usage{
-DataManagement(settings_file)
+DataManagement(settings_file = "", settings = NULL)
 }
 \arguments{
 \item{settings_file}{The YAML settings file to use}
+
+\item{settings}{A list of settings to use instead of a file}
 }
 \value{
 A DataManagement object

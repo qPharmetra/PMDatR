@@ -14,6 +14,6 @@
 #' mtcars %>% as_data_frame() %>% mutate(newcol=default_missing_column("newcol", 1))
 #' mtcars %>% as_data_frame() %>% mutate(newcol=default_missing_column("newcol", 1:32))
 #'
-default_missing_column = function(column, default_value=NA, env=parent.frame()){
-  if(exists(column, where=env)) column else default_value
+default_missing_column = function(column, default_value=NA, env=dynGet(".")){
+  if(exists(column, where=env)) env[[column]] else default_value
 }

@@ -27,7 +27,7 @@ By default a left join is performed, so all records in events.df are preserved. 
 values in the covariate data will result in NA in the covariate column.  Covariate data
 with unmatched keys will be silently dropped.  For example, if merging covariates by
 ID and VISIT, if the SCREENING visit was not included in the covariate data then
-observations or doses occuring in (or associated with) the SCREENING VISIT will have
+observations or doses occurring in (or associated with) the SCREENING VISIT will have
 NA values for the covariates.  Conversely, if the Follow-up VISIT is not present in the event
 data, no covariate data is present in the result for the Follow-up visit.  This ensures that
 new rows are not added that would not have the correct variables (TIME, AMT, DV, EVID, etc.)

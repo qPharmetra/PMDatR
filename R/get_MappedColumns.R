@@ -27,11 +27,11 @@
 #'
 #' @return A data_frame with the mapped data
 #' @importFrom lazyeval lazy_dots lazy expr_text
-#' @importFrom dplyr filter_ mutate_ select_
+#' @importFrom dplyr filter_ mutate_ select_ arrange do
 #' @export
 #'
 
-getIndividualDoses = function(.data, ID, TIME, AMT, EVID, MDV, ex.filter, Units, ...){
+getIndividualDoses = function(.data, ID, TIME, AMT, EVID, MDV, ex.filter, Units, combine.tol=0.0, ...){
 
   # check inputs for id, time, amt
   if(missing(ID)) stop("getIndividualDoses cannot have missing argument 'ID'")
@@ -48,7 +48,7 @@ getIndividualDoses = function(.data, ID, TIME, AMT, EVID, MDV, ex.filter, Units,
       .data = filter_(.data, lazy(ex.filter, .follow_symbols=T))
     },
     error=function(cond){stop(sprintf("getIndividualDoses: unable to process ex.filter expression: %s\n\t%s", expr_text(ex.filter), cond$message))},
-    warning=function(cond){warning(sprintf("getIndividualDoses: ex.filter expression: %s\n\t%s",cond))})
+    warning=function(cond){warning(sprintf("getIndividualDoses: ex.filter expression: %s\n\t%s", expr_text(ex.filter), cond$message))})
     }
 
   if(nrow(.data)==0){
@@ -87,8 +87,25 @@ getIndividualDoses = function(.data, ID, TIME, AMT, EVID, MDV, ex.filter, Units,
     warning=function(cond)message(sprintf("getIndividualDoses: warning in column transformations:\n\t%s", cond))
   )
 
+  # combine doses, if tol>0
+  if(combine.tol>0){
+    # need to group.  Look for ID, CMT
+    nex = nrow(.data)
+    grps = intersect(c("ID","CMT"),names(.data))
+    .data = .data %>% group_by_(.dots=grps) %>% arrange(TIME) %>%
+      do(combine_rows_by_tol(., "TIME", tol=combine.tol*60, AMT=sum(AMT))) %>%
+      ungroup
+    nex.new = nrow(.data)
+    ## message indicating if/how many doses were combined
+    ncomb = nex - nex.new
+    message(sprintf(paste0("Dose combination - a total of [%s] dose records ",
+                           "were combined using a tolerance of [%.3g] minutes"),
+                    ncomb, combine.tol))
+  }
+
   # check for CMT column, and if present, split on commas
-  if("CMT" %in% names(.data)) .data = .data %>% separate_rows(CMT)
+  if("CMT" %in% names(.data)) .data = .data %>% separate_rows("CMT")
+
 
   .data
 
@@ -140,7 +157,7 @@ getDV = function(.data, ID, TIME, DV, BQL, LLOQ, EVID, MDV, dv.filter, Units, ..
       .data = filter_(.data, lazy(dv.filter, .follow_symbols=T))
     },
     error=function(cond){stop(sprintf("getDV: unable to process dv.filter expression: %s\n\t%s", expr_text(dv.filter), cond$message))},
-    warning=function(cond){warning(sprintf("getDV: dv.filter expression: %s\n\t%s",cond))})
+    warning=function(cond){warning(sprintf("getDV: dv.filter expression: %s\n\t%s",, expr_text(dv.filter), cond$message))})
   }
 
   if(nrow(.data)==0){
@@ -269,7 +286,7 @@ getCov = function(.data, ID, cov.col, cov.val, cov.filter, cov.keys, fun.summary
       .data = filter_(.data, lazy(cov.filter, .follow_symbols=T))
     },
     error=function(cond){stop(sprintf("getCov: unable to process cov.filter expression: %s\n\t%s", expr_text(cov.filter), cond$message))},
-    warning=function(cond){warning(sprintf("getCov: cov.filter expression: %s\n\t%s",cond))})
+    warning=function(cond){warning(sprintf("getCov: cov.filter expression: %s\n\t%s",expr_text(cov.filter), cond$message))})
   }
 
   if(nrow(.data)==0){
@@ -438,7 +455,7 @@ getCovT = function(.data, ID, TIME, EVID, covT.col, covT.val, covT.filter, fun.s
       .data = filter_(.data, lazy(covT.filter, .follow_symbols=T))
     },
     error=function(cond){stop(sprintf("getCovT: unable to process covT.filter expression: %s\n\t%s", expr_text(covT.filter), cond$message))},
-    warning=function(cond){warning(sprintf("getCovT: covT.filter expression: %s\n\t%s",cond))})
+    warning=function(cond){warning(sprintf("getCovT: covT.filter expression: %s\n\t%s",expr_text(covT.filter), cond$message))})
   }
 
   if(nrow(.data)==0){

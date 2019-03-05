@@ -4,7 +4,8 @@
 \alias{post_process_dosing}
 \title{Apply ADDL and Missing doses to a dosing data frame}
 \usage{
-post_process_dosing(df, expandADDL = F, ADDLTolerance = 0.5)
+post_process_dosing(df, expandADDL = F, ADDLTolerance = 0.5,
+  ADDLgroups = c("ID", "CMT"))
 }
 \arguments{
 \item{df}{A tbl_df or data.frame object with all of the dosing data}

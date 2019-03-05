@@ -245,6 +245,15 @@ test_that("Select, Transform, and filter of variables in source domain",{
   expect_equal(as.character(dm.dom$Data$RFSTDTC), "2013-12-18 09:00:00")
 })
 
+test_that("Domain lookup functions work",{
+  dm.dom = domain(dm.settings)
+  dm.dom = load.domain(dm.dom)
+  DM=dm.dom$Data #stored like in the app
+  ## did we get expected row?
+  expect_equal(get_from_domain("DM","AGE"),48)
+  expect_equal(lookup_in_domain("DM","AGE","SUBJID", 1), 48)
+})
+
 test_that("load domain but skip mapping function",{
   dm.dom = domain(dm.settings)
   dm.dom = load.domain(dm.dom, .fun=NULL)
@@ -335,13 +344,12 @@ dm=read.csv(dm.settings$filepath)
 
 test_that("pre-merge SUPPQUAL",{
   ## add in premerge settings
-  this.settings=dm.settings
-  this.settings$InputMappings$PreMergeFile=file.path(path.testroot,"testdata/data1/csv/suppdm.csv")
-  this.settings$InputMappings$PreMergeKeys="SUBJID"
-  this.settings$InputMappings$PreMergeCols="SUBJID=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL"
-  this.settings$InputMappings$PreMergeSupp=T
-  this.settings$InputMappings$MappedDomain="DM"
-  dm.dom = domain(this.settings)
+  dm.settings$InputMappings$PreMergeFile=file.path(path.testroot,"testdata/data1/csv/suppdm.csv")
+  dm.settings$InputMappings$PreMergeKeys="SUBJID"
+  dm.settings$InputMappings$PreMergeCols="SUBJID=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL"
+  dm.settings$InputMappings$PreMergeSupp=T
+  dm.settings$InputMappings$MappedDomain="DM"
+  dm.dom = domain(dm.settings)
 
   dm.dom = load.domain(dm.dom, .fun=blank_preprocess)
   ## did we get expected row?
@@ -355,13 +363,12 @@ test_that("pre-merge SUPPQUAL",{
 
 test_that("pre-merge SUPPQUAL with duplicate QNAM",{
   ## add in premerge settings
-  this.settings=dm.settings
-  this.settings$InputMappings$PreMergeFile=file.path(path.testroot,"testdata/data1/csv/suppdm2.csv")
-  this.settings$InputMappings$PreMergeKeys="SUBJID"
-  this.settings$InputMappings$PreMergeCols="SUBJID=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL"
-  this.settings$InputMappings$PreMergeSupp=T
-  this.settings$InputMappings$MappedDomain="DM"
-  dm.dom = domain(this.settings)
+  dm.settings$InputMappings$PreMergeFile=file.path(path.testroot,"testdata/data1/csv/suppdm2.csv")
+  dm.settings$InputMappings$PreMergeKeys="SUBJID"
+  dm.settings$InputMappings$PreMergeCols="SUBJID=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL"
+  dm.settings$InputMappings$PreMergeSupp=T
+  dm.settings$InputMappings$MappedDomain="DM"
+  dm.dom = domain(dm.settings)
   ## extract pre-process function
   #eval(parse(text=dm.dom$fnPreProc))
   dm.dom = load.domain(dm.dom, .fun=blank_preprocess)
@@ -378,14 +385,13 @@ test_that("pre-merge SUPPQUAL with duplicate QNAM",{
 
 test_that("pre-merge SUPPQUAL with filter",{
   ## add in premerge settings
-  this.settings=dm.settings
-  this.settings$InputMappings$PreMergeFile=file.path(path.testroot,"testdata/data1/csv/suppdm.csv")
-  this.settings$InputMappings$PreMergeKeys="SUBJID"
-  this.settings$InputMappings$PreMergeCols="SUBJID=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL"
-  this.settings$InputMappings$PreMergeSupp=T
-  this.settings$InputMappings$PreMergeFilter="RDOMAIN=='DM'"
-  this.settings$InputMappings$MappedDomain="DM"
-  dm.dom = domain(this.settings)
+  dm.settings$InputMappings$PreMergeFile=file.path(path.testroot,"testdata/data1/csv/suppdm.csv")
+  dm.settings$InputMappings$PreMergeKeys="SUBJID"
+  dm.settings$InputMappings$PreMergeCols="SUBJID=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL"
+  dm.settings$InputMappings$PreMergeSupp=T
+  dm.settings$InputMappings$PreMergeFilter="RDOMAIN=='DM'"
+  dm.settings$InputMappings$MappedDomain="DM"
+  dm.dom = domain(dm.settings)
   expect_true(dm.dom$valid)
   ## extract pre-process function
   #eval(parse(text=dm.dom$fnPreProc))
@@ -402,15 +408,14 @@ test_that("pre-merge SUPPQUAL with filter",{
 
 test_that("pre-merge SUPPQUAL with filter, remove records",{
   ## add in premerge settings
-  this.settings=dm.settings
-  this.settings$InputMappings$PreMergeFile=file.path(path.testroot,"testdata/data1/csv/suppdm.csv")
-  this.settings$InputMappings$PreMergeKeys="SUBJID"
-  this.settings$InputMappings$PreMergeCols="SUBJID=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL"
-  this.settings$InputMappings$PreMergeSupp=T
-  this.settings$InputMappings$PreMergeFilter="RDOMAIN=='EX'"
-  this.settings$InputMappings$MappedDomain="DM"
+  dm.settings$InputMappings$PreMergeFile=file.path(path.testroot,"testdata/data1/csv/suppdm.csv")
+  dm.settings$InputMappings$PreMergeKeys="SUBJID"
+  dm.settings$InputMappings$PreMergeCols="SUBJID=as.numeric(IDVARVAL), QNAM=QNAM, QVAL=QVAL"
+  dm.settings$InputMappings$PreMergeSupp=T
+  dm.settings$InputMappings$PreMergeFilter="RDOMAIN=='EX'"
+  dm.settings$InputMappings$MappedDomain="DM"
 
-  dm.dom = domain(this.settings)
+  dm.dom = domain(dm.settings)
   expect_true(dm.dom$valid)
   ## extract pre-process function
   #eval(parse(text=dm.dom$fnPreProc))
@@ -423,3 +428,5 @@ test_that("pre-merge SUPPQUAL with filter, remove records",{
   expect_equal(names(dm.dom$Data), names(dm))
 
 })
+
+

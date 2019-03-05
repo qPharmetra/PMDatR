@@ -4,8 +4,7 @@
 \alias{default_missing_column}
 \title{Create a default value in a dataframe column if the column doesn't already exist}
 \usage{
-default_missing_column(column, default_value = NA,
-  env = parent.frame())
+default_missing_column(column, default_value = NA, env = dynGet("."))
 }
 \arguments{
 \item{column}{string name for column to default}

@@ -4,7 +4,7 @@
 \alias{iso_to_posix}
 \title{Convert an ISO8601 date/time to POSIXct}
 \usage{
-iso_to_posix(dtc, .time, .tz = "UTC")
+iso_to_posix(dtc, .time, .tz = "UTC", .day, .month)
 }
 \arguments{
 \item{dtc}{A ISO8601 formatted date/time}
@@ -13,6 +13,12 @@ iso_to_posix(dtc, .time, .tz = "UTC")
 same as dtc, .time is recycled with a warning.}
 
 \item{.tz}{The timezone for the dtc values.  Default is UTC.}
+
+\item{.day}{If dtc is year-month only, a month to use a default.  If length is not 1 or
+same as dtc, .time is recycled with a warning.}
+
+\item{.month}{If dtc is year only, a month to use a default.  If length is not 1 or
+same as dtc, .time is recycled with a warning.}
 }
 \value{
 date/time as R POSIXct native type.
@@ -20,8 +26,17 @@ date/time as R POSIXct native type.
 \description{
 Convert an ISO8601 date/time to POSIXct
 }
+\details{
+The conversion does its best to guess at the format of the time and to fill in any missing
+parts, defaulting to Jan, the first of the month, and midnight.  The default day, month, and time can
+be provided, but it's important to note that the infill of these values won't cross more than
+one division.  That is, "1990" will default to "1990-01-01 00:00", even if .time is given as 06:35.
+The missing pieces must be filled in in order.
+}
 \examples{
 iso_to_posix("2016-10-03T21:22:45")
 iso_to_posix(c("2016-10-03","2016-10-03T12:34"),"09:00")
 iso_to_posix(c("2016-10-03","2016-10-03","2016-10-03"), c("09:00", "10:10")) #gives a warning about length of .times
+iso_to_posix(c("1980", "1980-06", "1980-06-15"), .time="09:34")
+iso_to_posix(c("1980", "1980-06", "1980-06-15"), .time="09:34", .day=15, .month=6)
 }

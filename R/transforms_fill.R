@@ -171,3 +171,34 @@ exclusion_codes = function(.data, .col , ...,  method="first", default="OK"){
   .data %>%
     mutate_(.dots=setNames(list(fn),col))
 }
+
+#' Fills occasion in a dataframe
+#'
+#' @param .data A dataframe
+#' @param .col The column to create/modify
+#' @param x1 The initial condition for the occasion
+#' @param x2 The second condition for the occasion
+#'
+#' @return a dataframe
+#'
+#' @details See occasion
+#'
+#' @importFrom dplyr mutate_
+#' @importFrom lazyeval expr_text
+#' @export
+#'
+
+fill_occasion = function(.data, .col, x1, x2){
+
+  col = expr_text(.col)
+  x1 = expr_text(x1)
+  x2 = expr_text(x2)
+  #
+  fn = as.formula(sprintf("~occasion(%s, %s)",
+                          x1, x2))
+  #sets column to value when column is .na
+  .data %>%
+    mutate_(.dots=setNames(list(fn),col))
+}
+
+

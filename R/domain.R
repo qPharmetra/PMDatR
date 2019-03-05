@@ -108,6 +108,7 @@ validate.domain = function(dom){
   if(!is.empty.yaml(inp$PreMergeFile))
   {
     #check file path exists
+    inp$PreMergeFile = printPath(inp$PreMergeFile)
     if(!file.exists(inp$PreMergeFile)){
       append.err(sprintf("Error D11: Domain '%s' PreMergeFile does not exist: %s",
                          dom$name, inp$PreMergeFile))
@@ -272,6 +273,7 @@ load.domain = function(x, settings, .fun, .hook)
                         xpt = load_xpt(x$filepath),
                         {stop(paste0("Domain: ", x$name, " - Cannot load files of type ", ftype))}
                         )
+      error_context="running premerge"
       x=premerge.domain(x)
 
       error_context="running preprocessing hook"
@@ -453,12 +455,12 @@ premerge.domain = function(node){
         .keys=unlist(strsplit(inp$PreMergeKeys, "\\s*,\\s*"))
         #txt = sprintf("%skeys=c(%s)\n", txt, paste0(sprintf("'%s'", .keys), collapse=", "))
         # check if suppqual
-        supp=F
+        .supp=F
         if(!is.null(inp$PreMergeSupp)) .supp=inp$PreMergeSupp
 
         # check for filter
         .pmfilter=NULL
-        if(!is.empty.yaml(inp$PreMergeFilter)) .pmfilter = sprintf(".filter= %s", inp$PreMergeFilter)
+        if(!is.empty.yaml(inp$PreMergeFilter)) .pmfilter = inp$PreMergeFilter
 
         #check for column transformations
         .cols=NULL
@@ -471,7 +473,7 @@ premerge.domain = function(node){
         #txt = sprintf("%sdom$Data = pre.merge(dom, domSupp, keys, supp=%s%s)\n", txt, .supp, .args)
         # call pre.merge directly
         #node$Data = pre.merge(inp, suppdom, keys, .filter=inp$PreMergeFilter, supp=.supp, lazy_dots(.cols))
-        arglist = c(list(dom1=node, dom2=suppdom, .filter=inp$PreMergeFilter, keys=.keys, supp=.supp), .cols)
+        arglist = c(list(dom1=node, dom2=suppdom, .filter=.pmfilter, keys=.keys, supp=.supp), .cols)
         lapply(suppdom,print)
         # remove any NULL elements in list
         arglist=arglist[!sapply(arglist,is.null)]

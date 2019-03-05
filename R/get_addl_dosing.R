@@ -7,10 +7,14 @@ roundup = function(x) floor(x+.5)
 #' of the dosing interval that must pass before an ADDL sequence can begin.
 #' @export
 get_addl_dosing <- function(df, .f = roundup, .tolII=0.5) {
+  #sanitization MEX and II must be defaultedif the are NA
+  df = df %>% mutate(II=ifelse(is.na(II),0,II))
   # expectations for function
   # MEX/MEX__ column containing whether missing DOSE, is 1/0
    mex_exists <- FALSE
   if ("MEX" %in% names(df)) {
+    # sanitize MEX
+    df = df %>% mutate(MEX=ifelse(is.na(MEX),FALSE,MEX))
     mex_exists <- TRUE
     if (is.character(df$MEX) || is.factor(df$MEX)) {
       df <- df %>% mutate(MEX__ = as.numeric(as.factor(MEX)) - 1)
@@ -61,6 +65,8 @@ get_addl_dosing <- function(df, .f = roundup, .tolII=0.5) {
       # this will coerce any posixct time to seconds since epoch, so from here out we will work in
       # terms of seconds until a final conversion back
       NDSECONDS_IN_DAY__ = dplyr::lead(NDTIME_SECONDS__, 1),
+      # save missed dose time
+      MEXTIME__ = ifelse(MEX__, TIME, NA),
       TIME = ifelse(
         MEX__,
         # for BID/TID dosing, the time should also be incremented/decremented to align
@@ -101,7 +107,7 @@ get_addl_dosing <- function(df, .f = roundup, .tolII=0.5) {
 #           NDSECONDS_IN_DAY__ - SECONDS_IN_DAY__,
         TIME + II * 3600
       ),
-   #   TIME = anytime::anytime(TIME, tz = "UTC", asUTC = TRUE),
+      #TIME = anytime::anytime(TIME, tz = "UTC", asUTC = TRUE),
 #       DTIME__ = DTIME__ - II * 3600,
 #       ADDL = calc_addl(DTIME__, II * 3600, .f = .f),
       EVID = 1,
@@ -114,6 +120,14 @@ get_addl_dosing <- function(df, .f = roundup, .tolII=0.5) {
     # add the ADDL column as empty
     addl_times$ADDL = numeric(0)
   }
+
+  # Put back MEX Time in original data
+  if(mex_exists){
+    df_times <- df_times %>% mutate(
+      TIME = ifelse(MEX__,MEXTIME__ , TIME)
+    )
+  }
+
   output_dosing <- dplyr::bind_rows(df_times, addl_times) %>%
     # when binding time can get kicked back to doubles again so back to UTC for a final time
     dplyr::mutate(TIME = anytime::anytime(TIME, "UTC", TRUE)) %>%
@@ -127,7 +141,8 @@ get_addl_dosing <- function(df, .f = roundup, .tolII=0.5) {
       -SECONDS_IN_DAY__,
       -NDTIME_SECONDS__,
       -NDSECONDS_IN_DAY__,
-      -MEX__
+      -MEX__,
+      -MEXTIME__
     ) %>%
 
     dplyr::select(-DOSE__) %>%

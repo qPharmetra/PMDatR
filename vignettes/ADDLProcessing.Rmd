@@ -1,0 +1,524 @@
+---
+title: "ADDL Processing"
+author: "qPharmetra, LLC"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Importing Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r include=FALSE}
+library(dplyr)
+library(tibble)
+library(knitr)
+library(PMDatR)
+```
+
+This vignette demonstrates the ADDL features of the PMDatR package.  ADDL is a feature in NONMEM whereby a sequence of doses can be specified in a single entry, rather than requiring one record per dose.  The ADDL algorithm in PMDatR can be used to compute ADDL sequencing between known dosing records in the sequence (e.g., first and last doses) and allows for additional features such as:
+
+* allowing a configurable buffer around the penultimate dose in the sequence
+* expanding ADDL dosing records into individual records
+* incorporating missed doses
+* applying the ADDL sequences to different groups of doses (e.g., by compound, period, etc.)
+
+# Basic Operation
+
+Dose records are specified with a start time (TIME), dose amount (AMT), event flag (EVID), missing flag indicator (MEX), and interdose interval (II) - at a minimum.  The TIME column must be in POSIXct format (an R date/time value).  A nonzero II will trigger the ADDL algorithm to fill in ADDL sequencing between dose records having the same II.  That is, the doses must have the same II.
+
+```{r echo=F}
+ex1 = data_frame(TIME=c("2018-01-01T08:15","2018-01-10T10:45"), 
+                 AMT=100, 
+                 EVID=1,
+                 II=24, 
+                 MEX=FALSE) %>%
+  mutate(TIME=iso_to_posix(TIME))
+```
+
+Input Data:
+
+```{r}
+ex1 %>% kable
+```
+
+Output:
+
+```{r}
+ex1 %>% get_addl_dosing() %>%
+  kable
+```
+
+The original dose records are unmodified except that II must be set to 0 (NONMEM expects that). An ADDL record is inserted between them with the dose time set to align the final ADDL dose with the next dose record.
+
+Note that if II doesn't match, the ADDL computation disregards the sequence, but still adjusts II and adds ADDL.  Here II is 0 for the second record:
+
+```{r echo=F}
+ex1 = data_frame(TIME=c("2018-01-01T08:15","2018-01-10T10:45"), 
+                 AMT=100, 
+                 EVID=1,
+                 II=c(24,0), 
+                 MEX=FALSE) %>%
+  mutate(TIME=iso_to_posix(TIME))
+ex1 %>% kable
+```
+
+Which produces:
+```{r}
+ex1 %>% get_addl_dosing() %>%
+  kable
+```
+
+And if the dose changes?
+
+```{r echo=F}
+ex1 = data_frame(TIME=c("2018-01-01T08:15","2018-01-10T10:45", "2018-01-23T09:30"), 
+                 AMT=c(100, 50, 100), 
+                 EVID=1,
+                 II=24, 
+                 MEX=FALSE) %>%
+  mutate(TIME=iso_to_posix(TIME))
+```
+
+Input Data:
+
+```{r}
+ex1 %>% kable
+```
+
+Which produces:
+```{r}
+ex1 %>% get_addl_dosing() %>%
+  kable
+```
+
+# Simple example with addl dosing starting exactly II later
+
+The first dose record starts the repeated dosing interval.  The second dose record ends the interval (because it's the last dose, not because these need to be paired).
+
+Input Data:
+
+```{r ex1}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 10:00", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+Modified dosing sheet after ADDL computation.  Note that the dose time is the same in both the starting and ending dose of the ADDL block.  The first dose on 1/1 is followed by ADDL dosing starting on 1/2 @ 10am with 8 extra doses, which stop on 1/10 @ 10am.  Then the final dose is on 1/11 @ 10am.
+
+```{r ex1addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+
+# Simple example with addl dosing starting more than II later
+
+We move the final dose back 5 hours.
+
+Input Data:
+
+```{r ex2}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 15:00", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+Modified dosing sheet after ADDL computation.  The first dose on 1/1 is followed by ADDL dosing starting on 1/2 @ 3pm with 8 extra doses, which stop on 1/10 @ 3pm.  Then the final dose is on 1/11 @ 3pm.
+
+```{r ex2addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Simple example with addl dosing starting less than II later
+
+We move the final dose forward 5 hours.  
+
+Input Data:
+
+```{r ex3}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 05:00", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+Modified dosing sheet after ADDL computation.  Backing up from 1/11 @ 5am, we land on 1/2 @ 5am as the next dose time.  This is acceptable because it is 19 hours from the previous dose, a time interval of less than 1/2 of the II (24 hours).
+
+```{r ex3addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Simple example with addl dosing starting less than 1/2 II later
+
+Both dose times are modified, so dose times are only 10 hours apart.
+
+Input Data:
+
+```{r ex4}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 22:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 06:00", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+A 6am dose on 1/2 is only 10 hours from the initial dose, so the 1/2 dose is skipped and the ADDL sequence starts on 1/3.  This reduces ADDL to 7, since skipping the small partial period means we take a whole II to set the next dose.
+
+```{r ex4addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Short dosing period - same times
+
+Same dose times at start and end, exactly two II apart.
+
+Input Data:
+
+```{r ex5}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/03/2017 10:00", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+There should be one ADDL record on 1/2, but with ADDL set to zero because the ADDL sequence only has one dose.
+
+```{r ex5addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Short dosing period - 1.5 dose intervals
+
+Same dose times at start and end, exactly 1.5 II apart.
+
+Input Data:
+
+```{r ex6}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 22:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/03/2017 10:00", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+There should be one ADDL record on 1/2, but with ADDL set to zero because the ADDL sequence only has one dose.  This is the limit of our tolerance for the extra dose.
+
+```{r ex6addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Short dosing interval - two subjects, right around the II tolerance
+
+Duplicate previous example, but ID=1 is just above the the II tolerance, ID=2 is just below.
+
+Input Data:
+
+```{r ex7}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 21:59",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/03/2017 10:00", "A",	100,	"QD",	  FALSE,   24,   1,
+      2,	"01/01/2017 22:01",	"A",	100,	"QD",	  FALSE,   24,   1,
+      2,	"01/03/2017 10:00", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+ID=1 gets an ADDL dose.  ID=2 does not.  This is probably the most concerning edge case, and an example of why we should record the 3 previous dose times leading up to a PK day.  If we have actual doses before a PK day then this ADDL algorithm will have minimal effect.
+
+NOTE: we ask for QD dosing, but for ID=2 the 1/2 dose is skipped due to the II tolerance (currently set at 50%).  We can't give a dose at 10am because it is within 12 hours of the previous dose, so in order to start the ADDL dosing at the correct time we have to skip forward an entire day, which puts us at the final dose anyway.
+
+```{r ex7addl}
+get_addl_dosing(ex_dat) %>% arrange(ID, TIME) %>% kable
+```
+
+# Short dosing interval - two subjects, lower II tolerance.
+
+Change the II tolerance from 0.5 (default) to 0.375 (9 hours for QD).  Now the second subject gets the ADDL dose at 10 am.
+
+```{r ex7addl2}
+get_addl_dosing(ex_dat, .tolII = 0.375) %>% arrange(ID, TIME) %>% kable
+```
+
+# Simple example with final 3 actual doses
+
+The first dose record starts the repeated dosing interval.  Then we have 3 additional doses leading up to the PK day.  We should see ADDL dosing starting on 1/2@9:15am and running for 8 additional doses. Then the individual doses should show up.  It doesn't matter that they are still marked with II=24... unless there is a large enough gap to restart ADDL sequencing.
+
+Input Data:
+
+```{r ex8}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 09:15", "A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/12/2017 10:21", "A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/13/2017 08:37", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+As expected, the ADDL dosing fills in between 1/2 and 1/10 only and lines up qith 1/11 dose time.
+
+```{r ex8addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+
+# Simple example with final 3 actual doses, dosing period causes ADDL restart
+
+The first dose record starts the repeated dosing interval.  Then we have 3 additional doses leading up to the PK day.  We should see ADDL dosing starting on 1/2@9:15am and running for 8 additional doses. Then the individual doses should show up.  I doesn't matter that they are still marked with II=24... unless there is a large enough gap to restart ADDL sequencing.
+
+Input Data:
+
+```{r ex9}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 09:15", "A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/12/2017 05:21", "A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/13/2017 17:37", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+BUT THERE IS A GAP HERE, the dosing period from 1/12 to 1/13 is over 36 hours so we get an ADDL dose filling in on 1/12!
+
+```{r ex9addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Simple example with final 3 actual doses, set actual doses with FREQ=ONCE
+
+The first dose record starts the repeated dosing interval.  Then we have 3 additional doses leading up to the PK day.  We should see ADDL dosing starting on 1/2@9:15am and running for 8 additional doses. Then the individual doses should show up.  Now the final dose is marked with FREQ=ONCE (which get's translated in mappings to II=0) so it won't allow ADDL sequencing running up to it.
+
+Input Data:
+
+```{r ex10}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 09:15", "A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/12/2017 05:21", "A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/13/2017 17:37", "A",	100,	"ONCE",	  FALSE,   0,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+ADDL sequencing runs between doses marked with II>0.  A dose with II==0 is a single dose and ADDL sequencing won't run to it - even if the previous dose is marked with II>0.
+
+NOTE: this may be something we want to change.  It doesn't affect timing of ADDL, but it does affect how we tag the EX data II values.  It may be difficult to figure out the FREQ/II values.
+
+```{r ex10addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Simple example with final 3 actual doses, one of them is missed!
+
+The first dose record starts the repeated dosing interval.  Then we have 3 additional doses leading up to the PK day.  We should see ADDL dosing starting on 1/2@9:15am and running for 8 additional doses. Then we have the missed dose recorded on 1/12 at the same clock time as the previous dose (this is determined in mappings, since the missed dose is probably missing a time in EXSTDTC).  Note that we have to enter AMT=0 for the missed dose.
+
+Input Data:
+
+```{r ex11}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 09:15", "A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/12/2017 09:15", "A",	0,	"QD",	  TRUE,   24,   1,
+      1,	"01/13/2017 08:37", "A",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+As expected, the ADDL dosing fills in between 1/2 and 1/10 only and lines up with 1/11 dose time.  Missed dose on 1/12 is backfilled by ADDL from 1/13 but is AMT 0.
+
+```{r ex11addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Don't use ADDL between cycles
+
+Starting in CYCLE1 with QD dosing until day 11.  Then restart in CYCLE2 on 2/1 until 2/13.
+
+Input Data:
+
+```{r ex12}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~CYCLE, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"CYCLE1",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 09:15", "CYCLE1",	100,	"QD",	  FALSE,   24,   1,
+      1,	"02/01/2017 09:15", "CYCLE2",	100,	"QD",	  FALSE,   24,   1,
+      1,	"02/13/2017 08:37", "CYCLE2",	100,	"QD",	  FALSE,   24,   1
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+Output:
+
+```{r ex12addl}
+ex_dat %>%  group_by(ID,CYCLE) %>% get_addl_dosing() %>% kable
+```
+
+
+# Missed doses in sequence
+
+The first dose record starts the repeated dosing interval for 31 days.  But we have 2 missing doses.  We should see ADDL dosing starting on 1/2@8:37am and running for 8 additional doses. Then we have the missed dose recorded on 1/12 at the same clock time as the previous dose (this is determined in mappings, since the missed dose is probably missing a time in EXSTDTC).  Note that we have to enter AMT=0 for the missed dose.  After last missed dose, ADDL is restarted with 17 additional doses to arrive at 1/30.
+
+Input Data:
+
+```{r ex14}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/11/2017 09:15", "A",	0,	"QD",	  TRUE,   24,   1,
+      1,	"01/12/2017 09:15", "A",	0,	"QD",	  TRUE,   24,   1,
+      1,	"01/31/2017 08:37", "A",	100,	"QD",	  FALSE,   24,   1     
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+
+
+```{r ex14addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Missed doses in sequence, BID
+
+The first dose record starts the repeated dosing interval for 31 days.  But we have 2 missing doses.  We should see ADDL dosing starting on 1/1@8:37pm (the eveing dose) and running for 18 additional doses. Then we have the missed doses recorded on 1/11, at the expected dose times for morning and evening dosing (8am/8pm).  Note that we have to enter AMT=0 for the missed dose.
+
+Input Data:
+
+```{r ex15}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	"A",	100,	"BID",	  FALSE,   12,   1,
+      1,	"01/11/2017 08:00", "A",	0,	"BID",	  TRUE,   12,   1,
+      1,	"01/11/2017 20:00", "A",	0,	"BID",	  TRUE,   12,   1,
+      1,	"01/31/2017 08:37", "A",	100,	"BID",	  FALSE,   12,   1     
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+Output:
+
+```{r ex15addl}
+get_addl_dosing(ex_dat) %>% kable
+```
+
+# Grouping by CMT
+
+In compartment 1, the first dose record starts the repeated dosing interval.  Then we have 3 additional doses leading up to the PK day.  We should see ADDL dosing starting on 1/2@9:15am and running for 8 additional doses. Then the individual doses should show up.  It doesn't matter that they are still marked with II=24... unless there is a large enough gap to restart ADDL sequencing.
+The second compartment dose starts later in the day on 1/1 and runs BID through the end of the month.
+
+Input Data:
+
+```{r ex16}
+ex_dat <- tibble::tribble(
+      ~ID,	~TIME,	         ~CMT, ~AMT,	~FREQ, ~MEX,   ~II, ~EVID,
+      1,	"01/01/2017 10:00",	1,	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/01/2017 15:55",	2,	50,	"BID",	  FALSE,   12,   1,
+      1,	"01/11/2017 09:15", 1,	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/12/2017 10:21", 1,	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/13/2017 08:37", 1,	100,	"QD",	  FALSE,   24,   1,
+      1,	"01/31/2017 12:43", 2,	50,	"BID",	  FALSE,   12,   1      
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+ex_dat %>% kable
+```
+
+As expected, the ADDL dosing fills in between 1/2 and 1/10 only and lines up with 1/11 dose time. For compartment two we get BID dosing ending on 12:43.  The sequences compute separately.  
+
+```{r ex16addl}
+ex_dat %>% group_by(CMT) %>% get_addl_dosing() %>% kable
+```
+
+# Expand ADDL records
+
+Expand ADDL requires an ID column.
+
+```{r include=F}
+ex1 = data_frame(ID=1,
+                 TIME=c("2018-01-01T08:15","2018-01-10T10:45"), 
+                 AMT=100, 
+                 EVID=1,
+                 II=24, 
+                 MEX=FALSE) %>%
+  mutate(TIME=iso_to_posix(TIME)) %>% 
+  get_addl_dosing()
+```
+
+Starting with ADDL dosing records:
+
+```{r}
+ex1 %>% kable
+```
+
+we can expand ADDL:
+
+```{r}
+ex1 %>% expand_addl() %>% kable
+```
+
+The expanded records have ADDL set to -1.  When using these records with NONMEM be sure to drop II and ADDL or set them to zero. 
+
+# ADDL and Time After Dose
+
+The time\_after\_dose function takes ADDL into account. With the following data, we expect the TAD for the observation on 1/4 to be 2 hours after the 1/4 dose and not 38 hours after the 1/1 dose.
+
+```{r echo=F}
+    input <- tibble::tribble(
+      ~ID,	~TIME,	         ~TRT, ~AMT, ~II, ~EVID, ~ADDL, ~CRE,
+      1,	"01/01/2017 10:00",	"A",	100,  0,   1,     0,  0.3,
+      1,	"01/01/2017 18:00",	"A",	0  ,  0,   0,     0,  0.3,
+      1,	"01/02/2017 10:00",	"A",	100, 24,   1,     8,  0.2,
+      1,	"01/04/2017 12:00",	"A",	0  ,  0,   0,     0,  0.2,
+      1,	"01/11/2017 10:00", "A",	100,  0,   1,     0,  0.5,
+      1,	"01/11/2017 12:00", "A",	0  ,  0,   0,     0,  0.5,
+      1,	"01/11/2017 14:00", "A",	0  ,  0,   0,     0,  0.5
+    ) %>% dplyr::mutate(
+      TIME = iso_to_posix(TIME)
+    )
+input %>% time_after_dose() %>% select(-DOSENUM__) %>% kable
+```
+
