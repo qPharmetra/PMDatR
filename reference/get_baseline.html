@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PMDatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -85,6 +85,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/ADDLProcessing.html">ADDL Processing</a>
+    </li>
     <li>
       <a href="../articles/BestPracticesforDataManagement.html">Best Practices for Data Management in PMDatR</a>
     </li>
@@ -164,7 +167,7 @@ all records for summarization.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>dplyr</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>PMDatR</span>)
-<span class='no'>Theoph</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>conc.bl</span> <span class='kw'>=</span> <span class='fu'>get_baseline</span>(<span class='no'>conc</span>, <span class='no'>Time</span><span class='kw'>&gt;</span><span class='fl'>0</span> <span class='kw'>&amp;</span> <span class='no'>Time</span><span class='kw'>&lt;</span><span class='fl'>1</span>, <span class='no'>Subject</span>, <span class='kw'>fun.summ</span><span class='kw'>=</span><span class='no'>mean_</span>))</div><div class='output co'>#&gt;     Subject   Wt Dose  Time  conc conc.bl
+<span class='no'>Theoph</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>conc.bl</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/PMDatR/topics/get_baseline'>get_baseline</a></span>(<span class='no'>conc</span>, <span class='no'>Time</span><span class='kw'>&gt;</span><span class='fl'>0</span> <span class='kw'>&amp;</span> <span class='no'>Time</span><span class='kw'>&lt;</span><span class='fl'>1</span>, <span class='no'>Subject</span>, <span class='kw'>fun.summ</span><span class='kw'>=</span><span class='no'>mean_</span>))</div><div class='output co'>#&gt;     Subject   Wt Dose  Time  conc conc.bl
 #&gt; 1         1 79.6 4.02  0.00  0.74   4.705
 #&gt; 2         1 79.6 4.02  0.25  2.84   4.705
 #&gt; 3         1 79.6 4.02  0.57  6.57   4.705
@@ -296,21 +299,21 @@ all records for summarization.</p></td>
 #&gt; 129      12 60.5 5.30  7.07  6.59   2.605
 #&gt; 130      12 60.5 5.30  9.03  6.11   2.605
 #&gt; 131      12 60.5 5.30 12.05  4.57   2.605
-#&gt; 132      12 60.5 5.30 24.15  1.17   2.605</div><div class='input'><span class='no'>Theoph</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>conc</span><span class='kw'>=</span><span class='fu'><a href='set_units.html'>set_units</a></span>(<span class='no'>conc</span>,<span class='st'>"mg/ml"</span>),
-  <span class='kw'>conc.bl</span> <span class='kw'>=</span> <span class='fu'>get_baseline</span>(<span class='no'>conc</span>, <span class='no'>Time</span><span class='kw'>&gt;</span><span class='fl'>0</span> <span class='kw'>&amp;</span> <span class='no'>Time</span><span class='kw'>&lt;</span><span class='fl'>1</span>, <span class='no'>Subject</span>, <span class='kw'>fun.summ</span><span class='kw'>=</span><span class='no'>mean_</span>)) <span class='kw'>%&gt;%</span> <span class='no'>as_data_frame</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 132 x 6</span><span>
+#&gt; 132      12 60.5 5.30 24.15  1.17   2.605</div><div class='input'><span class='no'>Theoph</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>conc</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/PMDatR/topics/set_units'>set_units</a></span>(<span class='no'>conc</span>,<span class='st'>"mg/ml"</span>),
+  <span class='kw'>conc.bl</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/PMDatR/topics/get_baseline'>get_baseline</a></span>(<span class='no'>conc</span>, <span class='no'>Time</span><span class='kw'>&gt;</span><span class='fl'>0</span> <span class='kw'>&amp;</span> <span class='no'>Time</span><span class='kw'>&lt;</span><span class='fl'>1</span>, <span class='no'>Subject</span>, <span class='kw'>fun.summ</span><span class='kw'>=</span><span class='no'>mean_</span>)) <span class='kw'>%&gt;%</span> <span class='no'>as_data_frame</span></div><div class='output co'>#&gt; # A tibble: 132 x 6
 #&gt;    Subject    Wt  Dose   Time conc    conc.bl
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;ord&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;mg/ml&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;mg/ml&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 1        79.6  4.02  0     </span><span style='color: #555555;'>"</span><span> 0.74</span><span style='color: #555555;'>"</span><span> 4.705  
-#&gt; </span><span style='color: #555555;'> 2</span><span> 1        79.6  4.02  0.25  </span><span style='color: #555555;'>"</span><span> 2.84</span><span style='color: #555555;'>"</span><span> 4.705  
-#&gt; </span><span style='color: #555555;'> 3</span><span> 1        79.6  4.02  0.570 </span><span style='color: #555555;'>"</span><span> 6.57</span><span style='color: #555555;'>"</span><span> 4.705  
-#&gt; </span><span style='color: #555555;'> 4</span><span> 1        79.6  4.02  1.12  10.50   4.705  
-#&gt; </span><span style='color: #555555;'> 5</span><span> 1        79.6  4.02  2.02  </span><span style='color: #555555;'>"</span><span> 9.66</span><span style='color: #555555;'>"</span><span> 4.705  
-#&gt; </span><span style='color: #555555;'> 6</span><span> 1        79.6  4.02  3.82  </span><span style='color: #555555;'>"</span><span> 8.58</span><span style='color: #555555;'>"</span><span> 4.705  
-#&gt; </span><span style='color: #555555;'> 7</span><span> 1        79.6  4.02  5.1   </span><span style='color: #555555;'>"</span><span> 8.36</span><span style='color: #555555;'>"</span><span> 4.705  
-#&gt; </span><span style='color: #555555;'> 8</span><span> 1        79.6  4.02  7.03  </span><span style='color: #555555;'>"</span><span> 7.47</span><span style='color: #555555;'>"</span><span> 4.705  
-#&gt; </span><span style='color: #555555;'> 9</span><span> 1        79.6  4.02  9.05  </span><span style='color: #555555;'>"</span><span> 6.89</span><span style='color: #555555;'>"</span><span> 4.705  
-#&gt; </span><span style='color: #555555;'>10</span><span> 1        79.6  4.02 12.1   </span><span style='color: #555555;'>"</span><span> 5.94</span><span style='color: #555555;'>"</span><span> 4.705  
-#&gt; </span><span style='color: #555555;'># ... with 122 more rows</span><span></div></span></pre>
+#&gt;    &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;mg/ml&gt; &lt;mg/ml&gt;
+#&gt;  1 1        79.6  4.02  0      0.74   4.705  
+#&gt;  2 1        79.6  4.02  0.25   2.84   4.705  
+#&gt;  3 1        79.6  4.02  0.570  6.57   4.705  
+#&gt;  4 1        79.6  4.02  1.12  10.50   4.705  
+#&gt;  5 1        79.6  4.02  2.02   9.66   4.705  
+#&gt;  6 1        79.6  4.02  3.82   8.58   4.705  
+#&gt;  7 1        79.6  4.02  5.1    8.36   4.705  
+#&gt;  8 1        79.6  4.02  7.03   7.47   4.705  
+#&gt;  9 1        79.6  4.02  9.05   6.89   4.705  
+#&gt; 10 1        79.6  4.02 12.1    5.94   4.705  
+#&gt; # … with 122 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -333,7 +336,7 @@ all records for summarization.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
 </div>
       </footer>
    </div>

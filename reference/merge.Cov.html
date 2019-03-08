@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PMDatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -85,6 +85,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/ADDLProcessing.html">ADDL Processing</a>
+    </li>
     <li>
       <a href="../articles/BestPracticesforDataManagement.html">Best Practices for Data Management in PMDatR</a>
     </li>
@@ -156,7 +159,7 @@ by changing the grouping of the covariate dataframes using dplyr::group_by.</p>
 values in the covariate data will result in NA in the covariate column.  Covariate data
 with unmatched keys will be silently dropped.  For example, if merging covariates by
 ID and VISIT, if the SCREENING visit was not included in the covariate data then
-observations or doses occuring in (or associated with) the SCREENING VISIT will have
+observations or doses occurring in (or associated with) the SCREENING VISIT will have
 NA values for the covariates.  Conversely, if the Follow-up VISIT is not present in the event
 data, no covariate data is present in the result for the Follow-up visit.  This ensures that
 new rows are not added that would not have the correct variables (TIME, AMT, DV, EVID, etc.)
@@ -185,7 +188,7 @@ The available options are: left, right, inner, full.  Any other value will defau
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
 </div>
       </footer>
    </div>

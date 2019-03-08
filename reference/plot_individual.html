@@ -65,7 +65,7 @@ Data will be colored by combinations of variables found in grouping." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PMDatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -87,6 +87,9 @@ Data will be colored by combinations of variables found in grouping." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/ADDLProcessing.html">ADDL Processing</a>
+    </li>
     <li>
       <a href="../articles/BestPracticesforDataManagement.html">Best Practices for Data Management in PMDatR</a>
     </li>
@@ -131,7 +134,7 @@ Data will be colored by combinations of variables found in grouping.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_individual</span>(<span class='no'>.data</span>, <span class='kw'>idv</span> <span class='kw'>=</span> <span class='st'>"TIME"</span>, <span class='kw'>strata</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>grouping</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>logY</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>showADDL</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+  <span class='kw'>logY</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>showADDL</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>ID</span> <span class='kw'>=</span> <span class='st'>"ID"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +150,10 @@ Data will be colored by combinations of variables found in grouping.</p>
     <tr>
       <th>grouping</th>
       <td><p>A comma delimited string of grouping variables.</p></td>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <td><p>a character value giving the column containing subject IDs</p></td>
     </tr>
     <tr>
       <th>strat</th>
@@ -177,7 +184,7 @@ Data will be colored by combinations of variables found in grouping.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
 </div>
       </footer>
    </div>
