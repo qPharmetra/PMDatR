@@ -315,7 +315,7 @@ getCov = function(.data, ID, cov.col, cov.val, cov.filter, cov.keys, fun.summary
   dupgroups = c(cov.keys)
   if(!missing(cov.col)) dupgroups=c(dupgroups,lazyeval::expr_text(cov.col))
   .data = .data %>% group_by_(.dots=dupgroups) %>%
-    mutate(N_DUP_=1:n()-1) %>% ungroup
+    mutate(N_DUP_=1:dplyr::n()-1) %>% ungroup
 
   # if long data, then first convert to wide
   if(!missing(cov.col)){
@@ -356,7 +356,7 @@ getCov = function(.data, ID, cov.col, cov.val, cov.filter, cov.keys, fun.summary
   .data =.data %>%select_(.dots=unique(c(cov.keys,names(trans.cols))))
 
   # check for duplicates and summarise if we find any
-  .dups = .data %>% group_by_(.dots=cov.keys) %>% filter(n()>1)
+  .dups = .data %>% group_by_(.dots=cov.keys) %>% filter(dplyr::n()>1)
   if(nrow(.dups)>0){
     # we're going to summarise over the keys (we just did the grouping, so should be good to go there)
     message("getCov - Some rows have duplicated merge keys.  Summary function(s) will be applied to remove duplicate rows.")
@@ -509,7 +509,7 @@ getCovT = function(.data, ID, TIME, EVID, covT.col, covT.val, covT.filter, fun.s
   dupgroups = c(cov.keys)
   if(!missing(covT.col)) dupgroups=c(dupgroups,lazyeval::expr_text(covT.col))
   .data = .data %>% group_by_(.dots=dupgroups) %>%
-    mutate(N_DUP_=1:n()-1) %>% ungroup
+    mutate(N_DUP_=1:dplyr::n()-1) %>% ungroup
 
   # if long data, then first convert to wide
   if(!missing(covT.col)){
@@ -544,7 +544,7 @@ getCovT = function(.data, ID, TIME, EVID, covT.col, covT.val, covT.filter, fun.s
   .data =.data %>%select_(.dots=unique(c(cov.keys,names(trans.cols))))
 
   # check for duplicates and summarise if we find any
-  .dups = .data %>% group_by_(.dots=cov.keys) %>% filter(n()>1)
+  .dups = .data %>% group_by_(.dots=cov.keys) %>% filter(dplyr::n()>1)
   if(nrow(.dups)>0){
     # we're going to summarise over the keys (we just did the grouping, so should be good to go there)
     message("getCovT - Some rows have duplicated ID and TIME.  Summary function(s) will be applied to remove duplicate rows.")

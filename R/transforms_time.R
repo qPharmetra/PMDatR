@@ -386,7 +386,7 @@ count_if = function(criteria, fill.na=T)
 occasion = function(x1, x2=TRUE, .lead_in=c("combine", "separate", "missing")){
   .lead_in=match.arg(.lead_in)
   df = data_frame(X1=x1==TRUE, X2=x2==TRUE) %>%
-    mutate(rowid=1:n()) %>%
+    mutate(rowid=1:dplyr::n()) %>%
     filter(X1==TRUE | X2==TRUE) %>%
     mutate(start_occ = if_else(X1==TRUE & lead(X2)==TRUE, TRUE, FALSE)) %>%
     filter(start_occ==TRUE)

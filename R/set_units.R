@@ -21,7 +21,8 @@ set_units <- function(x, units, strict=F) {
 #   }
   attr(x, "pmunits") <- .units
   if (!("pmunits" %in% class(x))) {
-    class(x) <- c("pmunits", class(x))
+    # adding AsIs so dplyr 0.8 won't throw a bunch of warnings when it sees these.
+    class(x) <- c("pmunits", class(x), "AsIs")
   }
   return(x)
 }

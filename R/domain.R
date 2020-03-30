@@ -638,7 +638,7 @@ create.domain = function(name=NULL,
 #'
 
 load.domain.mappings = function(filename){
-  maps = yaml::yaml.load_file(filename)[["DomainMappings"]]
+  maps = load_yaml_file(filename)[["DomainMappings"]]
   names(maps) = map_chr(maps, "MappedDomain")
   maps
 }

@@ -15,7 +15,7 @@ DataManagement <- function(settings_file="", settings=NULL){
 
   if(is.null(settings)){
     # load the settings file
-    settings = yaml.load_file(settings_file)
+    settings = load_yaml_file(settings_file)
   }
 
   # flag errors

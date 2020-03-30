@@ -4,7 +4,7 @@ author: "qPharmetra, LLC"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Importing Data}
+  %\VignetteIndexEntry{ADDL Processing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

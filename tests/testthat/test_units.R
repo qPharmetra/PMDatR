@@ -69,3 +69,15 @@ test_that("getCov handles stacked data with units",{
   expect_equal(units(units.df$ALB),"g/L")
   expect_equal(units(units.df$BILI),"umol/L")
 })
+
+test_that("unit columns can be used in post_transform",{
+  XXX = function(alb,bili){
+    x=alb/bili
+    convert(x,"g/umol")
+  }
+  units.df = getCovT(df,  ID=USUBJID, TIME=iso_to_posix(LBDTC),
+                     covT.col=LBTESTCD, covT.val=LBSTRESN, ALB=ALB, BILI=BILI, Units=LBSTRESU)
+  expect_equal(units(units.df$ALB),"g/L")
+  expect_equal(units(units.df$BILI),"umol/L")
+  expect_equal(units((mutate(units.df,x=XXX(ALB,BILI)) %>% fill_locf(x))$x), "g/umol")
+})

@@ -211,6 +211,14 @@ test_that("test that default is left join",{
   expect_equal(events.df, events2.df) #check ID
 })
 
+test_that("merge.Cov ignores attributes",{
+  dm2.df = dm.df
+  pc2.df = pc.df %>% ungroup
+  attr(dm2.df$ID,'silly')="bear"
+  expect_warning(left_join(pc2.df, dm2.df)) #did we get a warning here?
+  expect_warning(merge.Cov(pc2.df,list(dm2.df)),regexp = NA) # should not here
+})
+
 
 context("pre-merge")
 

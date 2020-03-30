@@ -56,42 +56,42 @@ test_that("locf works with multiple na flags",{
 ### iso_to_posix
 test_that("iso_to_posix process data + time",{
   x=iso_to_posix("2016-10-03T21:22:45")
-  expect_equal(anytime::iso8601(x),"2016-10-03 21:22:45")
+  expect_equal(anytime::iso8601(x),"2016-10-03T21:22:45")
 })
 
 test_that("iso_to_posix processes date with filled in time", {
   x=iso_to_posix(c("2016-10-03","2016-10-03T12:34"),"09:00")
-  expect_equal(anytime::iso8601(x), c("2016-10-03 09:00:00","2016-10-03 12:34:00"),"09:00")
+  expect_equal(anytime::iso8601(x), c("2016-10-03T09:00:00","2016-10-03T12:34:00"))
 })
 
 test_that("iso_to_posix processes date with filled in time", {
   expect_warning(x<-iso_to_posix(c("2016-10-03","2016-10-03","2016-10-03"), c("09:00", "10:10")))
   #gives a warning about length of .times
-  expect_equal(anytime::iso8601(x), c("2016-10-03 09:00:00","2016-10-03 10:10:00","2016-10-03 09:00:00"))
+  expect_equal(anytime::iso8601(x), c("2016-10-03T09:00:00","2016-10-03T10:10:00","2016-10-03T09:00:00"))
 })
 
 test_that("iso_to_posix processes NA", {
   expect_warning(x<-iso_to_posix(c(NA,"2016-10-03","2016-10-03"), c("09:00", "10:10")))
   #gives a warning about length of .times
-  expect_equal(anytime::iso8601(x), c(NA,"2016-10-03 10:10:00","2016-10-03 09:00:00"))
+  expect_equal(anytime::iso8601(x), c(NA,"2016-10-03T10:10:00","2016-10-03T09:00:00"))
 })
 
 test_that("iso_to_posix processes empty", {
   expect_warning(x<-iso_to_posix(c("","2016-10-03","2016-10-03"), c("09:00", "10:10")))
   #gives a warning about length of .times
-  expect_equal(anytime::iso8601(x), c(NA,"2016-10-03 10:10:00","2016-10-03 09:00:00"))
+  expect_equal(anytime::iso8601(x), c(NA,"2016-10-03T10:10:00","2016-10-03T09:00:00"))
 })
 
 test_that("iso_to_posix processes NA time string", {
   expect_warning(x<-iso_to_posix(c("2016-10-03","2016-10-03","2016-10-03"), c(NA, "10:10")))
   #gives a warning about length of .times
-  expect_equal(anytime::iso8601(x), c("2016-10-03 00:00:00","2016-10-03 10:10:00","2016-10-03 00:00:00"))
+  expect_equal(anytime::iso8601(x), c("2016-10-03T00:00:00","2016-10-03T10:10:00","2016-10-03T00:00:00"))
 })
 
 test_that("iso_to_posix processes empty time string", {
   expect_warning(x<-iso_to_posix(c("2016-10-03","2016-10-03","2016-10-03"), c("", "10:10")))
   #gives a warning about length of .times
-  expect_equal(anytime::iso8601(x), c("2016-10-03 00:00:00","2016-10-03 10:10:00","2016-10-03 00:00:00"))
+  expect_equal(anytime::iso8601(x), c("2016-10-03T00:00:00","2016-10-03T10:10:00","2016-10-03T00:00:00"))
 })
 
 # Test ISO durations

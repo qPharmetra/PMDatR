@@ -6,7 +6,7 @@ strip_units <- function(.x) {
   attribs <- names(attributes(.x))
   if ("pmunits" %in% attribs) {
     attr(.x, "pmunits" ) <- NULL
-    rm_class <- which(classes == "pmunits")
+    rm_class <- which(classes %in% c("pmunits", "AsIs"))
     if (length(rm_class)) {
       class(.x) <- classes[-rm_class]
     }

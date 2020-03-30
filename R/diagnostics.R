@@ -127,7 +127,23 @@ check_iso_date_formats = function(x, ignore_blanks=T, ignore_na=T){
 
 
   # get the iso format captures in the regex
-  capts=regexpr(parsedate:::iso_regex,x,perl = T)
+  iso_regex =  paste0(
+    "^\\s*",
+    "(?<year>[\\+-]?\\d{4}(?!\\d{2}\\b))",
+    "(?<restafteryear>(?<dash>-?)",
+    "(?<dateafteryear>(?<month>0[1-9]|1[0-2])",
+    "(?<dashandday>\\g{dash}(?<day>[12]\\d|0[1-9]|3[01]))?",
+    "|W(?<week>[0-4]\\d|5[0-3])(?<pmweekday>-?(?<weekday>[1-7]))?",
+    "|(?<yearday>00[1-9]|0[1-9]\\d|[12]\\d{2}|3",
+    "(?<yeardaytail>[0-5]\\d|6[1-6])))",
+    "(?<time>[T\\s](?<hourminfrac>(?<hourmin>(?<hour>[01]\\d|2[0-3])",
+    "(?<colonmin>(?<colon>:?)(?<min>[0-5]\\d))?|24\\:?00)",
+    "(?<frac>[\\.,]\\d+(?!:))?)?",
+    "(?<colonsec>\\g{colon}(?<sec>[0-5]\\d)(?<secfrac>[\\.,]\\d+)?)?",
+    "(?<tz>[zZ]|(?<tzpm>[\\+-])",
+    "(?<tzhour>[01]\\d|2[0-3]):?(?<tzmin>[0-5]\\d)?)?)?)?$"
+  )
+  capts=regexpr(iso_regex,x,perl = T)
   #convert to list
   captures = regexp_to_list(x,capts)
   # convert to tbl and transmute
@@ -666,11 +682,11 @@ summary_table = function(.data, cols="", grouping="", catFn=table, conFn=summary
   consum = catsum
   if(length(catCols)>0) catsum = .data %>% select_(.dots=catCols) %>%
     summarise_each(funs(format_summary(.,catFn))) %>%
-    mutate(GRPID__=1:n())
+    mutate(GRPID__=1:dplyr::n())
 # start with summary over groups
   if(length(conCols)>0) consum = .data %>% select_(.dots=conCols) %>%
     summarise_each(funs(format_summary(.,conFn))) %>%
-    mutate(GRPID__=1:n())
+    mutate(GRPID__=1:dplyr::n())
   # now join by groupID.  in case of no groups groupID is just 1 and there is one row
   left_join(catsum, consum, by="GRPID__") %>% select(-GRPID__)
 }

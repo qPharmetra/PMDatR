@@ -43,10 +43,15 @@
 fill_NA = function(.data, column, value, groups="ID"){
   col = expr_text(column)
   val = expr_text(value)
+  # save attributes in col
+  saveattr = attributes(.data[[col]])
   fn = as.formula(sprintf("~ifelse(is.na(%s),%s,%s)",col, val, col))
   #sets column to value when column is .na
-  .data %>% group_by_(.dots=groups) %>%
+  .data = .data %>% group_by_(.dots=groups) %>%
     mutate_(.dots=setNames(list(fn),col))
+  # put back attributes of locf'd column (until bug is fixed in dplyr 0.9)
+  attributes(.data[[col]]) = saveattr
+  .data
 }
 
 #' @rdname fill
@@ -62,11 +67,15 @@ fill_NA = function(.data, column, value, groups="ID"){
 #' @export
 fill_locf = function(.data, column, groups="ID", tolerance=Inf, time="TIME", backfill=T){
   col = expr_text(column)
-  #
+  # save attributes in col
+  saveattr = attributes(.data[[col]])
   fn = as.formula(sprintf("~locf(%s, cond=(%s-lag(%s))<=%s, backfill=%s)",col, time, time, tolerance, backfill))
   #sets column to value when column is .na
-  .data %>% group_by_(.dots=groups) %>%
+  .data = .data %>% group_by_(.dots=groups) %>%
     mutate_(.dots=setNames(list(fn),col))
+  # put back attributes of locf'd column (until bug is fixed in dplyr 0.9)
+  attributes(.data[[col]]) = saveattr
+  .data
 }
 
 #' @rdname fill
@@ -76,11 +85,15 @@ fill_locf = function(.data, column, groups="ID", tolerance=Inf, time="TIME", bac
 #' @export
 fill_nocb = function(.data, column, groups="ID", tolerance=Inf, time="TIME", backfill=T){
   col = expr_text(column)
-  #
+  # save attributes in col
+  saveattr = attributes(.data[[col]])  #
   fn = as.formula(sprintf("~nocb(%s, cond=lag(%s)<=%s, backfill=%s)",col, time, tolerance, backfill))
   #sets column to value when column is .na
-  .data %>% group_by_(.dots=groups) %>%
+  .data = .data %>% group_by_(.dots=groups) %>%
     mutate_(.dots=setNames(list(fn),col))
+  # put back attributes of locf'd column (until bug is fixed in dplyr 0.9)
+  attributes(.data[[col]]) = saveattr
+  .data
 }
 
 #' Add new variables to a data_frame

@@ -12,6 +12,21 @@ is.empty.yaml = function(node){
   return(F)
 }
 
+load_yaml_file = function(settings_file){
+  # yaml integer data handler
+  # this fixes a situation where a numeric looking string is parsed from yaml but errors
+  # due to being out of numeric range.  Brings it in as character instead.
+  int_handler = function(x){
+    if(is.na(suppressWarnings(as.integer(x)))) {
+      as.character(x)
+    } else {
+      as.integer(x)}
+  }
+
+   yaml::yaml.load_file(settings_file, handlers=list("int"=int_handler))
+
+}
+
 is_whitespace = function(x) grepl("^\\s*$", x)
 
 is_valid_format_spec = function(x) grepl("^%\\d*?(.\\d*)?[fg]$",x)
@@ -84,6 +99,9 @@ printPath = function(x) gsub("\\","/",x,fixed=T)
 reinterpret_errors = function(x, header= 4){
   # first replace any leading hashes
   x=gsub("^#*\\s*","",x)
+
+  # ignore any deprecation warnings
+  if(grepl(".+deprecated.*", x)){ return() }
 
   # now look for common error patterns and replace them
   if(grepl("Error in .+: object '.*' not found",x)) x= gsub("Error in .+:","Error RT1:", x)

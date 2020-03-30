@@ -104,7 +104,7 @@ merge.Cov = function(events.df, covs.l){
     if(!all(keys %in% names(events.df))){
       msg = paste0("Columns [%s] are used as keys in a static covariate merge. ",
                    "All key columns must be present in the event data (Dependent ",
-                   "Variables, Dosing, Time-Varying Covariates. Please ",
+                   "Variables, Dosing, Time-Varying Covariates). Please ",
                    "ensure that key columns are mapped in each of the Queries.")
       stop(sprintf(msg,paste(keys,collapse=", ")))
     }
@@ -138,6 +138,9 @@ merge.Cov = function(events.df, covs.l){
                    "specifications to ensure that key columns are mapped.")
       warning(sprintf(msg,paste(na.cols,collapse=", ")))
     }
+    # equalize the attributes in the keys cols of cov.df to the attributes in events.df
+    cov.df[,keys] = lapply(keys, function(x){attributes(cov.df[[x]]) <- attributes(events.df[[x]]); cov.df[[x]]})
+
     fun = switch(jtype,
                  right = right_join,
                  inner = inner_join,
@@ -145,7 +148,7 @@ merge.Cov = function(events.df, covs.l){
                  left = , #left and anything else fall through to left_join
                  left_join)
 
-    events.df = events.df %>% fun(cov.df, by=keys)
+    events.df = events.df %>% fun(bind_rows(cov.df), by=keys)
   }
   events.df
 }
@@ -320,7 +323,7 @@ pre.merge = function(dom1, dom2, keys, .filter, jointype="left", supp=F, ...){
       # check for duplicate QNAM and tag QNAM.2, etc before spread.  If  .filter takes out all rows
       # this gets ugly, so keep in check.  Can't have dups with no rows, anyway
       df2 = df2 %>% group_by_(.dots=c(keys,"QNAM")) %>%
-        mutate(qnam_cnt=1:n()) %>% ungroup %>%
+        mutate(qnam_cnt=1:dplyr::n()) %>% ungroup %>%
         mutate(QNAM=if_else(qnam_cnt>1, paste(QNAM, qnam_cnt, sep="_"), QNAM))
       hasdups = max(df2$qnam_cnt)>1
       if(hasdups) {

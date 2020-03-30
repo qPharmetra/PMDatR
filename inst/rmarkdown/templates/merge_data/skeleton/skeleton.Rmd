@@ -96,12 +96,10 @@ for(dom in DMO$Domains)
   rmarkdown::draft(output_name, template="diagnostics_source", package = "PMDatR", edit=F)
   # expand templated variable (domain name, to avoid duplicate chunk names in Merge Script)
   xpd=knitr::knit_expand(output_name, domname=dom$name)
+  ## remove yaml header
+  xpd = stringr::str_replace(xpd, "---\ntitle: [\\s|\\S]+\n---\n\n","")
   if(file.exists(output_name)) invisible(file.remove(output_name))
-  # overwrite the draft
-  #cat(xpd, file=output_name)
-  #rmarkdown::render(output_name, quiet=T)
-  
-  #cat(sprintf("[%s Domain Load Report](%s_diagnostics.html)\n\n", dom$name, dom$name))
+
   cat(sprintf("## %s Domain Load Report\n\n", dom$name))
   xpd = gsub("##", "###", xpd)
   cat(knit(text=xpd, quiet=T))
@@ -143,7 +141,8 @@ EX.df = post_process_dosing(EX.df,
 
 kable(head(EX.df,nPrintRows))
 
-kable(as_data_frame(unit_cols(EX.df)))
+u.df=data.frame(Units=unit_cols(EX.df))
+if(nrow(u.df)>0) kable(u.df)
 
 if(DMO$MergeOptions$SaveIntermediateFiles){
   try(readr::write_csv(EX.df, tolower(file.path(DMO$Settings$TempDir, "ex.df.csv"))))
@@ -156,7 +155,8 @@ if(DMO$MergeOptions$SaveIntermediateFiles){
 DV.df = Process_DV()
 kable(head(DV.df,nPrintRows))
 
-kable(as_data_frame(unit_cols(DV.df)))
+u.df=data.frame(Units=unit_cols(DV.df))
+if(nrow(u.df)>0) kable(u.df)
 
 if(DMO$MergeOptions$SaveIntermediateFiles){
   try(readr::write_csv(DV.df, tolower(file.path(DMO$Settings$TempDir, "dv.df.csv"))))
@@ -173,7 +173,9 @@ for(i in seq_along(Cov.l)){
   df = Cov.l[[i]]
   print(kable(head(df,nPrintRows)))
   
-  print(kable(as_data_frame(unit_cols(df))))
+  u.df=data.frame(Units=unit_cols(df))
+  if(nrow(u.df)>0) print(kable(u.df))
+
   
   if(DMO$MergeOptions$SaveIntermediateFiles){
     try(readr::write_csv(df, tolower(file.path(DMO$Settings$TempDir, sprintf("%s.cov.df.csv", cov.names[i])))))
@@ -187,7 +189,8 @@ for(i in seq_along(Cov.l)){
 CovT.df = Process_CovT()
 kable(head(CovT.df,nPrintRows))
 
-kable(as_data_frame(unit_cols(CovT.df)))
+u.df=data.frame(Units=unit_cols(CovT.df))
+if(nrow(u.df)>0) kable(u.df)
 
 if(DMO$MergeOptions$SaveIntermediateFiles){
   try(readr::write_csv(CovT.df, tolower(file.path(DMO$Settings$TempDir, "covt.df.csv"))))
@@ -226,13 +229,14 @@ if(DMO$MergeOptions$SaveIntermediateFiles){
 
 ## Post-Merge Transforms
 
-```{r}
+```{r collapse=TRUE}
 database.df = post.merge.refactoring(database.df, fun.transform = post.transform, 
                                      fun.filter = post.filter,
                                      fun.exclude = apply.exclusions,
                                      options=DMO$MergeOptions)
 kable(head(database.df,nPrintRows))
-kable(as_data_frame(unit_cols(database.df)))
+u.df=data.frame(Units=unit_cols(database.df))
+if(nrow(u.df)>0) kable(u.df)
 
 if(DMO$MergeOptions$SaveIntermediateFiles){
   try(readr::write_csv(database.df, tolower(file.path(DMO$Settings$TempDir, "After_Transforms.df.csv"))))

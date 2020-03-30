@@ -22,7 +22,7 @@ diff_col <- function(
            .name = NULL,
            .name_fn = NULL,
            .agg_fn = NULL) {
-    .df <- dplyr::ungroup(.df) %>% mutate(INDEX__ = 1:n())
+    .df <- dplyr::ungroup(.df) %>% mutate(INDEX__ = 1:dplyr::n())
     if (is.null(.name)) {
       if (!is.null(.name_fn)) {
         .name <- .name_fn(.col)

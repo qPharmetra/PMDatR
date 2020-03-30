@@ -38,8 +38,8 @@ test_that("Can bind_rows converts units", {
   th3= th1 %>% mutate(conc=set_units(conc,"ng/mL"))
   th4= th2 %>% mutate(conc=set_units(conc,"mg/mL"))
   df = bind_rows(th3,th4)
-  expect_equal(as.double(df$conc),c(th3$conc,th4$conc*1e6))
-  expect_equal(units(df$conc),"ng/mL")
+  expect_equal(as.double(df$conc),c(th1$conc, th2$conc*1e6)) #did it convert?
+  expect_equal(units(df$conc),"ng/mL") #what are the units?
 })
 
 test_that("Can bind_rows converts types: numeric+character", {

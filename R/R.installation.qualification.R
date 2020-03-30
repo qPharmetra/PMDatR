@@ -45,7 +45,7 @@ R.installation.qualification = function()
 
   ## check R version, against project requirement, or against dependency requirement
   current.R = getRversion()
-  required.R = "3.3.3"
+  required.R = "3.6.0"
   IQ.Rversion = (current.R != required.R)
 
   ## load R object with installed versions
