@@ -6,18 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Merging Data with PMDatR • PMDatR</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Merging Data with PMDatR">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="PMDatR">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PMDatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -53,6 +54,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/ADDLProcessing.html">ADDL Processing</a>
+    </li>
+    <li>
       <a href="../articles/BestPracticesforDataManagement.html">Best Practices for Data Management in PMDatR</a>
     </li>
     <li>
@@ -76,13 +80,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Merging Data with PMDatR</h1>
+      <h1 data-toc-skip>Merging Data with PMDatR</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2019-03-01</h4>
+            <h4 class="date">2020-05-13</h4>
       
       
       <div class="hidden name"><code>MergingData.Rmd</code></div>
@@ -103,16 +108,44 @@
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
 <p>As of version 0.2 the YAML setup file doesn’t exist yet, so some basic information is encoded in the DataManagement object. This section would normally be setup by the PMDatR::DataManagement functions.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(PMDatR)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">PMDatR</span>)</pre></body></html></div>
 <pre><code>## Welcome to PMDatR,</code></pre>
-<pre><code>## package path = /usr/local/lib/R/site-library/PMDatR</code></pre>
+<pre><code>## package path = /tmp/RtmpC182l2/temp_libpath7275442227fb/PMDatR</code></pre>
+<pre><code>## library paths:
+##  /tmp/RtmpC182l2/temp_libpath7275442227fb
+## /home/travis/R/Library
+## /usr/local/lib/R/site-library
+## /home/travis/R-bin/lib/R/library</code></pre>
+<pre><code>## IQ PASSED
+## Warning: extraneous packages detected
+## askpass
+## callr
+## covr
+## curl
+## desc
+## fs
+## highlight
+## httr
+## memoise
+## openssl
+## pkgdown
+## praise
+## processx
+## ps
+## remotes
+## rex
+## rprojroot
+## sys
+## testthat
+## whisker
+## xml2</code></pre>
 <pre><code>## setting stringsAsFactors to FALSE as PMDatR default</code></pre>
 <pre><code>## 
 ## Attaching package: 'PMDatR'</code></pre>
 <pre><code>## The following object is masked from 'package:stats':
 ## 
 ##     power</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)</pre></body></html></div>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
 <pre><code>## The following object is masked from 'package:PMDatR':
@@ -124,22 +157,22 @@
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">#DM = DataManagement(settings.path) would generate the DM object that we construct here</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co"># these lists come from the settings.path YAML file</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">pc.settings =<span class="st"> </span><span class="kw"><a href="../reference/domain.html">domain</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">name=</span><span class="st">"PC"</span>,<span class="dt">filepath=</span><span class="st">"pc.sas7bdat"</span>))</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">ex.settings =<span class="st"> </span><span class="kw"><a href="../reference/domain.html">domain</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">name=</span><span class="st">"EX"</span>,<span class="dt">filepath=</span><span class="st">"ex.sas7bdat"</span>))</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">dm.settings =<span class="st"> </span><span class="kw"><a href="../reference/domain.html">domain</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">name=</span><span class="st">"DM"</span>,<span class="dt">filepath=</span><span class="st">"dm.sas7bdat"</span>))</a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">lb.settings =<span class="st"> </span><span class="kw"><a href="../reference/domain.html">domain</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">name=</span><span class="st">"LB"</span>,<span class="dt">filepath=</span><span class="st">"lb.sas7bdat"</span>))</a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">DM=<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>()</a>
-<a class="sourceLine" id="cb12-10" data-line-number="10">DM<span class="op">$</span>domains =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">PC=</span>pc.settings, <span class="dt">EX=</span>ex.settings, <span class="dt">DM=</span>dm.settings, <span class="dt">LB=</span>lb.settings)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co">#DM = DataManagement(settings.path) would generate the DM object that we construct here</span>
+
+<span class="co"># these lists come from the settings.path YAML file</span>
+<span class="no">pc.settings</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/domain.html">domain</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">name</span><span class="kw">=</span><span class="st">"PC"</span>,<span class="kw">filepath</span><span class="kw">=</span><span class="st">"pc.sas7bdat"</span>))
+<span class="no">ex.settings</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/domain.html">domain</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">name</span><span class="kw">=</span><span class="st">"EX"</span>,<span class="kw">filepath</span><span class="kw">=</span><span class="st">"ex.sas7bdat"</span>))
+<span class="no">dm.settings</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/domain.html">domain</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">name</span><span class="kw">=</span><span class="st">"DM"</span>,<span class="kw">filepath</span><span class="kw">=</span><span class="st">"dm.sas7bdat"</span>))
+<span class="no">lb.settings</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/domain.html">domain</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">name</span><span class="kw">=</span><span class="st">"LB"</span>,<span class="kw">filepath</span><span class="kw">=</span><span class="st">"lb.sas7bdat"</span>))
+
+<span class="no">DM</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>()
+<span class="no">DM</span>$<span class="no">domains</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">PC</span><span class="kw">=</span><span class="no">pc.settings</span>, <span class="kw">EX</span><span class="kw">=</span><span class="no">ex.settings</span>, <span class="kw">DM</span><span class="kw">=</span><span class="no">dm.settings</span>, <span class="kw">LB</span><span class="kw">=</span><span class="no">lb.settings</span>)</pre></body></html></div>
 </div>
 <div id="datamanagement-object" class="section level2">
 <h2 class="hasAnchor">
 <a href="#datamanagement-object" class="anchor"></a>DataManagement Object</h2>
 <p>At this point the DataManagement object is created. In this simple example, we’ve done this by hand and only created the domain data. We’ll have a look at the DM object structure.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">DM</a></code></pre></div>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">DM</span></pre></body></html></div>
 <pre><code>## $domains
 ## $domains$PC
 ## $name
@@ -249,7 +282,7 @@
 <h3 class="hasAnchor">
 <a href="#source-the-file-created-by-dm-object-initialization" class="anchor"></a>Source the file created by DM object initialization</h3>
 <p>The DM object as part of processing a settings file, will create an R file with dynamically created functions. This file is sourced into the data management script and the functions are available for the script to use.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/source">source</a></span>(<span class="st">"DMfunctions_spoofed.R"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="st">"DMfunctions_spoofed.R"</span>)</pre></body></html></div>
 </div>
 </div>
 <div id="pre-process-domains-load-filter-pre-merge-etc" class="section level2">
@@ -257,194 +290,196 @@
 <a href="#pre-process-domains-load-filter-pre-merge-etc" class="anchor"></a>Pre-process domains (load, filter, pre-merge etc)</h2>
 <p>In this part of the script, the domain sources are preprocessed. The preprocess.domains function directs loading of the sources and additional pre-processing, including filtering, pre-merge, transforms, and custom code can be added by the preprocess.XX functions.</p>
 <p>The function definitions given in DMfunctions file are shown here for informational purposes. All the preprocessing functions here are currently empty. They would normally be omitted by the DM object in such a case, but are provided here as stubs for further customization and experimentation.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">preprocess.domains &lt;-</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="cf">function</span> (DMobj) </a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">    DMobj<span class="op">$</span>domains<span class="op">$</span>PC =<span class="st"> </span><span class="kw"><a href="../reference/load.domain.html">load.domain</a></span>(DMobj<span class="op">$</span>domains<span class="op">$</span>PC, <span class="dt">.fun =</span> preprocess.PC)</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">    DMobj<span class="op">$</span>domains<span class="op">$</span>EX =<span class="st"> </span><span class="kw"><a href="../reference/load.domain.html">load.domain</a></span>(DMobj<span class="op">$</span>domains<span class="op">$</span>EX, <span class="dt">.fun =</span> preprocess.EX)</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">    DMobj<span class="op">$</span>domains<span class="op">$</span>DM =<span class="st"> </span><span class="kw"><a href="../reference/load.domain.html">load.domain</a></span>(DMobj<span class="op">$</span>domains<span class="op">$</span>DM, <span class="dt">.fun =</span> preprocess.DM)</a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">    DMobj<span class="op">$</span>domains<span class="op">$</span>LB =<span class="st"> </span><span class="kw"><a href="../reference/load.domain.html">load.domain</a></span>(DMobj<span class="op">$</span>domains<span class="op">$</span>LB, <span class="dt">.fun =</span> preprocess.LB)</a>
-<a class="sourceLine" id="cb16-8" data-line-number="8">    DMobj</a>
-<a class="sourceLine" id="cb16-9" data-line-number="9">}</a></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">preprocess.EX &lt;-</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="cf">function</span> (dom) </a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">    dom</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">}</a></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">preprocess.PC &lt;-</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="cf">function</span> (dom) </a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">    dom</a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">}</a></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">preprocess.DM &lt;-</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="cf">function</span> (dom) </a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb19-4" data-line-number="4">    dom</a>
-<a class="sourceLine" id="cb19-5" data-line-number="5">}</a></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">preprocess.LB &lt;-</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="cf">function</span> (dom) </a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb20-4" data-line-number="4">    dom</a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">preprocess.domains</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">DMobj</span>)
+{
+    <span class="no">DMobj</span>$<span class="no">domains</span>$<span class="no">PC</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/load.domain.html">load.domain</a></span>(<span class="no">DMobj</span>$<span class="no">domains</span>$<span class="no">PC</span>, <span class="kw">.fun</span> <span class="kw">=</span> <span class="no">preprocess.PC</span>)
+    <span class="no">DMobj</span>$<span class="no">domains</span>$<span class="no">EX</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/load.domain.html">load.domain</a></span>(<span class="no">DMobj</span>$<span class="no">domains</span>$<span class="no">EX</span>, <span class="kw">.fun</span> <span class="kw">=</span> <span class="no">preprocess.EX</span>)
+    <span class="no">DMobj</span>$<span class="no">domains</span>$<span class="no">DM</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/load.domain.html">load.domain</a></span>(<span class="no">DMobj</span>$<span class="no">domains</span>$<span class="no">DM</span>, <span class="kw">.fun</span> <span class="kw">=</span> <span class="no">preprocess.DM</span>)
+    <span class="no">DMobj</span>$<span class="no">domains</span>$<span class="no">LB</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/load.domain.html">load.domain</a></span>(<span class="no">DMobj</span>$<span class="no">domains</span>$<span class="no">LB</span>, <span class="kw">.fun</span> <span class="kw">=</span> <span class="no">preprocess.LB</span>)
+    <span class="no">DMobj</span>
+}</pre></body></html></div>
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">preprocess.EX</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">dom</span>)
+{
+    <span class="no">dom</span>
+}</pre></body></html></div>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">preprocess.PC</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">dom</span>)
+{
+    <span class="no">dom</span>
+}</pre></body></html></div>
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">preprocess.DM</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">dom</span>)
+{
+    <span class="no">dom</span>
+}</pre></body></html></div>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">preprocess.LB</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">dom</span>)
+{
+    <span class="no">dom</span>
+}</pre></body></html></div>
 <p>Here we load and process the domains</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">DM =<span class="st"> </span><span class="kw">preprocess.domains</span>(DM)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">DM</span> <span class="kw">=</span> <span class="fu">preprocess.domains</span>(<span class="no">DM</span>)</pre></body></html></div>
 <pre><code>## 
 ## Domain loaded: PC
 ##  Source File: pc.sas7bdat
 ##  Dimensions: 252 rows x 25 columns
 ##  MD5 sum: 5e9450af633843e136ec86ffab800040
-##  Last Modified: 2019-03-01 19:02:57
-##  Pre-processed Data [252 x 25] at 2019-03-01 23:06:05
+##  Last Modified: 2020-05-13 21:11:43
+##  Pre-processed Data [252 x 25] at 2020-05-13 21:29:15
 ## 
 ## Domain loaded: EX
 ##  Source File: ex.sas7bdat
 ##  Dimensions: 18 rows x 19 columns
 ##  MD5 sum: b1531a8bb553da5a8571ad2f13a6bb8e
-##  Last Modified: 2019-03-01 19:02:57
-##  Pre-processed Data [18 x 19] at 2019-03-01 23:06:05
+##  Last Modified: 2020-05-13 21:11:43
+##  Pre-processed Data [18 x 19] at 2020-05-13 21:29:15
 ## 
 ## Domain loaded: DM
 ##  Source File: dm.sas7bdat
 ##  Dimensions: 10 rows x 28 columns
 ##  MD5 sum: ef3d7b2e20ed6b9c34e576f9cea448f5
-##  Last Modified: 2019-03-01 19:02:57
-##  Pre-processed Data [10 x 28] at 2019-03-01 23:06:05
+##  Last Modified: 2020-05-13 21:11:43
+##  Pre-processed Data [10 x 28] at 2020-05-13 21:29:15
 ## 
 ## Domain loaded: LB
 ##  Source File: lb.sas7bdat
 ##  Dimensions: 2273 rows x 29 columns
 ##  MD5 sum: 80b97ae4bfb9fb7562c7f9caf67e320d
-##  Last Modified: 2019-03-01 19:02:57
-##  Pre-processed Data [2273 x 29] at 2019-03-01 23:06:05</code></pre>
+##  Last Modified: 2020-05-13 21:11:43
+##  Pre-processed Data [2273 x 29] at 2020-05-13 21:29:16</code></pre>
 </div>
 <div id="process-dosing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#process-dosing" class="anchor"></a>Process Dosing</h2>
 <p>The dosing domain is processed according to the dynamic function process.EX, shown here.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">process.EX &lt;-</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="cf">function</span> (DM) </a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">    ex1.df =<span class="st"> </span><span class="kw"><a href="../reference/getIndividualDoses.html">getIndividualDoses</a></span>(DM<span class="op">$</span>domains<span class="op">$</span>EX<span class="op">$</span>Data, <span class="dt">ID =</span> USUBJID, </a>
-<a class="sourceLine" id="cb23-5" data-line-number="5">        <span class="dt">TIME =</span> parsedate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/parsedate/topics/parse_date">parse_date</a></span>(EXSTDTC), <span class="dt">AMT =</span> EXDOSE, </a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">        <span class="dt">TRT =</span> EXTRT, <span class="dt">EPOCH =</span> EPOCH, <span class="dt">NTIME =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb23-7" data-line-number="7">    <span class="kw"><a href="../reference/bind_rows.html">bind_rows</a></span>(ex1.df)</a>
-<a class="sourceLine" id="cb23-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">process.EX</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">DM</span>)
+{
+    <span class="no">ex1.df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/getIndividualDoses.html">getIndividualDoses</a></span>(<span class="no">DM</span>$<span class="no">domains</span>$<span class="no">EX</span>$<span class="no">Data</span>, <span class="kw">ID</span> <span class="kw">=</span> <span class="no">USUBJID</span>,
+        <span class="kw">TIME</span> <span class="kw">=</span> <span class="kw pkg">parsedate</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/parsedate/man/parse_date.html">parse_date</a></span>(<span class="no">EXSTDTC</span>), <span class="kw">AMT</span> <span class="kw">=</span> <span class="no">EXDOSE</span>,
+        <span class="kw">TRT</span> <span class="kw">=</span> <span class="no">EXTRT</span>, <span class="kw">EPOCH</span> <span class="kw">=</span> <span class="no">EPOCH</span>, <span class="kw">NTIME</span> <span class="kw">=</span> <span class="fl">0</span>)
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="no">ex1.df</span>)
+}</pre></body></html></div>
 <p>Note that the process.EX function calls getIndividualDoses, which takes required arguments for ID, TIME, and AMT columns. Additional columns may be specified, as well as a filter expression to select rows of the dataset. Column specifications may contain functions to transform data. Additional help is available ??PMDatR::getIndividualDoses.</p>
 <p>Here we process the doses. Note that process.EX could have multiple calls to get functions for dosing, depending upon the complexity of the dosing data.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">EX.df =<span class="st"> </span><span class="kw">process.EX</span>(DM)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">EX.df</span> <span class="kw">=</span> <span class="fu">process.EX</span>(<span class="no">DM</span>)</pre></body></html></div>
 <pre><code>## getIndividualDoses: EVID defaulted to 1</code></pre>
 <pre><code>## getIndividualDoses: MDV defaulted to 1</code></pre>
 <p>EVID was not provided, so it was added and defaulted to 1.</p>
 <p>A quick look at the EX data:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(EX.df)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(<span class="no">EX.df</span>)</pre></body></html></div>
 <pre><code>## Observations: 18
 ## Variables: 8
-## $ ID    &lt;chr&gt; "STUDY-01-1", "STUDY-01-1", "STUDY-01-2", "STUDY-01-3", ...
-## $ TIME  &lt;dttm&gt; 2013-12-18 09:00:00, 2013-12-28 09:00:00, 2013-12-18 09...
-## $ AMT   &lt;dbl&gt; 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 1...
+## $ ID    &lt;chr&gt; "STUDY-01-1", "STUDY-01-1", "STUDY-01-2", "STUDY-01-3", "S…
+## $ TIME  &lt;dttm&gt; 2013-12-18 09:00:00, 2013-12-28 09:00:00, 2013-12-18 09:0…
+## $ AMT   &lt;dbl&gt; 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100…
 ## $ EVID  &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 ## $ MDV   &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-## $ TRT   &lt;chr&gt; "B", "A", "A", "A", "B", "B", "A", "B", "A", "A", "B", "...
-## $ EPOCH &lt;chr&gt; "Treatment Period 1", "Treatment Period 2", "Treatment P...
+## $ TRT   &lt;chr&gt; "B", "A", "A", "A", "B", "B", "A", "B", "A", "A", "B", "B"…
+## $ EPOCH &lt;chr&gt; "Treatment Period 1", "Treatment Period 2", "Treatment Per…
 ## $ NTIME &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0</code></pre>
 </div>
 <div id="process-dv-items" class="section level2">
 <h2 class="hasAnchor">
 <a href="#process-dv-items" class="anchor"></a>Process DV items</h2>
 <p>The observation data is processed according to the dynamic function process.DV, shown here.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">process.DV &lt;-</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="cf">function</span> (DM) </a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">    dv1.df =<span class="st"> </span><span class="kw"><a href="../reference/getDV.html">getDV</a></span>(DM<span class="op">$</span>domains<span class="op">$</span>PC<span class="op">$</span>Data, <span class="dt">ID =</span> USUBJID, <span class="dt">TIME =</span> parsedate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/parsedate/topics/parse_date">parse_date</a></span>(PCDTC), </a>
-<a class="sourceLine" id="cb29-5" data-line-number="5">        <span class="dt">DV =</span> PCSTRESN, <span class="dt">BQL =</span> PCORRES <span class="op">==</span><span class="st"> "BQL"</span>, <span class="dt">LLOQ =</span> PCLLOQ, </a>
-<a class="sourceLine" id="cb29-6" data-line-number="6">        <span class="dt">MDV =</span> PCSTAT <span class="op">==</span><span class="st"> "NOT DONE"</span>, <span class="dt">NTIME =</span> PCTPTNUM, <span class="dt">PCSTAT =</span> PCSTAT, </a>
-<a class="sourceLine" id="cb29-7" data-line-number="7">        <span class="dt">EPOCH =</span> EPOCH, <span class="dt">dv.filter =</span> PCTEST <span class="op">==</span><span class="st"> "ANALYTE1"</span>)</a>
-<a class="sourceLine" id="cb29-8" data-line-number="8">    <span class="kw"><a href="../reference/bind_rows.html">bind_rows</a></span>(dv1.df)</a>
-<a class="sourceLine" id="cb29-9" data-line-number="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="no">process.DV</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">DM</span>)
+{
+    <span class="no">dv1.df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/getDV.html">getDV</a></span>(<span class="no">DM</span>$<span class="no">domains</span>$<span class="no">PC</span>$<span class="no">Data</span>, <span class="kw">ID</span> <span class="kw">=</span> <span class="no">USUBJID</span>, <span class="kw">TIME</span> <span class="kw">=</span> <span class="kw pkg">parsedate</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/parsedate/man/parse_date.html">parse_date</a></span>(<span class="no">PCDTC</span>),
+        <span class="kw">DV</span> <span class="kw">=</span> <span class="no">PCSTRESN</span>, <span class="kw">BQL</span> <span class="kw">=</span> <span class="no">PCORRES</span> <span class="kw">==</span> <span class="st">"BQL"</span>, <span class="kw">LLOQ</span> <span class="kw">=</span> <span class="no">PCLLOQ</span>,
+        <span class="kw">MDV</span> <span class="kw">=</span> <span class="no">PCSTAT</span> <span class="kw">==</span> <span class="st">"NOT DONE"</span>, <span class="kw">NTIME</span> <span class="kw">=</span> <span class="no">PCTPTNUM</span>, <span class="kw">PCSTAT</span> <span class="kw">=</span> <span class="no">PCSTAT</span>,
+        <span class="kw">EPOCH</span> <span class="kw">=</span> <span class="no">EPOCH</span>, <span class="kw">dv.filter</span> <span class="kw">=</span> <span class="no">PCTEST</span> <span class="kw">==</span> <span class="st">"ANALYTE1"</span>)
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="no">dv1.df</span>)
+}</pre></body></html></div>
 <p>Here we process the observations Note that process.DV could have multiple calls to getDV, to build up data with multiple observations from potentially multiple domains (e.g. PC, LB, AE…)</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">DV.df =<span class="st"> </span><span class="kw">process.DV</span>(DM)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">DV.df</span> <span class="kw">=</span> <span class="fu">process.DV</span>(<span class="no">DM</span>)</pre></body></html></div>
 <pre><code>## getDV: EVID defaulted to 0</code></pre>
 <p>EVID was not provided, so it was added and defaulted to 0.</p>
 <p>A quick look at the DV data:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(DV.df)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(<span class="no">DV.df</span>)</pre></body></html></div>
 <pre><code>## Observations: 252
 ## Variables: 10
-## $ ID     &lt;chr&gt; "STUDY-01-1", "STUDY-01-1", "STUDY-01-1", "STUDY-01-1",...
-## $ TIME   &lt;dttm&gt; 2013-12-18 08:12:00, 2013-12-18 09:30:00, 2013-12-18 1...
-## $ DV     &lt;dbl&gt; 0.1000, 0.5700, 1.8500, 180.0000, 261.2500, 408.7500, 5...
-## $ EVID   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
-## $ BQL    &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, ...
-## $ LLOQ   &lt;dbl&gt; 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, ...
-## $ MDV    &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,...
-## $ NTIME  &lt;dbl&gt; -0.05, 0.50, 1.00, 1.50, 2.00, 3.00, 4.00, 6.00, 8.00, ...
-## $ PCSTAT &lt;chr&gt; "", "", "", "", "", "", "", "", "", "", "", "", "", "",...
-## $ EPOCH  &lt;chr&gt; "Treatment Period 1", "Treatment Period 1", "Treatment ...</code></pre>
+## $ ID     &lt;chr&gt; "STUDY-01-1", "STUDY-01-1", "STUDY-01-1", "STUDY-01-1", "…
+## $ TIME   &lt;dttm&gt; 2013-12-18 08:12:00, 2013-12-18 09:30:00, 2013-12-18 10:…
+## $ DV     &lt;dbl&gt; 0.1000, 0.5700, 1.8500, 180.0000, 261.2500, 408.7500, 553…
+## $ EVID   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ BQL    &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…
+## $ LLOQ   &lt;dbl&gt; 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.…
+## $ MDV    &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F…
+## $ NTIME  &lt;dbl&gt; -0.05, 0.50, 1.00, 1.50, 2.00, 3.00, 4.00, 6.00, 8.00, 12…
+## $ PCSTAT &lt;chr&gt; "", "", "", "", "", "", "", "", "", "", "", "", "", "", "…
+## $ EPOCH  &lt;chr&gt; "Treatment Period 1", "Treatment Period 1", "Treatment Pe…</code></pre>
 </div>
 <div id="process-covariate-items" class="section level2">
 <h2 class="hasAnchor">
 <a href="#process-covariate-items" class="anchor"></a>Process Covariate items</h2>
 <p>process.Cov creates a list of covariate datasets to merge into the Events data (DV, EX, and CovT). The dynamically created function is shown here:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">process.Cov &lt;-</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="cf">function</span> (DM) </a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">    cov1.df =<span class="st"> </span><span class="kw"><a href="../reference/getCov.html">getCov</a></span>(DM<span class="op">$</span>domains<span class="op">$</span>DM<span class="op">$</span>Data, <span class="dt">ID =</span> USUBJID, <span class="dt">AGE =</span> AGE, </a>
-<a class="sourceLine" id="cb34-5" data-line-number="5">        <span class="dt">SEX =</span> SEX, <span class="dt">RACE =</span> RACE, <span class="dt">ETHNIC =</span> ETHNIC, <span class="dt">cov.keys =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ID"</span>))</a>
-<a class="sourceLine" id="cb34-6" data-line-number="6">    cov2.df =<span class="st"> </span><span class="kw"><a href="../reference/getCov.html">getCov</a></span>(DM<span class="op">$</span>domains<span class="op">$</span>LB<span class="op">$</span>Data, <span class="dt">ID =</span> USUBJID, <span class="dt">cov.filter =</span> LBBLFL <span class="op">==</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb34-7" data-line-number="7"><span class="st">        "Y"</span>, <span class="dt">cov.col =</span> LBTESTCD, <span class="dt">cov.val =</span> LBSTRESN, <span class="dt">EPOCH =</span> EPOCH, </a>
-<a class="sourceLine" id="cb34-8" data-line-number="8">        <span class="dt">cov.keys =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ID"</span>, <span class="st">"EPOCH"</span>), <span class="dt">CREAT =</span> CREAT)</a>
-<a class="sourceLine" id="cb34-9" data-line-number="9">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(cov1.df, cov2.df)</a>
-<a class="sourceLine" id="cb34-10" data-line-number="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="no">process.Cov</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">DM</span>)
+{
+    <span class="no">cov1.df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/getCov.html">getCov</a></span>(<span class="no">DM</span>$<span class="no">domains</span>$<span class="no">DM</span>$<span class="no">Data</span>, <span class="kw">ID</span> <span class="kw">=</span> <span class="no">USUBJID</span>, <span class="kw">AGE</span> <span class="kw">=</span> <span class="no">AGE</span>,
+        <span class="kw">SEX</span> <span class="kw">=</span> <span class="no">SEX</span>, <span class="kw">RACE</span> <span class="kw">=</span> <span class="no">RACE</span>, <span class="kw">ETHNIC</span> <span class="kw">=</span> <span class="no">ETHNIC</span>, <span class="kw">cov.keys</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ID"</span>))
+    <span class="no">cov2.df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/getCov.html">getCov</a></span>(<span class="no">DM</span>$<span class="no">domains</span>$<span class="no">LB</span>$<span class="no">Data</span>, <span class="kw">ID</span> <span class="kw">=</span> <span class="no">USUBJID</span>, <span class="kw">cov.filter</span> <span class="kw">=</span> <span class="no">LBBLFL</span> <span class="kw">==</span>
+        <span class="st">"Y"</span>, <span class="kw">cov.col</span> <span class="kw">=</span> <span class="no">LBTESTCD</span>, <span class="kw">cov.val</span> <span class="kw">=</span> <span class="no">LBSTRESN</span>, <span class="kw">EPOCH</span> <span class="kw">=</span> <span class="no">EPOCH</span>,
+        <span class="kw">cov.keys</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ID"</span>, <span class="st">"EPOCH"</span>), <span class="kw">CREAT</span> <span class="kw">=</span> <span class="no">CREAT</span>)
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">cov1.df</span>, <span class="no">cov2.df</span>)
+}</pre></body></html></div>
 <p>Note that covariates can be combined across multiple files. Also, covariates may be processed from both long format (presented like LB domain, where tests are stacked) or wide format (like DM domain, where covariates are in individual columns) sources. The merge keys are specified in the getCov() call, which groups the returned data by the keys. The grouping is interpreted when merging the data.</p>
 <p>Here we process the covariates in the LB and DM domains.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">Cov.l =<span class="st"> </span><span class="kw">process.Cov</span>(DM)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">Cov.l</span> <span class="kw">=</span> <span class="fu">process.Cov</span>(<span class="no">DM</span>)</pre></body></html></div>
 <p>A quick look at the Covariate data:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(Cov.l[[<span class="dv">1</span>]])</a></code></pre></div>
+<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(<span class="no">Cov.l</span><span class="kw">[[</span><span class="fl">1</span>]])</pre></body></html></div>
 <pre><code>## Observations: 10
 ## Variables: 5
-## $ ID     &lt;chr&gt; "STUDY-01-1", "STUDY-01-2", "STUDY-01-3", "STUDY-01-4",...
+## Groups: ID [10]
+## $ ID     &lt;chr&gt; "STUDY-01-1", "STUDY-01-2", "STUDY-01-3", "STUDY-01-4", "…
 ## $ AGE    &lt;dbl&gt; 48, 30, 54, 49, 37, 50, 31, 53, 44, 34
 ## $ SEX    &lt;chr&gt; "M", "M", "M", "F", "M", "M", "M", "F", "M", "M"
-## $ RACE   &lt;chr&gt; "WHITE", "ASIAN", "WHITE", "WHITE", "BLACK OR AFRICAN A...
-## $ ETHNIC &lt;chr&gt; "HISPANIC OR LATINO", "NOT HISPANIC OR LATINO", "HISPAN...</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(Cov.l[[<span class="dv">2</span>]])</a></code></pre></div>
+## $ RACE   &lt;chr&gt; "WHITE", "ASIAN", "WHITE", "WHITE", "BLACK OR AFRICAN AME…
+## $ ETHNIC &lt;chr&gt; "HISPANIC OR LATINO", "NOT HISPANIC OR LATINO", "HISPANIC…</code></pre>
+<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(<span class="no">Cov.l</span><span class="kw">[[</span><span class="fl">2</span>]])</pre></body></html></div>
 <pre><code>## Observations: 18
 ## Variables: 3
-## $ ID    &lt;chr&gt; "STUDY-01-1", "STUDY-01-1", "STUDY-01-10", "STUDY-01-10"...
-## $ EPOCH &lt;chr&gt; "Treatment Period 1", "Treatment Period 2", "Treatment P...
-## $ CREAT &lt;dbl&gt; 100.00, 88.75, 97.50, 92.50, 96.25, 140.00, 137.50, 86.2...</code></pre>
+## Groups: ID, EPOCH [18]
+## $ ID    &lt;chr&gt; "STUDY-01-1", "STUDY-01-1", "STUDY-01-10", "STUDY-01-10", …
+## $ EPOCH &lt;chr&gt; "Treatment Period 1", "Treatment Period 2", "Treatment Per…
+## $ CREAT &lt;dbl&gt; 100.00, 88.75, 97.50, 92.50, 96.25, 140.00, 137.50, 86.25,…</code></pre>
 </div>
 <div id="process-time-varying-covariate-items-covt" class="section level2">
 <h2 class="hasAnchor">
 <a href="#process-time-varying-covariate-items-covt" class="anchor"></a>Process Time-Varying Covariate items (CovT)</h2>
 <p>Time varying covariates are stacked with dosing and observations. As such, TIME should be specified along with ID. The covariates are expected to present in stacked form. If multiple domains provide time-varying covariates, the data will be stacked. A filter can be applied to select rows.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">process.CovT &lt;-</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="cf">function</span> (DM) </a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">    cols =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>()</a>
-<a class="sourceLine" id="cb40-5" data-line-number="5">    id =<span class="st"> "USUBJID"</span></a>
-<a class="sourceLine" id="cb40-6" data-line-number="6">    time =<span class="st"> "parsedate::parse_date(EXSTDTC)"</span></a>
-<a class="sourceLine" id="cb40-7" data-line-number="7">    covt1.df =<span class="st"> </span><span class="kw"><a href="../reference/getCovT.html">getCovT</a></span>(DM<span class="op">$</span>domains<span class="op">$</span>LB<span class="op">$</span>Data, <span class="dt">ID =</span> USUBJID, <span class="dt">TIME =</span> parsedate<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/parsedate/topics/parse_date">parse_date</a></span>(LBDTC), </a>
-<a class="sourceLine" id="cb40-8" data-line-number="8">        <span class="dt">covT.filter =</span> EPOCH <span class="op">!=</span><span class="st"> "Screening"</span>, <span class="dt">covT.col =</span> LBTESTCD, </a>
-<a class="sourceLine" id="cb40-9" data-line-number="9">        <span class="dt">covT.val =</span> LBSTRESN, <span class="dt">EPOCH =</span> EPOCH, <span class="dt">ALB =</span> ALB, <span class="dt">AST =</span> AST, </a>
-<a class="sourceLine" id="cb40-10" data-line-number="10">        <span class="dt">ALT =</span> ALT, <span class="dt">BILI =</span> BILI)</a>
-<a class="sourceLine" id="cb40-11" data-line-number="11">    <span class="kw"><a href="../reference/bind_rows.html">bind_rows</a></span>(covt1.df)</a>
-<a class="sourceLine" id="cb40-12" data-line-number="12">}</a></code></pre></div>
+<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="no">process.CovT</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">DM</span>)
+{
+    <span class="no">cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>()
+    <span class="no">id</span> <span class="kw">=</span> <span class="st">"USUBJID"</span>
+    <span class="no">time</span> <span class="kw">=</span> <span class="st">"parsedate::parse_date(EXSTDTC)"</span>
+    <span class="no">covt1.df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/getCovT.html">getCovT</a></span>(<span class="no">DM</span>$<span class="no">domains</span>$<span class="no">LB</span>$<span class="no">Data</span>, <span class="kw">ID</span> <span class="kw">=</span> <span class="no">USUBJID</span>, <span class="kw">TIME</span> <span class="kw">=</span> <span class="kw pkg">parsedate</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/parsedate/man/parse_date.html">parse_date</a></span>(<span class="no">LBDTC</span>),
+        <span class="kw">covT.filter</span> <span class="kw">=</span> <span class="no">EPOCH</span> <span class="kw">!=</span> <span class="st">"Screening"</span>, <span class="kw">covT.col</span> <span class="kw">=</span> <span class="no">LBTESTCD</span>,
+        <span class="kw">covT.val</span> <span class="kw">=</span> <span class="no">LBSTRESN</span>, <span class="kw">EPOCH</span> <span class="kw">=</span> <span class="no">EPOCH</span>, <span class="kw">ALB</span> <span class="kw">=</span> <span class="no">ALB</span>, <span class="kw">AST</span> <span class="kw">=</span> <span class="no">AST</span>,
+        <span class="kw">ALT</span> <span class="kw">=</span> <span class="no">ALT</span>, <span class="kw">BILI</span> <span class="kw">=</span> <span class="no">BILI</span>)
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="no">covt1.df</span>)
+}</pre></body></html></div>
 <p>Here we process the time varying covariates in the LB domain.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">CovT.df =<span class="st"> </span><span class="kw">process.CovT</span>(DM)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="no">CovT.df</span> <span class="kw">=</span> <span class="fu">process.CovT</span>(<span class="no">DM</span>)</pre></body></html></div>
 <pre><code>## getCovT: EVID defaulted to 2</code></pre>
 <p>EVID was not provided, so it was added and defaulted to 2.</p>
 <p>A quick look at the CovT data:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(CovT.df)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(<span class="no">CovT.df</span>)</pre></body></html></div>
 <pre><code>## Observations: 46
 ## Variables: 8
-## $ ID    &lt;chr&gt; "STUDY-01-1", "STUDY-01-1", "STUDY-01-1", "STUDY-01-1", ...
-## $ TIME  &lt;dttm&gt; 2013-12-17 18:42:00, 2013-12-21 09:00:00, 2013-12-27 19...
-## $ EVID  &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,...
-## $ EPOCH &lt;chr&gt; "Treatment Period 1", "Treatment Period 1", "Treatment P...
-## $ ALB   &lt;dbl&gt; 53.75, 55.00, 56.25, 55.00, 53.75, 57.50, 56.25, 52.50, ...
-## $ AST   &lt;dbl&gt; 21.25, 17.50, 23.75, 17.50, 22.50, 27.50, 27.50, 43.75, ...
-## $ ALT   &lt;dbl&gt; 16.25, 16.25, 18.75, 16.25, 17.50, 25.00, 30.00, 72.50, ...
-## $ BILI  &lt;dbl&gt; 5.00, 5.00, 6.25, 7.50, 8.75, 5.00, 12.50, 7.50, 10.00, ...</code></pre>
+## $ ID    &lt;chr&gt; "STUDY-01-1", "STUDY-01-1", "STUDY-01-1", "STUDY-01-1", "S…
+## $ TIME  &lt;dttm&gt; 2013-12-17 18:42:00, 2013-12-21 09:00:00, 2013-12-27 19:0…
+## $ EVID  &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2…
+## $ EPOCH &lt;chr&gt; "Treatment Period 1", "Treatment Period 1", "Treatment Per…
+## $ ALB   &lt;dbl&gt; 53.75, 55.00, 56.25, 55.00, 53.75, 57.50, 56.25, 52.50, 57…
+## $ AST   &lt;dbl&gt; 21.25, 17.50, 23.75, 17.50, 22.50, 27.50, 27.50, 43.75, 32…
+## $ ALT   &lt;dbl&gt; 16.25, 16.25, 18.75, 16.25, 17.50, 25.00, 30.00, 72.50, 58…
+## $ BILI  &lt;dbl&gt; 5.00, 5.00, 6.25, 7.50, 8.75, 5.00, 12.50, 7.50, 10.00, 5.…</code></pre>
 </div>
 <div id="ready-for-merging" class="section level2">
 <h2 class="hasAnchor">
@@ -455,32 +490,31 @@
 <h3 class="hasAnchor">
 <a href="#pre-merge-hook-goes-here" class="anchor"></a>PRE-MERGE HOOK GOES HERE</h3>
 <p>Custom code can be injected in the pre.merge.hook function, shown here:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">pre.merge.hook &lt;-</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="cf">function</span> () </a>
-<a class="sourceLine" id="cb45-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb45-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="no">pre.merge.hook</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> ()
+{
+}</pre></body></html></div>
 <p>We’ll call it, even though it doesn’t actually do anything in this example.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">pre.merge.hook</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb48"><html><body><pre class="r"><span class="fu">pre.merge.hook</span>()</pre></body></html></div>
 <pre><code>## NULL</code></pre>
 </div>
 <div id="append-events" class="section level3">
 <h3 class="hasAnchor">
 <a href="#append-events" class="anchor"></a>Append events</h3>
 <p>The EX and DV files can be combined by the PMDatR::append.events function. A new data frame is returned that contains the stacked events, sorted by ID and TIME.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">events.df =<span class="st"> </span><span class="kw"><a href="../reference/append.events.html">append.events</a></span>(EX.df, DV.df)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><html><body><pre class="r"><span class="no">events.df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/append.events.html">append.events</a></span>(<span class="no">EX.df</span>, <span class="no">DV.df</span>)</pre></body></html></div>
 </div>
 <div id="append-covt" class="section level3">
 <h3 class="hasAnchor">
 <a href="#append-covt" class="anchor"></a>Append CovT</h3>
 <p>The time-varying covariates are then appended to the events, using PMDatR::append.CovT. We overwrite the events.df data frame.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">events.df =<span class="st"> </span><span class="kw"><a href="../reference/append.CovT.html">append.CovT</a></span>(events.df, CovT.df)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><html><body><pre class="r"><span class="no">events.df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/append.CovT.html">append.CovT</a></span>(<span class="no">events.df</span>, <span class="no">CovT.df</span>)</pre></body></html></div>
 </div>
 <div id="merge-covariates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#merge-covariates" class="anchor"></a>Merge covariates</h3>
 <p>The covariate data frames are contained in a list. They are each merged with the events, according to the specified keys. No events are deleted as an effect of this merge, and no unmatched covariates are kept - this is a left_join.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">database.df =<span class="st"> </span><span class="kw"><a href="../reference/merge.Cov.html">merge.Cov</a></span>(events.df, Cov.l)</a></code></pre></div>
-<pre><code>## Warning: Column `ID` has different attributes on LHS and RHS of join</code></pre>
+<div class="sourceCode" id="cb52"><html><body><pre class="r"><span class="no">database.df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/merge.Cov.html">merge.Cov</a></span>(<span class="no">events.df</span>, <span class="no">Cov.l</span>)</pre></body></html></div>
 </div>
 </div>
 <div id="check-for-errors-and-report" class="section level2">
@@ -492,16 +526,16 @@
 <h2 class="hasAnchor">
 <a href="#post-merge-hook-goes-here" class="anchor"></a>POST-MERGE HOOK GOES HERE</h2>
 <p>We’ll demonstrate the post merge hook by using it to reassign M and F to MALE and FEMALE in the SEX column, and to get rid of na values in PCSTAT. Here’s the function definition:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">post.merge.hook &lt;-</a>
-<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="cf">function</span> () </a>
-<a class="sourceLine" id="cb52-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb52-4" data-line-number="4">    .data =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sys.parent">parent.frame</a></span>()<span class="op">$</span>database.df</a>
-<a class="sourceLine" id="cb52-5" data-line-number="5">    database.df &lt;&lt;-<span class="st"> </span>.data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">SEX =</span> <span class="kw"><a href="../reference/conditional_values.html">conditional_values</a></span>(<span class="dt">MALE =</span> SEX <span class="op">==</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb52-6" data-line-number="6"><span class="st">        "M"</span>, <span class="dt">default =</span> <span class="st">"FEMALE"</span>), <span class="dt">PCSTAT =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(PCSTAT), </a>
-<a class="sourceLine" id="cb52-7" data-line-number="7">        <span class="st">""</span>, PCSTAT))</a>
-<a class="sourceLine" id="cb52-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb53"><html><body><pre class="r"><span class="no">post.merge.hook</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> ()
+{
+    <span class="no">.data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span>()$<span class="no">database.df</span>
+    <span class="no">database.df</span> <span class="kw">&lt;&lt;-</span> <span class="no">.data</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">SEX</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/conditional_values.html">conditional_values</a></span>(<span class="kw">MALE</span> <span class="kw">=</span> <span class="no">SEX</span> <span class="kw">==</span>
+        <span class="st">"M"</span>, <span class="kw">default</span> <span class="kw">=</span> <span class="st">"FEMALE"</span>), <span class="kw">PCSTAT</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">PCSTAT</span>),
+        <span class="st">""</span>, <span class="no">PCSTAT</span>))
+}</pre></body></html></div>
 <p>And now run it.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">post.merge.hook</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb54"><html><body><pre class="r"><span class="fu">post.merge.hook</span>()</pre></body></html></div>
 </div>
 <div id="filter-transform-exclude" class="section level2">
 <h2 class="hasAnchor">
@@ -509,38 +543,47 @@
 <p>PMDatR::post.merge.refactoring applies some smarts to make sure that our data are going to be ready for nonmem. It adds in a RECID column, which just enumerates the rows in the dataframe. We also get ELTM (elapsed time) which defaults to hours since the first event per subject. Then dynamic functions for transforming, filtering and exluding data can be applied.</p>
 <p>Transform</p>
 <p>Many data transformations that we’d want need to operate over all of the data in a subject, or even across the entire dataset. The post.transform function handles such operations specified in the settings. In this example we use it to apply a last observation carried forward (locf) interpolation for the time-varying covarites (which were NA for the other events). The function definition is shown here:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">post.transform &lt;-</a>
-<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="cf">function</span> (.data) </a>
-<a class="sourceLine" id="cb54-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb54-4" data-line-number="4">    .data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise_each.html">mutate_each</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(locf), ALB, AST, ALT, BILI, CREAT)</a>
-<a class="sourceLine" id="cb54-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb55"><html><body><pre class="r"><span class="no">post.transform</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">.data</span>)
+{
+    <span class="no">.data</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="no">ALB</span>, <span class="no">AST</span>, <span class="no">ALT</span>, <span class="no">BILI</span>, <span class="no">CREAT</span>), <span class="fu"><a href="https://dplyr.tidyverse.org/reference/funs.html">funs</a></span>(<span class="no">locf</span>))
+}</pre></body></html></div>
 <p>Filter</p>
 <p>The filter operation can be used here to remove data that somehow escaped removal in preprocessing of domains, or selection of EX, DV, and CovT. Or possibly we need the full context of the joined data to determine if removal is desired. Filtering data at this point will generate a gap in RECID. Here we remove the record with RECID==27 (by way of example), as shown:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">post.filter &lt;-</a>
-<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="cf">function</span> (.data) </a>
-<a class="sourceLine" id="cb55-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb55-4" data-line-number="4">    .data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(RECID <span class="op">!=</span><span class="st"> </span><span class="dv">27</span>)</a>
-<a class="sourceLine" id="cb55-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb56"><html><body><pre class="r"><span class="no">post.filter</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">.data</span>)
+{
+    <span class="no">.data</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">RECID</span> <span class="kw">!=</span> <span class="fl">27</span>)
+}</pre></body></html></div>
 <p>Exclusions</p>
 <p>We use a single exclusion column (EXCL) to indicate data disposition. The EXCL column can be used in NONMEM to exclude data from a run. PMDatR provides a useful function, conditionalValues, which allows us to apply criteria - in order - to set the Exclusion flag. In addition, flags can be set to indicate if a criteria was T or F. Since the EXCL column can only include a single value per record, exclusions should be ordered by egregiousness so that the reported reason for exclusion will be the most egregious. This single value exclusion method ensures that data dispostion reports won’t double count data. Here we exclude with reasons BQL or ND (Not Done), with the default value being OK.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">apply.exclusions &lt;-</a>
-<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="cf">function</span> (.data) </a>
-<a class="sourceLine" id="cb56-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb56-4" data-line-number="4">    .data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">EXCL =</span> <span class="kw"><a href="../reference/conditional_values.html">conditional_values</a></span>(<span class="dt">BQL =</span> BQL <span class="op">==</span><span class="st"> </span>T <span class="op">&amp;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb56-5" data-line-number="5"><span class="st">        </span>EVID <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">ND =</span> PCSTAT <span class="op">==</span><span class="st"> "NOT DONE"</span>, <span class="dt">default =</span> <span class="st">"OK"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb56-6" data-line-number="6"><span class="st">        </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">BQL.fl =</span> BQL <span class="op">==</span><span class="st"> </span>T <span class="op">&amp;</span><span class="st"> </span>EVID <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">ND.fl =</span> PCSTAT <span class="op">==</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb56-7" data-line-number="7"><span class="st">            "NOT DONE"</span>)</a>
-<a class="sourceLine" id="cb56-8" data-line-number="8">}</a></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">database.df =<span class="st"> </span><span class="kw"><a href="../reference/post.merge.refactoring.html">post.merge.refactoring</a></span>(database.df, </a>
-<a class="sourceLine" id="cb57-2" data-line-number="2">                                     <span class="dt">fun.transform =</span> post.transform, </a>
-<a class="sourceLine" id="cb57-3" data-line-number="3">                                     <span class="dt">fun.filter =</span> post.filter,</a>
-<a class="sourceLine" id="cb57-4" data-line-number="4">                                     <span class="dt">fun.exclude =</span> apply.exclusions)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><html><body><pre class="r"><span class="no">apply.exclusions</span> <span class="kw">&lt;-</span>
+<span class="kw">function</span> (<span class="no">.data</span>)
+{
+    <span class="no">.data</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">EXCL</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/conditional_values.html">conditional_values</a></span>(<span class="kw">BQL</span> <span class="kw">=</span> <span class="no">BQL</span> <span class="kw">==</span> <span class="no">T</span> <span class="kw">&amp;</span>
+        <span class="no">EVID</span> <span class="kw">==</span> <span class="fl">0</span>, <span class="kw">ND</span> <span class="kw">=</span> <span class="no">PCSTAT</span> <span class="kw">==</span> <span class="st">"NOT DONE"</span>, <span class="kw">default</span> <span class="kw">=</span> <span class="st">"OK"</span>)) <span class="kw">%&gt;%</span>
+        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">BQL.fl</span> <span class="kw">=</span> <span class="no">BQL</span> <span class="kw">==</span> <span class="no">T</span> <span class="kw">&amp;</span> <span class="no">EVID</span> <span class="kw">==</span> <span class="fl">0</span>, <span class="kw">ND.fl</span> <span class="kw">=</span> <span class="no">PCSTAT</span> <span class="kw">==</span>
+            <span class="st">"NOT DONE"</span>)
+}</pre></body></html></div>
+<div class="sourceCode" id="cb58"><html><body><pre class="r"><span class="no">database.df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/PMDatR/man/post.merge.refactoring.html">post.merge.refactoring</a></span>(<span class="no">database.df</span>,
+                                     <span class="kw">fun.transform</span> <span class="kw">=</span> <span class="no">post.transform</span>,
+                                     <span class="kw">fun.filter</span> <span class="kw">=</span> <span class="no">post.filter</span>,
+                                     <span class="kw">fun.exclude</span> <span class="kw">=</span> <span class="no">apply.exclusions</span>)</pre></body></html></div>
 <pre><code>## Warning in post.merge.refactoring(database.df, fun.transform =
 ## post.transform, : Post Merge: NONMEM dataset does not have CMT column</code></pre>
 <pre><code>## Post Merge sort order [ID, TIME, EVID] and EVID order [2, 1, 3, 4, 0]</code></pre>
-<pre><code>## `mutate_each()` is deprecated.
-## Use `mutate_all()`, `mutate_at()` or `mutate_if()` instead.
-## To map `funs` over a selection of variables, use `mutate_at()`</code></pre>
+<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## Please use a list of either functions or lambdas: 
+## 
+##   # Simple named list: 
+##   list(mean = mean, median = median)
+## 
+##   # Auto named with `tibble::lst()`: 
+##   tibble::lst(mean, median)
+## 
+##   # Using lambdas
+##   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
+## This warning is displayed once per session.</code></pre>
 <pre><code>## Dropped EVID 2 records with DV==NA</code></pre>
 <pre><code>## Dropped empty columns []</code></pre>
 </div>
@@ -549,7 +592,7 @@
 <a href="#look-at-the-data" class="anchor"></a>Look at the data</h2>
 <p>Lets review the data for the first subject. See that RECID 27 is missing, per our post.filter operation.</p>
 <p>Note that remaining NA values will be converted to appropriate missing values when writing the NONMEM file. Also, ELTM will simply output a number without units. Writing a NONMEM ready file is not complete as of version 0.2</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">kable</span>(database.df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(ID<span class="op">==</span><span class="st">"STUDY-01-1"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="fu">kable</span>(<span class="no">database.df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">ID</span><span class="kw">==</span><span class="st">"STUDY-01-1"</span>))</pre></body></html></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">RECID</th>
@@ -1487,30 +1530,14 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#overview">Overview</a></li>
-      <li><a href="#setup">Setup</a></li>
-      <li><a href="#datamanagement-object">DataManagement Object</a></li>
-      <li><a href="#merge-script">Merge script</a></li>
-      <li><a href="#pre-process-domains-load-filter-pre-merge-etc">Pre-process domains (load, filter, pre-merge etc)</a></li>
-      <li><a href="#process-dosing">Process Dosing</a></li>
-      <li><a href="#process-dv-items">Process DV items</a></li>
-      <li><a href="#process-covariate-items">Process Covariate items</a></li>
-      <li><a href="#process-time-varying-covariate-items-covt">Process Time-Varying Covariate items (CovT)</a></li>
-      <li><a href="#ready-for-merging">Ready for Merging</a></li>
-      <li><a href="#check-for-errors-and-report">Check for errors and report</a></li>
-      <li><a href="#post-merge-hook-goes-here">POST-MERGE HOOK GOES HERE</a></li>
-      <li><a href="#filter-transform-exclude">Filter, Transform, Exclude</a></li>
-      <li><a href="#look-at-the-data">Look at the data</a></li>
-      </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
@@ -1518,12 +1545,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

@@ -8,21 +8,29 @@
 
 <title>set_units_from_list sets units for all columns that match a name — set_units_from_list • PMDatR</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="set_units_from_list sets units for all columns that match a name — set_units_from_list" />
 
+<meta property="og:title" content="set_units_from_list sets units for all columns that match a name — set_units_from_list" />
 <meta property="og:description" content="set_units_from_list sets units for all columns that match a name" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PMDatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -103,7 +112,6 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -113,6 +121,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -124,13 +133,11 @@
     </div>
 
     <div class="ref-description">
-    
     <p>set_units_from_list sets units for all columns that match a name</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>set_units_from_list</span>(<span class='no'>.df</span>, <span class='no'>.ul</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -143,14 +150,14 @@
       <td><p>unit list with name/value</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>set_units_from_list</span>(<span class='no'>Theoph</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>Wt</span> <span class='kw'>=</span> <span class='st'>"kg"</span>, <span class='kw'>conc</span> <span class='kw'>=</span> <span class='st'>"mg/L"</span>, <span class='kw'>Dose</span> <span class='kw'>=</span> <span class='st'>"mg/kg"</span>))</div><div class='output co'>#&gt;     Subject   Wt Dose  Time  conc
+    <pre class="examples"><div class='input'><span class='fu'>set_units_from_list</span>(<span class='no'>Theoph</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>Wt</span> <span class='kw'>=</span> <span class='st'>"kg"</span>, <span class='kw'>conc</span> <span class='kw'>=</span> <span class='st'>"mg/L"</span>, <span class='kw'>Dose</span> <span class='kw'>=</span> <span class='st'>"mg/kg"</span>))</div><div class='output co'>#&gt;     Subject   Wt Dose  Time  conc
 #&gt; 1         1 79.6 4.02  0.00  0.74
 #&gt; 2         1 79.6 4.02  0.25  2.84
 #&gt; 3         1 79.6 4.02  0.57  6.57
-#&gt; 4         1 79.6 4.02  1.12 10.50
+#&gt; 4         1 79.6 4.02  1.12  10.5
 #&gt; 5         1 79.6 4.02  2.02  9.66
 #&gt; 6         1 79.6 4.02  3.82  8.58
 #&gt; 7         1 79.6 4.02  5.10  8.36
@@ -158,61 +165,61 @@
 #&gt; 9         1 79.6 4.02  9.05  6.89
 #&gt; 10        1 79.6 4.02 12.12  5.94
 #&gt; 11        1 79.6 4.02 24.37  3.28
-#&gt; 12        2 72.4 4.40  0.00  0.00
-#&gt; 13        2 72.4 4.40  0.27  1.72
-#&gt; 14        2 72.4 4.40  0.52  7.91
-#&gt; 15        2 72.4 4.40  1.00  8.31
-#&gt; 16        2 72.4 4.40  1.92  8.33
-#&gt; 17        2 72.4 4.40  3.50  6.85
-#&gt; 18        2 72.4 4.40  5.02  6.08
-#&gt; 19        2 72.4 4.40  7.03  5.40
-#&gt; 20        2 72.4 4.40  9.00  4.55
-#&gt; 21        2 72.4 4.40 12.00  3.01
-#&gt; 22        2 72.4 4.40 24.30  0.90
-#&gt; 23        3 70.5 4.53  0.00  0.00
-#&gt; 24        3 70.5 4.53  0.27  4.40
-#&gt; 25        3 70.5 4.53  0.58  6.90
-#&gt; 26        3 70.5 4.53  1.02  8.20
-#&gt; 27        3 70.5 4.53  2.02  7.80
-#&gt; 28        3 70.5 4.53  3.62  7.50
-#&gt; 29        3 70.5 4.53  5.08  6.20
-#&gt; 30        3 70.5 4.53  7.07  5.30
-#&gt; 31        3 70.5 4.53  9.00  4.90
-#&gt; 32        3 70.5 4.53 12.15  3.70
+#&gt; 12        2 72.4  4.4  0.00     0
+#&gt; 13        2 72.4  4.4  0.27  1.72
+#&gt; 14        2 72.4  4.4  0.52  7.91
+#&gt; 15        2 72.4  4.4  1.00  8.31
+#&gt; 16        2 72.4  4.4  1.92  8.33
+#&gt; 17        2 72.4  4.4  3.50  6.85
+#&gt; 18        2 72.4  4.4  5.02  6.08
+#&gt; 19        2 72.4  4.4  7.03   5.4
+#&gt; 20        2 72.4  4.4  9.00  4.55
+#&gt; 21        2 72.4  4.4 12.00  3.01
+#&gt; 22        2 72.4  4.4 24.30   0.9
+#&gt; 23        3 70.5 4.53  0.00     0
+#&gt; 24        3 70.5 4.53  0.27   4.4
+#&gt; 25        3 70.5 4.53  0.58   6.9
+#&gt; 26        3 70.5 4.53  1.02   8.2
+#&gt; 27        3 70.5 4.53  2.02   7.8
+#&gt; 28        3 70.5 4.53  3.62   7.5
+#&gt; 29        3 70.5 4.53  5.08   6.2
+#&gt; 30        3 70.5 4.53  7.07   5.3
+#&gt; 31        3 70.5 4.53  9.00   4.9
+#&gt; 32        3 70.5 4.53 12.15   3.7
 #&gt; 33        3 70.5 4.53 24.17  1.05
-#&gt; 34        4 72.7 4.40  0.00  0.00
-#&gt; 35        4 72.7 4.40  0.35  1.89
-#&gt; 36        4 72.7 4.40  0.60  4.60
-#&gt; 37        4 72.7 4.40  1.07  8.60
-#&gt; 38        4 72.7 4.40  2.13  8.38
-#&gt; 39        4 72.7 4.40  3.50  7.54
-#&gt; 40        4 72.7 4.40  5.02  6.88
-#&gt; 41        4 72.7 4.40  7.02  5.78
-#&gt; 42        4 72.7 4.40  9.02  5.33
-#&gt; 43        4 72.7 4.40 11.98  4.19
-#&gt; 44        4 72.7 4.40 24.65  1.15
-#&gt; 45        5 54.6 5.86  0.00  0.00
+#&gt; 34        4 72.7  4.4  0.00     0
+#&gt; 35        4 72.7  4.4  0.35  1.89
+#&gt; 36        4 72.7  4.4  0.60   4.6
+#&gt; 37        4 72.7  4.4  1.07   8.6
+#&gt; 38        4 72.7  4.4  2.13  8.38
+#&gt; 39        4 72.7  4.4  3.50  7.54
+#&gt; 40        4 72.7  4.4  5.02  6.88
+#&gt; 41        4 72.7  4.4  7.02  5.78
+#&gt; 42        4 72.7  4.4  9.02  5.33
+#&gt; 43        4 72.7  4.4 11.98  4.19
+#&gt; 44        4 72.7  4.4 24.65  1.15
+#&gt; 45        5 54.6 5.86  0.00     0
 #&gt; 46        5 54.6 5.86  0.30  2.02
 #&gt; 47        5 54.6 5.86  0.52  5.63
-#&gt; 48        5 54.6 5.86  1.00 11.40
+#&gt; 48        5 54.6 5.86  1.00  11.4
 #&gt; 49        5 54.6 5.86  2.02  9.33
 #&gt; 50        5 54.6 5.86  3.50  8.74
 #&gt; 51        5 54.6 5.86  5.02  7.56
 #&gt; 52        5 54.6 5.86  7.02  7.09
-#&gt; 53        5 54.6 5.86  9.10  5.90
+#&gt; 53        5 54.6 5.86  9.10   5.9
 #&gt; 54        5 54.6 5.86 12.00  4.37
 #&gt; 55        5 54.6 5.86 24.35  1.57
-#&gt; 56        6 80.0 4.00  0.00  0.00
-#&gt; 57        6 80.0 4.00  0.27  1.29
-#&gt; 58        6 80.0 4.00  0.58  3.08
-#&gt; 59        6 80.0 4.00  1.15  6.44
-#&gt; 60        6 80.0 4.00  2.03  6.32
-#&gt; 61        6 80.0 4.00  3.57  5.53
-#&gt; 62        6 80.0 4.00  5.00  4.94
-#&gt; 63        6 80.0 4.00  7.00  4.02
-#&gt; 64        6 80.0 4.00  9.22  3.46
-#&gt; 65        6 80.0 4.00 12.10  2.78
-#&gt; 66        6 80.0 4.00 23.85  0.92
+#&gt; 56        6   80    4  0.00     0
+#&gt; 57        6   80    4  0.27  1.29
+#&gt; 58        6   80    4  0.58  3.08
+#&gt; 59        6   80    4  1.15  6.44
+#&gt; 60        6   80    4  2.03  6.32
+#&gt; 61        6   80    4  3.57  5.53
+#&gt; 62        6   80    4  5.00  4.94
+#&gt; 63        6   80    4  7.00  4.02
+#&gt; 64        6   80    4  9.22  3.46
+#&gt; 65        6   80    4 12.10  2.78
+#&gt; 66        6   80    4 23.85  0.92
 #&gt; 67        7 64.6 4.95  0.00  0.15
 #&gt; 68        7 64.6 4.95  0.25  0.85
 #&gt; 69        7 64.6 4.95  0.50  2.35
@@ -224,7 +231,7 @@
 #&gt; 75        7 64.6 4.95  9.00  4.39
 #&gt; 76        7 64.6 4.95 12.05  3.53
 #&gt; 77        7 64.6 4.95 24.22  1.15
-#&gt; 78        8 70.5 4.53  0.00  0.00
+#&gt; 78        8 70.5 4.53  0.00     0
 #&gt; 79        8 70.5 4.53  0.25  3.05
 #&gt; 80        8 70.5 4.53  0.52  3.05
 #&gt; 81        8 70.5 4.53  0.98  7.31
@@ -233,63 +240,60 @@
 #&gt; 84        8 70.5 4.53  5.05  5.88
 #&gt; 85        8 70.5 4.53  7.15  4.73
 #&gt; 86        8 70.5 4.53  9.07  4.57
-#&gt; 87        8 70.5 4.53 12.10  3.00
+#&gt; 87        8 70.5 4.53 12.10     3
 #&gt; 88        8 70.5 4.53 24.12  1.25
-#&gt; 89        9 86.4 3.10  0.00  0.00
-#&gt; 90        9 86.4 3.10  0.30  7.37
-#&gt; 91        9 86.4 3.10  0.63  9.03
-#&gt; 92        9 86.4 3.10  1.05  7.14
-#&gt; 93        9 86.4 3.10  2.02  6.33
-#&gt; 94        9 86.4 3.10  3.53  5.66
-#&gt; 95        9 86.4 3.10  5.02  5.67
-#&gt; 96        9 86.4 3.10  7.17  4.24
-#&gt; 97        9 86.4 3.10  8.80  4.11
-#&gt; 98        9 86.4 3.10 11.60  3.16
-#&gt; 99        9 86.4 3.10 24.43  1.12
-#&gt; 100      10 58.2 5.50  0.00  0.24
-#&gt; 101      10 58.2 5.50  0.37  2.89
-#&gt; 102      10 58.2 5.50  0.77  5.22
-#&gt; 103      10 58.2 5.50  1.02  6.41
-#&gt; 104      10 58.2 5.50  2.05  7.83
-#&gt; 105      10 58.2 5.50  3.55 10.21
-#&gt; 106      10 58.2 5.50  5.05  9.18
-#&gt; 107      10 58.2 5.50  7.08  8.02
-#&gt; 108      10 58.2 5.50  9.38  7.14
-#&gt; 109      10 58.2 5.50 12.10  5.68
-#&gt; 110      10 58.2 5.50 23.70  2.42
-#&gt; 111      11 65.0 4.92  0.00  0.00
-#&gt; 112      11 65.0 4.92  0.25  4.86
-#&gt; 113      11 65.0 4.92  0.50  7.24
-#&gt; 114      11 65.0 4.92  0.98  8.00
-#&gt; 115      11 65.0 4.92  1.98  6.81
-#&gt; 116      11 65.0 4.92  3.60  5.87
-#&gt; 117      11 65.0 4.92  5.02  5.22
-#&gt; 118      11 65.0 4.92  7.03  4.45
-#&gt; 119      11 65.0 4.92  9.03  3.62
-#&gt; 120      11 65.0 4.92 12.12  2.69
-#&gt; 121      11 65.0 4.92 24.08  0.86
-#&gt; 122      12 60.5 5.30  0.00  0.00
-#&gt; 123      12 60.5 5.30  0.25  1.25
-#&gt; 124      12 60.5 5.30  0.50  3.96
-#&gt; 125      12 60.5 5.30  1.00  7.82
-#&gt; 126      12 60.5 5.30  2.00  9.72
-#&gt; 127      12 60.5 5.30  3.52  9.75
-#&gt; 128      12 60.5 5.30  5.07  8.57
-#&gt; 129      12 60.5 5.30  7.07  6.59
-#&gt; 130      12 60.5 5.30  9.03  6.11
-#&gt; 131      12 60.5 5.30 12.05  4.57
-#&gt; 132      12 60.5 5.30 24.15  1.17</div></pre>
+#&gt; 89        9 86.4  3.1  0.00     0
+#&gt; 90        9 86.4  3.1  0.30  7.37
+#&gt; 91        9 86.4  3.1  0.63  9.03
+#&gt; 92        9 86.4  3.1  1.05  7.14
+#&gt; 93        9 86.4  3.1  2.02  6.33
+#&gt; 94        9 86.4  3.1  3.53  5.66
+#&gt; 95        9 86.4  3.1  5.02  5.67
+#&gt; 96        9 86.4  3.1  7.17  4.24
+#&gt; 97        9 86.4  3.1  8.80  4.11
+#&gt; 98        9 86.4  3.1 11.60  3.16
+#&gt; 99        9 86.4  3.1 24.43  1.12
+#&gt; 100      10 58.2  5.5  0.00  0.24
+#&gt; 101      10 58.2  5.5  0.37  2.89
+#&gt; 102      10 58.2  5.5  0.77  5.22
+#&gt; 103      10 58.2  5.5  1.02  6.41
+#&gt; 104      10 58.2  5.5  2.05  7.83
+#&gt; 105      10 58.2  5.5  3.55 10.21
+#&gt; 106      10 58.2  5.5  5.05  9.18
+#&gt; 107      10 58.2  5.5  7.08  8.02
+#&gt; 108      10 58.2  5.5  9.38  7.14
+#&gt; 109      10 58.2  5.5 12.10  5.68
+#&gt; 110      10 58.2  5.5 23.70  2.42
+#&gt; 111      11   65 4.92  0.00     0
+#&gt; 112      11   65 4.92  0.25  4.86
+#&gt; 113      11   65 4.92  0.50  7.24
+#&gt; 114      11   65 4.92  0.98     8
+#&gt; 115      11   65 4.92  1.98  6.81
+#&gt; 116      11   65 4.92  3.60  5.87
+#&gt; 117      11   65 4.92  5.02  5.22
+#&gt; 118      11   65 4.92  7.03  4.45
+#&gt; 119      11   65 4.92  9.03  3.62
+#&gt; 120      11   65 4.92 12.12  2.69
+#&gt; 121      11   65 4.92 24.08  0.86
+#&gt; 122      12 60.5  5.3  0.00     0
+#&gt; 123      12 60.5  5.3  0.25  1.25
+#&gt; 124      12 60.5  5.3  0.50  3.96
+#&gt; 125      12 60.5  5.3  1.00  7.82
+#&gt; 126      12 60.5  5.3  2.00  9.72
+#&gt; 127      12 60.5  5.3  3.52  9.75
+#&gt; 128      12 60.5  5.3  5.07  8.57
+#&gt; 129      12 60.5  5.3  7.07  6.59
+#&gt; 130      12 60.5  5.3  9.03  6.11
+#&gt; 131      12 60.5  5.3 12.05  4.57
+#&gt; 132      12 60.5  5.3 24.15  1.17</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -297,13 +301,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
