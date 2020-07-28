@@ -1,6 +1,6 @@
 Package: PMDatR
 Title: Pharmacometric Data Management in R
-Version: 1.1.0
+Version: 1.1.0.1
 Author: qPharmetra, LLC
 Maintainer: Jason Chittenden <jason.chittenden@qpharmetra.com>
 Description: Provides tools for building datasets for pharmacometric analyses,
@@ -8,28 +8,28 @@ Description: Provides tools for building datasets for pharmacometric analyses,
 License: LICENSE
 LazyData: true
 Depends:
-    R (== 3.3.3)
+    R (>= 3.3.3)
 Suggests:
     testthat
 Imports:
-    dplyr(== 0.5.0),
-    methods(== 3.3.3),
-    yaml(== 2.1.13),
-    knitr(== 1.11),
-    rmarkdown (>= 0.8.1),
-    udunits2(== 0.8.1),
-    haven (== 1.0.0),
-    ggplot2 (== 1.0.1),
-    lazyeval (== 0.2.0),
-    readxl (== 1.0.0),
-    reshape2 (== 1.4.1),
-    tidyr (== 0.4.0),
-    formatR (== 1.2.1),
-    parsedate (== 1.1.2),
-    anytime (== 0.2.0),
-    Hmisc (== 3.17-0),
-    stringr (== 1.0.0),
-    foreign (== 0.8-66),
-    purrr (== 0.2.2)
+    dplyr,
+    methods,
+    yaml,
+    knitr,
+    rmarkdown,
+    udunits2,
+    haven,
+    ggplot2,
+    lazyeval,
+    readxl,
+    reshape2,
+    tidyr,
+    formatR,
+    parsedate,
+    anytime,
+    Hmisc,
+    stringr,
+    foreign,
+    purrr
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

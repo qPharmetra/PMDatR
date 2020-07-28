@@ -21,12 +21,13 @@ test_that("Check structure DM",{
 
 })
 
-test_that("RMD creates function text",{
-  outpath = file.path(path.testroot,"testthat/test1.rmd")
-  rmarkdown::draft(outpath, template = "Process_Settings", package = "PMDatR", edit=F)
-  rmarkdown::render(outpath, params = list(settings_file = file.path("../..",settings_file)))
-
-})
+# can't test RMD functionality from testthat
+# test_that("RMD creates function text",{
+#   outpath = file.path(path.testroot,"testthat/test1.rmd")
+#   rmarkdown::draft(outpath, template = "Process_Settings", package = "PMDatR", edit=F)
+#   rmarkdown::render(outpath, params = list(settings_file = file.path("../..",settings_file)))
+#
+# })
 
 
 test_that("write_post_transform processes", {
