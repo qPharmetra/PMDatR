@@ -3,7 +3,7 @@
 .onLoad <- function(libname, pkgname){
   #check and set default options
 
-  if(getOption("stringsAsFactors")) {
+  if(getOption("stringsAsFactors", FALSE)) {
     options(stringsAsFactors = F)
   }
 
