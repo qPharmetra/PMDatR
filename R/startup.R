@@ -15,7 +15,7 @@
   packageStartupMessage(paste("library paths:\n", paste(.libPaths(), collapse="\n")))
   packageStartupMessage(paste(R.installation.qualification()$IQ.message))
   packageStartupMessage("setting stringsAsFactors to FALSE as PMDatR default")
-  if(getOption("stringsAsFactors")) {
+  if(getOption("stringsAsFactors", FALSE)) {
     options(stringsAsFactors = F)
   }
   if(is.null(getOption("qpExampleDir"))) options(qpExampleDir=file.path(path.package("PMDatR"),"NONMEM"))
