@@ -4,7 +4,7 @@
   #check and set default options
 
   if(getOption("stringsAsFactors", FALSE)) {
-    options(stringsAsFactors = F)
+    options(stringsAsFactors = FALSE)
   }
 
 }
